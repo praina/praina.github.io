@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Escape &amp; Explore | Icebox | Prateek Raina</title>
+  <meta name="description" content="How I evaluated and killed a Chrome extension idea: a structured PM decision on three competing technical approaches.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__wordmark">Praina<span>.</span></a>
+    <ul class="nav__links">
+      <li><a href="/case/"       class="nav__link">Work</a></li>
+      <li><a href="/prd/"        class="nav__link">PRDs</a></li>
+      <li><a href="/icebox/"     class="nav__link">Icebox</a></li>
+      <li><a href="/#about"      class="nav__link">About</a></li>
+      <li><a href="/#experience" class="nav__link">Experience</a></li>
+    </ul>
+    <a href="/#contact" class="nav__cta">Get in touch</a>
+    <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav__mobile-overlay" id="mobileOverlay">
+  <a href="/case/">Work</a>
+  <a href="/prd/">PRDs</a>
+  <a href="/icebox/">Icebox</a>
+  <a href="/#about">About</a>
+  <a href="/#experience">Experience</a>
+  <a href="/#contact">Contact</a>
+</div>
+
+<article class="icebox-detail">
+  <a href="/icebox/" class="back-link">← The Icebox</a>
+
+  <div class="icebox-detail__meta-row">
+    <span class="icebox__status icebox__status--killed">Killed</span>
+    <span class="eyebrow icebox-detail__eyebrow">Personal Project · 2025</span>
+  </div>
+
+  <h1 class="icebox-detail__title">YouTube Escape &amp; Explore Chrome Extension</h1>
+
+  <p class="icebox-detail__summary">A browser extension designed to counter algorithmic content fatigue by giving users an intent-based discovery layer for YouTube: pick a topic, get a curated escape hatch away from your feed. During discovery I evaluated three technical implementation paths. All three had fatal flaws. I killed the project before writing a line of extension code.</p>
+
+  <!-- Decision matrix -->
+  <h2 class="icebox-detail__section-h">Approach comparison</h2>
+  <table class="matrix" data-reveal>
+    <thead>
+      <tr>
+        <th>Approach</th>
+        <th>Maintainability</th>
+        <th>User experience</th>
+        <th>Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>API Proxy</td>
+        <td>Low: requires live server, ongoing API costs</td>
+        <td>High: direct, clean navigation</td>
+        <td><span class="matrix__killed">Rejected</span><div class="matrix__note">Too much overhead for a side project</div></td>
+      </tr>
+      <tr>
+        <td>Search Hacking</td>
+        <td>High: automatic, no maintenance</td>
+        <td>Low: noisy, uncontrolled results</td>
+        <td><span class="matrix__killed">Rejected</span><div class="matrix__note">Couldn't guarantee a reliable experience</div></td>
+      </tr>
+      <tr>
+        <td>Manual Curation</td>
+        <td>Medium: requires ongoing content updates</td>
+        <td>High: curated, high-quality videos</td>
+        <td><span class="matrix__killed">Rejected</span><div class="matrix__note">Made me the permanent bottleneck</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Three approaches -->
+  <h2 class="icebox-detail__section-h">Approach breakdown</h2>
+  <div class="icebox-detail__approaches" data-reveal>
+
+    <div class="icebox-detail__step">
+      <span class="icebox-detail__step-tag">API Proxy</span>
+      <div>
+        <h3 class="icebox-detail__step-h">Connect directly to YouTube's data API</h3>
+        <p class="icebox-detail__step-body">The cleanest UX: pull high-quality, structured video data directly from YouTube's official API and surface it inside the extension. No noise, no guesswork.</p>
+        <p class="icebox-detail__step-body">The problem: the API key has to live somewhere secure. Bundling it inside the extension exposes it to anyone who downloads it. The only safe option is a proxy server, a backend middleman that holds the key and handles requests on behalf of users. That turns a browser extension into a hosted service with ongoing infrastructure costs, API rate limits, and security monitoring. I didn't want to build a startup; I wanted a side project.</p>
+      </div>
+    </div>
+
+    <div class="icebox-detail__step">
+      <span class="icebox-detail__step-tag">Search Hacking</span>
+      <div>
+        <h3 class="icebox-detail__step-h">Pre-fill YouTube search queries by topic</h3>
+        <p class="icebox-detail__step-body">Skip the API entirely. On click, open a pre-constructed YouTube search URL ("best history documentaries", "long-form nature footage") and let YouTube's own search do the work. Zero backend, zero maintenance.</p>
+        <p class="icebox-detail__step-body">The problem: I have no control over what YouTube returns. Search results change constantly, get polluted by SEO spam, and vary by region. The extension would sometimes surface great content, sometimes garbage. Shipping something I can't stand behind is a non-starter.</p>
+      </div>
+    </div>
+
+    <div class="icebox-detail__step">
+      <span class="icebox-detail__step-tag">Manual Curation</span>
+      <div>
+        <h3 class="icebox-detail__step-h">Maintain a hand-picked library of videos inside the extension</h3>
+        <p class="icebox-detail__step-body">Curate 50 high-quality videos across topics, hardcode them into the extension, ship it. No server, no API. Clean UX, high quality.</p>
+        <p class="icebox-detail__step-body">The problem: videos get deleted, go private, or go stale. Someone has to monitor, update, and push new extension versions to keep the library alive. That someone is me. Taking on a recurring maintenance obligation against a full-time job and a product portfolio isn't a side project: it's a second job with no upside. This violates my core constraint: build once, run without me.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Kill rationale -->
+  <h2 class="icebox-detail__section-h">Why I killed it</h2>
+  <div class="icebox-detail__kill" data-reveal>
+    <div class="icebox-detail__kill-label">Decision</div>
+    <div class="icebox-detail__kill-row">
+      <span>API Proxy</span>
+      <span>Turns a side project into a hosted service with ongoing costs and security surface.</span>
+    </div>
+    <div class="icebox-detail__kill-row">
+      <span>Search Hacking</span>
+      <span>Produces unreliable results I can't control: ships a product I can't stand behind.</span>
+    </div>
+    <div class="icebox-detail__kill-row">
+      <span>Manual Curation</span>
+      <span>Makes me the permanent bottleneck. Any product that requires my ongoing intervention to survive is not a product: it's a chore.</span>
+    </div>
+  </div>
+
+  <!-- Key lessons -->
+  <h2 class="icebox-detail__section-h">What I carried forward</h2>
+  <div class="case__learnings" data-reveal>
+    <div class="case__learnings-label">Lessons</div>
+    <p class="case__learning">Operational debt is a silent killer of side projects. The cost to keep a product alive (not to build it, but to run it) is often invisible during ideation. Making it visible early is the job.</p>
+    <p class="case__learning">Killing an idea is a skill, not a failure. Running a structured analysis and walking away before writing a line of code saved weeks of effort. The discipline to say "the math doesn't work" is exactly what separates senior PM judgment from building for the sake of building.</p>
+  </div>
+
+</article>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <span class="footer__wordmark">Praina<span>.</span></span>
+    <span class="footer__copy">© 2026 Prateek Raina · GitHub Pages</span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

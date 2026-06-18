@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bureau Reporting Modernisation | Prateek Raina</title>
+  <meta name="description" content="How I modernised bureau reporting infrastructure at American Express: from legacy SFTP to REST API, with 40% faster processing and 99.9%+ uptime.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__wordmark">Praina<span>.</span></a>
+    <ul class="nav__links">
+      <li><a href="/case/"       class="nav__link">Work</a></li>
+      <li><a href="/prd/"        class="nav__link">PRDs</a></li>
+      <li><a href="/icebox/"     class="nav__link">Icebox</a></li>
+      <li><a href="/#about"      class="nav__link">About</a></li>
+      <li><a href="/#experience" class="nav__link">Experience</a></li>
+    </ul>
+    <a href="/#contact" class="nav__cta">Get in touch</a>
+    <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav__mobile-overlay" id="mobileOverlay">
+  <a href="/">Home</a>
+  <a href="/case/">Work</a>
+  <a href="/prd/">PRDs</a>
+  <a href="/icebox/">Icebox</a>
+  <a href="/#contact">Contact</a>
+</div>
+
+<!-- ── SAMPLE BANNER ──────────────────────────────────── -->
+<div class="sample-banner">
+  <div class="sample-banner__inner">
+    <div class="sample-banner__dot"></div>
+    <p class="sample-banner__text"><strong>Illustrative write-up</strong> · Based on real work · Details simplified for portfolio presentation</p>
+  </div>
+</div>
+
+<!-- ── CASE HEADER ────────────────────────────────────── -->
+<div class="case__header">
+  <a href="/case/" class="back-link">← Selected work</a>
+
+  <p class="eyebrow case__eyebrow">American Express · 2022–2024</p>
+  <h1 class="case__title">Bureau Reporting Modernisation</h1>
+  <p class="case__summary">Migrated the bureau reporting system from legacy infrastructure to a modern REST API-based architecture, achieving ~40% faster processing, ~99% on-time file delivery, and 99.9%+ platform uptime through a new failover mechanism.</p>
+
+  <div class="case__meta">
+    <div>
+      <div class="case__meta-label">Role</div>
+      <div class="case__meta-val">Product Owner</div>
+    </div>
+    <div>
+      <div class="case__meta-label">Timeline</div>
+      <div class="case__meta-val">Sep 2022 – Jan 2024</div>
+    </div>
+    <div>
+      <div class="case__meta-label">Domain</div>
+      <div class="case__meta-val">Fintech · Data Infrastructure · Reporting</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── IMAGE PLACEHOLDER ──────────────────────────────── -->
+<div class="case__image">
+  <div class="case__image-placeholder">
+    <span class="case__image-caption">[ System architecture: SFTP-based legacy pipeline → REST API data-sharing layer / before → after ]</span>
+  </div>
+</div>
+
+<!-- ── IMPACT STRIP ───────────────────────────────────── -->
+<div class="case__body">
+  <div class="case__impact" data-reveal>
+    <div class="case__impact-cell">
+      <div class="case__impact-num">~40%</div>
+      <div class="case__impact-label">Faster report processing after migrating from legacy to modern infrastructure</div>
+    </div>
+    <div class="case__impact-cell">
+      <div class="case__impact-num">~99%</div>
+      <div class="case__impact-label">On-time file delivery after SFTP → REST API migration</div>
+    </div>
+    <div class="case__impact-cell">
+      <div class="case__impact-num">99.9%+</div>
+      <div class="case__impact-label">Reporting platform uptime through failover mechanism implementation</div>
+    </div>
+  </div>
+
+  <!-- Context -->
+  <div class="case__section" data-reveal>
+    <h2 class="case__section-h">Context</h2>
+    <p class="case__section-body">American Express's bureau reporting system, responsible for sending credit data to the major credit bureaux, was running on aging infrastructure built around SFTP-based file transfers. Reporting accuracy and timeliness are regulatory obligations; any failure has compliance and reputational consequences. The system had accumulated years of technical debt and operated with minimal failover capability.</p>
+  </div>
+
+  <!-- Problem -->
+  <div class="case__section" data-reveal>
+    <h2 class="case__section-h">Problem</h2>
+    <p class="case__section-body">The legacy pipeline had two compounding problems: a slow processing layer that created queue backlog on high-volume days, and an unreliable SFTP delivery mechanism that caused intermittent late or failed submissions. Regulatory reporting latency was becoming a risk. Meanwhile, the team's sprint velocity had plateaued and the say-do ratio was poor: backlog chaos was absorbing capacity that should have gone to the modernisation.</p>
+  </div>
+
+  <!-- Approach -->
+  <div class="case__approach" data-reveal>
+    <h2 class="case__section-h" style="padding-bottom:16px;">Approach</h2>
+    <div class="case__approach-step">
+      <div class="case__step-n">01</div>
+      <div>
+        <h3 class="case__step-h">Separated delivery reliability from infrastructure modernisation</h3>
+        <p class="case__step-t">The instinct was to do everything at once. I pushed back: fix SFTP reliability first (quick win, lower risk), then modernise the processing layer. Sequencing matters: stakeholders see results earlier, and you don't bet compliance on a big-bang migration.</p>
+      </div>
+    </div>
+    <div class="case__approach-step">
+      <div class="case__step-n">02</div>
+      <div>
+        <h3 class="case__step-h">Scoped the REST API migration as a parallel-run before cutover</h3>
+        <p class="case__step-t">Designed a shadow-period where both SFTP and REST API pathways ran simultaneously. Compared outputs for parity. Only cut over when 30 consecutive business days showed zero discrepancy. Killed the SFTP dependency cleanly, not nervously.</p>
+      </div>
+    </div>
+    <div class="case__approach-step">
+      <div class="case__step-n">03</div>
+      <div>
+        <h3 class="case__step-h">Implemented a failover mechanism to close the uptime gap</h3>
+        <p class="case__step-t">Worked with engineering to spec a failover that automatically rerouted processing on primary node failure. Defined the SLAs, the alert thresholds, and the runbooks. This was the piece that took uptime from "mostly okay" to 99.9%+.</p>
+      </div>
+    </div>
+    <div class="case__approach-step">
+      <div class="case__step-n">04</div>
+      <div>
+        <h3 class="case__step-h">Rebuilt the team's delivery process from the backlog up</h3>
+        <p class="case__step-t">Ran a backlog audit: removed stale items, clarified acceptance criteria on everything in the next two sprints, and introduced a standing refinement session. Sprint velocity improved 25% YoY. Say-do ratio went from roughly 60% to 90%+ within two quarters.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Learnings -->
+  <div class="case__learnings" data-reveal>
+    <div class="case__learnings-label">What I'd carry forward</div>
+    <p class="case__learning">Sequencing is strategy. The order you tackle problems in often matters more than the solutions themselves, especially when compliance is involved and there's no margin for error.</p>
+    <p class="case__learning">A parallel-run period feels expensive until you compare it to a failed cutover. For regulated data, the shadow period is non-negotiable.</p>
+    <p class="case__learning">Velocity problems are almost always backlog problems in disguise. Fixing the upstream (clarity, sizing, sequencing) fixes the downstream (delivery, confidence, morale).</p>
+  </div>
+
+  <!-- Next -->
+  <a href="tractable-migration.html" class="case__next" data-reveal>
+    <div>
+      <div class="case__next-label">Next case study</div>
+      <div class="case__next-title">Enterprise Platform Migration</div>
+    </div>
+    <span class="case__next-arrow">→</span>
+  </a>
+</div>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer__inner">
+    <span class="footer__wordmark">Praina<span>.</span></span>
+    <span class="footer__copy">© 2026 Prateek Raina · GitHub Pages</span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

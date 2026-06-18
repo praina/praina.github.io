@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prateek Raina | Technical Product Manager</title>
+  <meta name="description" content="Technical Product Manager specialising in B2B SaaS, enterprise migrations, and AI products. Currently at Tractable.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__wordmark">Praina<span>.</span></a>
+    <ul class="nav__links">
+      <li><a href="case/"       class="nav__link">Work</a></li>
+      <li><a href="prd/"        class="nav__link">PRDs</a></li>
+      <li><a href="icebox/"     class="nav__link">Icebox</a></li>
+      <li><a href="#about"      class="nav__link">About</a></li>
+      <li><a href="#experience" class="nav__link">Experience</a></li>
+    </ul>
+    <a href="#contact" class="nav__cta">Get in touch</a>
+    <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── MOBILE OVERLAY ─────────────────────────────────── -->
+<div class="nav__mobile-overlay" id="mobileOverlay">
+  <a href="case/"       onclick="closeMobileNav()">Work</a>
+  <a href="prd/"        onclick="closeMobileNav()">PRDs</a>
+  <a href="icebox/"     onclick="closeMobileNav()">Icebox</a>
+  <a href="#about"      onclick="closeMobileNav()">About</a>
+  <a href="#experience" onclick="closeMobileNav()">Experience</a>
+  <a href="#contact"    onclick="closeMobileNav()">Contact</a>
+</div>
+
+<!-- ── HERO ───────────────────────────────────────────── -->
+<section class="hero" id="hero">
+  <div class="hero__left">
+    <p class="eyebrow hero__eyebrow">Technical Product Manager · B2B SaaS · AI Products</p>
+    <h1 class="hero__name">Prateek Raina</h1>
+    <blockquote class="hero__quote">
+      <p>Simplifying messy, legacy systems at scale, without breaking things for the people who rely on them.</p>
+    </blockquote>
+    <p class="hero__bio">
+      TPM with a B.Tech in CS from <strong>IIT Ropar</strong> and an MBA from <strong>FMS Delhi</strong>, equally comfortable in an architecture discussion and a stakeholder alignment meeting. Currently at <strong>Tractable</strong>, owning enterprise client migrations end-to-end.
+    </p>
+    <div class="hero__ctas">
+      <a href="https://www.linkedin.com/in/prateek-raina" target="_blank" rel="noopener" class="btn-fill">LinkedIn →</a>
+      <a href="#work" class="btn-outline">View selected work</a>
+    </div>
+  </div>
+
+  <!-- Stats row -->
+  <div class="hero__stats">
+    <div class="hero__stat">
+      <div class="hero__stat-num" data-count="5+">5+</div>
+      <div class="hero__stat-lbl">Years in Product</div>
+    </div>
+    <div class="hero__stat">
+      <div class="hero__stat-num" data-count="99.9%">99.9%</div>
+      <div class="hero__stat-lbl">Uptime delivered</div>
+    </div>
+    <div class="hero__stat">
+      <div class="hero__stat-num" data-count="~65%">~65%</div>
+      <div class="hero__stat-lbl">Cost reduced</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── IMPACT ─────────────────────────────────────────── -->
+<div class="impact" id="impact">
+  <div class="impact__inner">
+    <div class="section-header" data-reveal>
+      <span class="section-header__num">01</span>
+      <h2 class="section-header__title">Real impact, real numbers</h2>
+    </div>
+    <div class="impact__grid">
+      <div class="impact__card" data-reveal>
+        <div class="impact__num" data-count="~40%">~40%</div>
+        <p class="impact__desc">Faster report processing via legacy → modern infrastructure migration</p>
+        <div class="impact__company">American Express</div>
+      </div>
+      <div class="impact__card" data-reveal>
+        <div class="impact__num" data-count="~99%">~99%</div>
+        <p class="impact__desc">On-time file delivery after migrating from SFTP to REST API</p>
+        <div class="impact__company">American Express</div>
+      </div>
+      <div class="impact__card" data-reveal>
+        <div class="impact__num" data-count="~65%">~65%</div>
+        <p class="impact__desc">Mar-Tech infrastructure cost reduction via event cleanup</p>
+        <div class="impact__company">Vedantu</div>
+      </div>
+      <div class="impact__card" data-reveal>
+        <div class="impact__num" data-count="+20%">+20%</div>
+        <p class="impact__desc">Conversion uplift from A/B testing retention campaigns</p>
+        <div class="impact__company">Vedantu</div>
+      </div>
+      <div class="impact__card" data-reveal>
+        <div class="impact__num" data-count="+25%">+25%</div>
+        <p class="impact__desc">Sprint velocity improvement YoY through backlog refinement</p>
+        <div class="impact__company">American Express</div>
+      </div>
+      <div class="impact__card" data-reveal>
+        <div class="impact__num" data-count="+15%">+15%</div>
+        <p class="impact__desc">QoQ revenue growth via pricing-driven sales strategy</p>
+        <div class="impact__company">JCB India</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── WHAT I DO ──────────────────────────────────────── -->
+<div class="pillars__section" id="about">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <span class="section-header__num">02</span>
+      <h2 class="section-header__title">What I do</h2>
+    </div>
+    <div class="pillars__grid">
+      <div class="pillar" data-reveal>
+        <div class="pillar__num">01</div>
+        <h3 class="pillar__title">Platform Migrations &amp; Technical PM</h3>
+        <p class="pillar__body">End-to-end ownership of complex migrations (legacy to modern infra, SFTP to REST API, monolith to new architecture) with full feature parity and zero disruption to live clients. I translate ambiguous requirements into scoped, buildable specs.</p>
+      </div>
+      <div class="pillar" data-reveal>
+        <div class="pillar__num">02</div>
+        <h3 class="pillar__title">Data, AI &amp; Experimentation</h3>
+        <p class="pillar__body">A/B testing, funnel analysis, cohort work: I treat every release as a hypothesis. I actively use AI tools to accelerate specs and research synthesis, and I build products on top of AI at Tractable. Not just a user; an advocate.</p>
+      </div>
+      <div class="pillar" data-reveal>
+        <div class="pillar__num">03</div>
+        <h3 class="pillar__title">Delivery &amp; Stakeholder Alignment</h3>
+        <p class="pillar__body">Consistent track record of improving say-do ratio, sprint velocity, and on-time delivery. I align engineering, ops, enterprise clients, and leadership around a shared plan, and keep that alignment through the inevitable pivots.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SELECTED WORK ──────────────────────────────────── -->
+<div class="work__section" id="work">
+  <div class="work__inner">
+    <div class="work__header">
+      <div class="section-header" style="margin-bottom:0">
+        <span class="section-header__num">03</span>
+        <h2 class="section-header__title">Selected work</h2>
+      </div>
+      <span class="work__hint">Case studies · click to read</span>
+    </div>
+    <div class="work__list">
+      <a href="case/tractable-migration.html" class="work__row" data-reveal>
+        <div class="work__bar"></div>
+        <div class="work__row-content">
+          <div class="work__row-co">Tractable · 2025–Present</div>
+          <div class="work__row-title">Enterprise Platform Migration</div>
+          <div class="work__row-outcome">Leading end-to-end migration of enterprise clients onto a new AI-powered platform architecture, from discovery through delivery, with full feature parity and zero disruption.</div>
+          <div class="work__row-tags">
+            <span class="work__tag">Platform Migration</span>
+            <span class="work__tag">B2B SaaS</span>
+            <span class="work__tag">Enterprise</span>
+            <span class="work__tag">AI Products</span>
+          </div>
+        </div>
+        <div class="work__arrow">→</div>
+      </a>
+      <a href="case/amex-reporting.html" class="work__row" data-reveal>
+        <div class="work__bar"></div>
+        <div class="work__row-content">
+          <div class="work__row-co">American Express · 2022–2024</div>
+          <div class="work__row-title">Bureau Reporting Modernisation</div>
+          <div class="work__row-outcome">Migrated bureau reporting from legacy infrastructure to a modern REST API-based architecture: ~40% faster processing, ~99% on-time delivery, and 99.9%+ uptime through failover.</div>
+          <div class="work__row-tags">
+            <span class="work__tag">Legacy Migration</span>
+            <span class="work__tag">REST APIs</span>
+            <span class="work__tag">Fintech</span>
+            <span class="work__tag">Data Infrastructure</span>
+          </div>
+        </div>
+        <div class="work__arrow">→</div>
+      </a>
+    </div>
+    <p style="margin-top:24px;font-family:var(--f-mono);font-size:12px;color:var(--c-ink-faint);letter-spacing:.04em;">Full decision logs and trade-off analysis in each case study. <a href="case/" style="color:var(--c-accent);text-decoration:none;">See all work →</a></p>
+  </div>
+</div>
+
+<!-- ── SKILLS ─────────────────────────────────────────── -->
+<div class="skills__section" id="skills">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <span class="section-header__num">04</span>
+      <h2 class="section-header__title">Skills &amp; tools</h2>
+    </div>
+    <div class="skills__rows">
+      <div class="skills__row" data-reveal>
+        <div class="skills__cat">Core PM</div>
+        <div class="skills__tags">
+          <span class="skills__tag">Product Discovery</span>
+          <span class="skills__tag">Product Scoping</span>
+          <span class="skills__tag">Roadmapping</span>
+          <span class="skills__tag">Backlog Management</span>
+          <span class="skills__tag">Sprint Planning</span>
+          <span class="skills__tag">User Stories</span>
+          <span class="skills__tag">Requirements Analysis</span>
+        </div>
+      </div>
+      <div class="skills__row" data-reveal>
+        <div class="skills__cat">Technical</div>
+        <div class="skills__tags">
+          <span class="skills__tag">Enterprise Software</span>
+          <span class="skills__tag">B2B SaaS</span>
+          <span class="skills__tag">Platform Migrations</span>
+          <span class="skills__tag">REST APIs</span>
+          <span class="skills__tag">System Design</span>
+          <span class="skills__tag">Agile / Scrum</span>
+          <span class="skills__tag">AI / LLM Products</span>
+          <span class="skills__tag">Lokalise</span>
+        </div>
+      </div>
+      <div class="skills__row" data-reveal>
+        <div class="skills__cat">Strategy</div>
+        <div class="skills__tags">
+          <span class="skills__tag">Product Lifecycle Mgmt</span>
+          <span class="skills__tag">Prioritization Frameworks</span>
+          <span class="skills__tag">Stakeholder Management</span>
+          <span class="skills__tag">Cross-functional Leadership</span>
+          <span class="skills__tag">Go-to-Market</span>
+        </div>
+      </div>
+      <div class="skills__row" data-reveal>
+        <div class="skills__cat">Data</div>
+        <div class="skills__tags">
+          <span class="skills__tag">Funnel Analysis</span>
+          <span class="skills__tag">A/B Testing</span>
+          <span class="skills__tag">Cohort Analysis</span>
+          <span class="skills__tag">Google Analytics</span>
+          <span class="skills__tag">SQL</span>
+        </div>
+      </div>
+      <div class="skills__row" data-reveal>
+        <div class="skills__cat">Tools</div>
+        <div class="skills__tags">
+          <span class="skills__tag">Jira</span>
+          <span class="skills__tag">Notion</span>
+          <span class="skills__tag">Figma</span>
+          <span class="skills__tag">Miro</span>
+          <span class="skills__tag">Confluence</span>
+          <span class="skills__tag">Postman</span>
+          <span class="skills__tag">HubSpot</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── EXPERIENCE ─────────────────────────────────────── -->
+<div class="exp__section" id="experience">
+  <div class="exp__inner">
+    <div class="section-header" data-reveal>
+      <span class="section-header__num">05</span>
+      <h2 class="section-header__title">Experience</h2>
+    </div>
+    <div class="exp__timeline">
+
+      <div class="exp__item" data-reveal>
+        <div class="exp__dot"></div>
+        <div class="exp__header">
+          <h3 class="exp__role">TPM 2 · <span>Tractable</span></h3>
+          <span class="exp__period">Jul 2025 – Present</span>
+        </div>
+        <p class="exp__note">Feature prioritisation, technical trade-off resolution, and end-to-end enterprise client migration onto a new AI-powered platform architecture. Also owns localisation tooling (Lokalise) and uses AI to accelerate specs and PM workflows.</p>
+      </div>
+
+      <div class="exp__item" data-reveal>
+        <div class="exp__dot exp__dot--hollow"></div>
+        <div class="exp__header">
+          <h3 class="exp__role">Product Consultant · <span>Turing</span></h3>
+          <span class="exp__period">Sep 2024 – May 2025</span>
+        </div>
+        <p class="exp__note">Product consulting across B2B SaaS clients. Applied LLM / AI tooling to product workflows and spec writing.</p>
+      </div>
+
+      <div class="exp__item" data-reveal>
+        <div class="exp__dot exp__dot--hollow"></div>
+        <div class="exp__header">
+          <h3 class="exp__role">Product Owner · <span>American Express</span></h3>
+          <span class="exp__period">Sep 2022 – Jan 2024</span>
+        </div>
+        <p class="exp__note">~40% improvement in report processing time, ~99% on-time file delivery, and 99.9%+ reporting uptime. Improved sprint velocity 25% YoY and say-do ratio by 30pp.</p>
+      </div>
+
+      <div class="exp__item" data-reveal>
+        <div class="exp__dot exp__dot--hollow"></div>
+        <div class="exp__header">
+          <h3 class="exp__role">Program Manager – CRM · <span>Vedantu</span></h3>
+          <span class="exp__period">Sep 2021 – Jul 2022</span>
+        </div>
+        <p class="exp__note">~65% reduction in Mar-Tech infrastructure costs. Built a WhatsApp conditional chatbot: +15pp user engagement, +5pp inbound leads. 20% uplift in retention conversion via A/B tests.</p>
+      </div>
+
+      <div class="exp__item" data-reveal>
+        <div class="exp__dot exp__dot--hollow"></div>
+        <div class="exp__header">
+          <h3 class="exp__role">Manager · <span>JCB India Ltd.</span></h3>
+          <span class="exp__period">Nov 2020 – Aug 2021</span>
+        </div>
+        <p class="exp__note">15% QoQ revenue growth in parts vertical via optimised pricing models. 52% procurement cost reduction through supplier identification.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── CONTACT ────────────────────────────────────────── -->
+<div class="contact__section" id="contact">
+  <div data-reveal>
+    <p class="eyebrow contact__eyebrow">06 · Contact</p>
+    <h2 class="contact__heading">Got a messy<br><em>migration</em> to untangle?</h2>
+    <p class="contact__sub">Open to conversations about Senior PM / TPM roles, B2B SaaS, platform migrations, and AI in product work. I typically respond within 24 hours.</p>
+    <a href="mailto:prateekraina2012@gmail.com" class="btn-fill">Send an email</a>
+  </div>
+  <div class="contact__links" data-reveal>
+    <a href="mailto:prateekraina2012@gmail.com" class="contact__link">
+      <span class="contact__link-label">Email</span>
+      <span class="contact__link-value">prateekraina2012@gmail.com</span>
+      <span class="contact__link-arrow">→</span>
+    </a>
+    <a href="https://www.linkedin.com/in/prateek-raina" target="_blank" rel="noopener" class="contact__link">
+      <span class="contact__link-label">LinkedIn</span>
+      <span class="contact__link-value">linkedin.com/in/prateek-raina</span>
+      <span class="contact__link-arrow">→</span>
+    </a>
+    <a href="https://github.com/praina" target="_blank" rel="noopener" class="contact__link">
+      <span class="contact__link-label">GitHub</span>
+      <span class="contact__link-value">github.com/praina</span>
+      <span class="contact__link-arrow">→</span>
+    </a>
+    <div class="contact__link" style="cursor:default;">
+      <span class="contact__link-label">Location</span>
+      <span class="contact__link-value">Delhi, India · Open to remote &amp; hybrid</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer__inner">
+    <span class="footer__wordmark">Praina<span>.</span></span>
+    <span class="footer__copy">© 2026 Prateek Raina · Built with intention, deployed on GitHub Pages</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
