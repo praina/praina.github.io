@@ -84,3 +84,15 @@ const counterObserver = new IntersectionObserver(
 );
 
 document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+/* ── Expand / collapse toggle (e.g. "Show all N" sections) ─── */
+document.querySelectorAll('[data-toggle-target]').forEach(btn => {
+  const target = document.getElementById(btn.dataset.toggleTarget);
+  if (!target) return;
+  const labelMore = btn.dataset.labelMore || btn.textContent;
+  const labelLess = btn.dataset.labelLess || 'Show less';
+  btn.addEventListener('click', () => {
+    const expanded = target.classList.toggle('is-expanded');
+    btn.textContent = expanded ? labelLess : labelMore;
+  });
+});

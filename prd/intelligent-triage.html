@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Migrating a Legacy-Stack Insurer to Full Platform Parity | PRD | Prateek Raina</title>
+  <meta name="description" content="PRD for migrating a major European motor insurer running on a legacy stack onto Tractable's current platform, bridging incompatible APIs without client-side changes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__wordmark">Praina<span>.</span></a>
+    <ul class="nav__links">
+      <li><a href="/case/"       class="nav__link">Work</a></li>
+      <li><a href="/prd/"        class="nav__link">PRDs</a></li>
+      <li><a href="/icebox/"     class="nav__link">Icebox</a></li>
+      <li><a href="/#about"      class="nav__link">About</a></li>
+      <li><a href="/#experience" class="nav__link">Experience</a></li>
+    </ul>
+    <a href="/#contact" class="nav__cta">Get in touch</a>
+    <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav__mobile-overlay" id="mobileOverlay">
+  <a href="/case/">Work</a>
+  <a href="/prd/">PRDs</a>
+  <a href="/icebox/">Icebox</a>
+  <a href="/#about">About</a>
+  <a href="/#experience">Experience</a>
+  <a href="/#contact">Contact</a>
+</div>
+
+<article class="sprd__article">
+  <a href="/prd/" class="back-link">← PRD examples</a>
+
+  <div class="sprd__meta-row">
+    <span class="eyebrow prd__eyebrow">Tractable · PRD</span>
+  </div>
+
+  <h1 class="sprd__title">Migrating a Legacy-Stack Insurer to Full Platform Parity</h1>
+
+  <div class="sprd__tldr">
+    <div class="sprd__tldr-label">TL;DR</div>
+    <p class="sprd__tldr-text">Enable Tractable's Estimating and Intelligent Triage use case for one of Europe's largest motor insurers by market share, who must remain on our legacy API stack indefinitely. This PRD scopes a compatibility layer that delivers full feature parity with our current platform, without requiring any change on the client's side.</p>
+  </div>
+
+  <div class="sprd__info-grid">
+    <div>
+      <div class="sprd__info-label">PRD Owner</div>
+      <div class="sprd__info-val">Prateek Raina</div>
+    </div>
+    <div>
+      <div class="sprd__info-label">Design Owner</div>
+      <div class="sprd__info-val">Product Design</div>
+    </div>
+    <div>
+      <div class="sprd__info-label">Stakeholders</div>
+      <div class="sprd__info-val">Engineering, Commercial, Operations, Regional &amp; Product Analytics leads</div>
+    </div>
+    <div>
+      <div class="sprd__info-label">Status</div>
+      <div class="sprd__info-val">[Internal Status]</div>
+    </div>
+  </div>
+
+  <!-- 1. Introduction -->
+  <div class="sprd__section">
+    <h2 class="sprd__section-h">1. Introduction</h2>
+    <p class="sprd__body"><strong>Goal:</strong> Deliver Tractable's Estimating and Intelligent Triage use case to a client locked into a legacy API stack, with full feature parity and zero disruption to their existing workflow.</p>
+    <p class="sprd__body"><strong>Scope:</strong> The compatibility layer, the triage logic, and the client-specific AI configuration needed to make this work end-to-end. Migrating the client onto our native API is explicitly out of scope.</p>
+  </div>
+
+  <!-- 2. Background -->
+  <div class="sprd__section">
+    <h2 class="sprd__section-h">2. Background</h2>
+    <h3 class="sprd__sub-h">Customer Profile</h3>
+    <p class="sprd__body">The client is the undisputed leader in its country's insurance market, holding roughly 40% of the non-life insurance sector. Founded in 1922, it has grown from a local pioneer into a major European financial player. As the primary insurer for residents of its market, it manages a high volume of motor claims, with a strong focus on service standards and operational efficiency.</p>
+    <h3 class="sprd__sub-h">The Use Case: Intelligent Triage</h3>
+    <p class="sprd__body">The client uses Tractable's Estimating use case to automatically categorise claims at the moment of intake and determine the most efficient repair path. Based on photos and the policyholder's answers (drivability, airbags, etc.), the AI labels each claim Simple or Complex. A claim is flagged Complex if the First Notice of Loss indicates a bad vehicle condition (not driveable, windscreen shattered, airbags deployed, or any door that cannot open or close), or if additional damage is present on the claim.</p>
+  </div>
+
+  <!-- 2.1 User Personas -->
+  <div class="sprd__section">
+    <h2 class="sprd__section-h">2.1 User Personas</h2>
+    <div class="sprd__personas">
+      <div class="sprd__persona-card">
+        <div class="sprd__persona-name">Policy Holder</div>
+        <div class="sprd__persona-who">Primary policyholders under the client's coverage</div>
+        <div class="sprd__persona-field"><span class="sprd__persona-field-label">Primary goal</span>Get their car repaired as fast as possible after an accident</div>
+        <div class="sprd__persona-field"><span class="sprd__persona-field-label">Key interaction</span>Completes the Input Capture App: vehicle questions and photo capture</div>
+      </div>
+      <div class="sprd__persona-card">
+        <div class="sprd__persona-name">Agent</div>
+        <div class="sprd__persona-who">Client agents who receive the First Notice of Loss and redirect the policyholder to Tractable or an internal expert</div>
+        <div class="sprd__persona-field"><span class="sprd__persona-field-label">Primary goal</span>Understand if a claim is in Tractable's scope, and get the policyholder to complete the link</div>
+        <div class="sprd__persona-field"><span class="sprd__persona-field-label">Pain point</span>Low adoption, with an ongoing change-management effort to improve it</div>
+      </div>
+      <div class="sprd__persona-card">
+        <div class="sprd__persona-name">Insurer's Internal Expert</div>
+        <div class="sprd__persona-who">Does ad hoc quality checks on claims and liaises with the body shop</div>
+        <div class="sprd__persona-field"><span class="sprd__persona-field-label">Primary goal</span>Ensure Tractable's triage and estimate are high quality</div>
+        <div class="sprd__persona-field"><span class="sprd__persona-field-label">Key interaction</span>Reviews triage and estimate outputs alongside the body shop</div>
+      </div>
+      <div class="sprd__persona-card">
+        <div class="sprd__persona-name">Network Body Shop</div>
+        <div class="sprd__persona-who">Body shops in the client's approved repair network</div>
+        <div class="sprd__persona-field"><span class="sprd__persona-field-label">Primary goal</span>Get accurate triage and estimates so they can repair vehicles fast</div>
+        <div class="sprd__persona-field"><span class="sprd__persona-field-label">Key interaction</span>Receives estimate and triage in the eGarage portal; can edit before sending back</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.2 KTLO Feature Parity -->
+  <div class="sprd__section">
+    <h2 class="sprd__section-h">2.2 Client Legacy Feature Parity</h2>
+    <p class="sprd__body" style="margin-bottom:20px;">Before migrating the client onto Tractable's current platform, every feature already live on their legacy stack must be accounted for, to guarantee a seamless transition with zero functional regression. Status tracked against the current platform (APP).</p>
+    <div class="sprd__check-cluster">
+      <div class="sprd__check-cluster-h sprd__check-cluster-h--yes">Applicable for the client <span class="sprd__check-cluster-n">24</span></div>
+      <div class="sprd__check-chips" id="yesChips">
+        <span class="sprd__chip sprd__chip--yes sprd__chip-featured">API, with portal access</span>
+        <span class="sprd__chip sprd__chip--yes sprd__chip-featured">HIL, ~50% of cases</span>
+        <span class="sprd__chip sprd__chip--yes sprd__chip-featured">Configurable table columns</span>
+        <span class="sprd__chip sprd__chip--yes sprd__chip-featured">Filters</span>
+        <span class="sprd__chip sprd__chip--yes sprd__chip-featured">Search</span>
+        <span class="sprd__chip sprd__chip--yes sprd__chip-featured">View by status (tabs)</span>
+        <span class="sprd__chip sprd__chip--yes sprd__chip-featured">Sort cases</span>
+        <span class="sprd__chip sprd__chip--yes sprd__chip-featured">Create new case</span>
+        <span class="sprd__chip sprd__chip--yes">Case ID field</span>
+        <span class="sprd__chip sprd__chip--yes">VIN field</span>
+        <span class="sprd__chip sprd__chip--yes">Point-of-impact diagram</span>
+        <span class="sprd__chip sprd__chip--yes">Damage capture</span>
+        <span class="sprd__chip sprd__chip--yes">Corner capture</span>
+        <span class="sprd__chip sprd__chip--yes">Vehicle condition questions</span>
+        <span class="sprd__chip sprd__chip--yes">Mileage capture</span>
+        <span class="sprd__chip sprd__chip--yes">Completion screen</span>
+        <span class="sprd__chip sprd__chip--yes">Estimate shown in UI</span>
+        <span class="sprd__chip sprd__chip--yes">Estimate as PDF</span>
+        <span class="sprd__chip sprd__chip--yes">Repair value / vehicle value %</span>
+        <span class="sprd__chip sprd__chip--yes">PDF download</span>
+        <span class="sprd__chip sprd__chip--yes">Image gallery</span>
+        <span class="sprd__chip sprd__chip--yes">Image download as ZIP</span>
+        <span class="sprd__chip sprd__chip--yes">Additional damage flagging</span>
+        <span class="sprd__chip sprd__chip--yes">Multi-language capture app (FR/DE/EN)</span>
+        <button class="sprd__chip-toggle" data-toggle-target="yesChips" data-label-more="Show all 24 →" data-label-less="Show fewer ←">Show all 24 →</button>
+      </div>
+    </div>
+
+    <div class="sprd__check-cluster">
+      <div class="sprd__check-cluster-h sprd__check-cluster-h--gap">Not applicable for the client <span class="sprd__check-cluster-n">35</span></div>
+      <div class="sprd__check-chips" id="gapChips">
+        <span class="sprd__chip sprd__chip--gap sprd__chip-featured">STP</span>
+        <span class="sprd__chip sprd__chip--gap sprd__chip-featured">Case locking</span>
+        <span class="sprd__chip sprd__chip--gap sprd__chip-featured">License plate capture</span>
+        <span class="sprd__chip sprd__chip--gap sprd__chip-featured">In-app dashboard</span>
+        <span class="sprd__chip sprd__chip--gap sprd__chip-featured">Information side panel</span>
+        <span class="sprd__chip sprd__chip--gap sprd__chip-featured">Car damage diagram</span>
+        <span class="sprd__chip sprd__chip--gap sprd__chip-featured">Inline estimate editing</span>
+        <span class="sprd__chip sprd__chip--gap sprd__chip-featured">Export options</span>
+        <span class="sprd__chip sprd__chip--gap">Other new list-page features</span>
+        <span class="sprd__chip sprd__chip--gap">Shop field</span>
+        <span class="sprd__chip sprd__chip--gap">Customer first name field</span>
+        <span class="sprd__chip sprd__chip--gap">Customer last name field</span>
+        <span class="sprd__chip sprd__chip--gap">Customer email field</span>
+        <span class="sprd__chip sprd__chip--gap">Customer phone field</span>
+        <span class="sprd__chip sprd__chip--gap">Make / model / year fields</span>
+        <span class="sprd__chip sprd__chip--gap">Accident date field</span>
+        <span class="sprd__chip sprd__chip--gap">Registration number field</span>
+        <span class="sprd__chip sprd__chip--gap">Registration date field</span>
+        <span class="sprd__chip sprd__chip--gap">Multi-language create-case modal</span>
+        <span class="sprd__chip sprd__chip--gap">VIN capture in app</span>
+        <span class="sprd__chip sprd__chip--gap">Expedited payment flow</span>
+        <span class="sprd__chip sprd__chip--gap">Multiple vehicle brands</span>
+        <span class="sprd__chip sprd__chip--gap">Parsed body-shop estimate in UI</span>
+        <span class="sprd__chip sprd__chip--gap">Original body-shop estimate in PDF</span>
+        <span class="sprd__chip sprd__chip--gap">AI review flags, agree/disagree per flag</span>
+        <span class="sprd__chip sprd__chip--gap">Agree/disagree with all flags at once</span>
+        <span class="sprd__chip sprd__chip--gap">Editable labour-hours on AI flag</span>
+        <span class="sprd__chip sprd__chip--gap">Line-number reference to body-shop estimate</span>
+        <span class="sprd__chip sprd__chip--gap">Click AI flag to filter photos by panel</span>
+        <span class="sprd__chip sprd__chip--gap">Click AI flag to highlight estimate row</span>
+        <span class="sprd__chip sprd__chip--gap">Advanced photo gallery controls</span>
+        <span class="sprd__chip sprd__chip--gap">"Mark as reviewed" button with notes</span>
+        <span class="sprd__chip sprd__chip--gap">Multiple estimate versions</span>
+        <span class="sprd__chip sprd__chip--gap">View-only mode</span>
+        <span class="sprd__chip sprd__chip--gap">Manual case-status update</span>
+        <button class="sprd__chip-toggle" data-toggle-target="gapChips" data-label-more="Show all 35 →" data-label-less="Show fewer ←">Show all 35 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. System Specifications -->
+  <div class="sprd__section">
+    <h2 class="sprd__section-h">3. System Specifications</h2>
+    <div class="sprd__systems">
+      <div class="sprd__system-block">
+        <div class="sprd__system-name">3.1 Client's Intake System</div>
+        <div class="sprd__system-body">On first contact from a policyholder, the client's agents run an eligibility check to confirm the claim qualifies for AI-automated processing. For eligible claims, the client triggers an API request to Tractable containing the vehicle's VIN and the date of the accident.</div>
+      </div>
+      <div class="sprd__system-block">
+        <div class="sprd__system-name">3.2 Tractable Backend</div>
+        <div class="sprd__system-body">Generates a claim-specific Input Capture App link in response to the VIN and accident-date request. Once the policyholder completes image and data capture, the backend processes the submission into a full repair estimate and a Simple/Complex triage verdict, then makes both available to the client via API and portal.</div>
+      </div>
+      <div class="sprd__system-block">
+        <div class="sprd__system-name">3.3 Tractable Input Capture App</div>
+        <div class="sprd__system-body">Guides the policyholder through a sequence of prompts to provide the required details, supporting upload of all essential vehicle images with secure transmission to the Tractable backend for automated AI processing.</div>
+      </div>
+      <div class="sprd__system-block">
+        <div class="sprd__system-name">3.4 Client's eGarage Portal</div>
+        <div class="sprd__system-body">An external, client-owned portal that lets partner body shops review and edit the AI-generated estimate, and send an automatic feedback signal once a claim is fully repaired and closed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Workflow -->
+  <div class="sprd__section">
+    <h2 class="sprd__section-h">4. Workflow &amp; Designs</h2>
+    <p class="sprd__body" style="margin-bottom:20px;">End-to-end business workflow, rebuilt as a swimlane diagram from the original whiteboard. Scroll horizontally on smaller screens.</p>
+    <div class="sprd__diagram-backdrop" id="diagramBackdrop"></div>
+    <div class="sprd__diagram-wrap" id="workflowDiagramWrap">
+      <button type="button" class="sprd__diagram-icon-btn sprd__diagram-expand" id="diagramExpandBtn" aria-label="Expand diagram">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3H3v4M13 3h4v4M7 17H3v-4M13 17h4v-4"></path></svg>
+      </button>
+      <button type="button" class="sprd__diagram-icon-btn sprd__diagram-close" id="diagramCloseBtn" aria-label="Close expanded diagram">✕</button>
+      <div class="sprd__diagram-zoom-controls" id="diagramZoomControls">
+        <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+        <button type="button" data-zoom="reset" aria-label="Reset zoom">Reset</button>
+        <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+      </div>
+      <div class="sprd__diagram-scroll">
+      <div class="sprd__diagram-stage" id="diagramStage">
+      <svg viewBox="0 0 2500 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Swimlane diagram of the claims triage workflow">
+        <title>Claims triage workflow</title>
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--c-accent)"></path>
+          </marker>
+        </defs>
+
+        <!-- lane dividers -->
+        <g stroke="var(--c-border-sub)" stroke-width="1">
+          <line x1="0" y1="40"  x2="2500" y2="40"></line>
+          <line x1="0" y1="120" x2="2500" y2="120"></line>
+          <line x1="0" y1="200" x2="2500" y2="200"></line>
+          <line x1="0" y1="280" x2="2500" y2="280"></line>
+          <line x1="0" y1="360" x2="2500" y2="360"></line>
+          <line x1="0" y1="440" x2="2500" y2="440"></line>
+          <line x1="0" y1="520" x2="2500" y2="520"></line>
+          <line x1="0" y1="600" x2="2500" y2="600"></line>
+        </g>
+
+        <!-- lane labels -->
+        <g font-family="var(--f-mono)" font-size="11" letter-spacing="0.06em" fill="var(--c-ink-faint)">
+          <text x="20" y="84">POLICY HOLDER</text>
+          <text x="20" y="164">AGENT</text>
+          <text x="20" y="236">CLIENT</text>
+          <text x="20" y="250">SOFTWARE</text>
+          <text x="20" y="316">TRACTABLE</text>
+          <text x="20" y="330">BACKEND</text>
+          <text x="20" y="396">INPUT CAPTURE</text>
+          <text x="20" y="410">APP</text>
+          <text x="20" y="484">EXPERT</text>
+          <text x="20" y="556">EGARAGE</text>
+          <text x="20" y="570">(BODY SHOPS)</text>
+        </g>
+
+        <!-- arrows -->
+        <g fill="none" stroke="var(--c-accent)" stroke-width="2" marker-end="url(#arrow)">
+          <path d="M270,108 L270,132"></path>
+          <path d="M350,160 H380 V240 L400,240"></path>
+          <path d="M560,240 L595,240"></path>
+          <path d="M690,278 L690,452"></path>
+          <path d="M785,240 H810 V320 L820,320"></path>
+          <path d="M980,320 L1030,320"></path>
+          <path d="M1190,320 H1215 V240 L1240,240"></path>
+          <path d="M1400,240 H1425 V80 L1450,80"></path>
+          <path d="M1530,108 L1530,372"></path>
+          <path d="M1610,400 L1660,400"></path>
+          <path d="M1820,400 H1845 V320 L1870,320"></path>
+          <path d="M1950,348 L1950,532"></path>
+          <path d="M2030,560 L2080,560"></path>
+          <path d="M2240,560 L2290,560"></path>
+          <path d="M2370,532 L2370,348"></path>
+        </g>
+
+        <!-- branch labels -->
+        <g font-family="var(--f-mono)" font-size="11" font-weight="500" fill="var(--c-accent)">
+          <text x="700" y="365">NO</text>
+          <text x="793" y="262">YES</text>
+          <text x="2378" y="445">AUTOMATIC</text>
+          <text x="2378" y="459">TRIGGER</text>
+        </g>
+
+        <!-- boxes -->
+        <g font-family="var(--f-body)" font-size="13" fill="var(--c-ink-strong)">
+          <!-- B1 -->
+          <rect x="190" y="52" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="270" y="76" text-anchor="middle">Has an accident,</text>
+          <text x="270" y="94" text-anchor="middle">contacts agent</text>
+          <!-- B2 -->
+          <rect x="190" y="132" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="270" y="156" text-anchor="middle">Asks triage Qs,</text>
+          <text x="270" y="174" text-anchor="middle">uploads details</text>
+          <!-- B3 -->
+          <rect x="400" y="212" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="480" y="236" text-anchor="middle">Runs eligibility</text>
+          <text x="480" y="254" text-anchor="middle">check</text>
+          <!-- D1 diamond -->
+          <polygon points="690,202 785,240 690,278 595,240" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></polygon>
+          <text x="690" y="236" text-anchor="middle">Tractable</text>
+          <text x="690" y="252" text-anchor="middle">eligible?</text>
+          <!-- B4 -->
+          <rect x="610" y="452" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="690" y="476" text-anchor="middle">Claim sent to</text>
+          <text x="690" y="494" text-anchor="middle">internal expert</text>
+          <!-- B5 -->
+          <rect x="820" y="292" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="900" y="316" text-anchor="middle">API call:</text>
+          <text x="900" y="334" text-anchor="middle">VIN + date</text>
+          <!-- B6 -->
+          <rect x="1030" y="292" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="1110" y="316" text-anchor="middle">Generates</text>
+          <text x="1110" y="334" text-anchor="middle">capture link</text>
+          <!-- B7 -->
+          <rect x="1240" y="212" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="1320" y="236" text-anchor="middle">Sends link to</text>
+          <text x="1320" y="254" text-anchor="middle">PH by SMS</text>
+          <!-- B8 -->
+          <rect x="1450" y="52" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="1530" y="76" text-anchor="middle">Receives link,</text>
+          <text x="1530" y="94" text-anchor="middle">clicks through</text>
+          <!-- B9 -->
+          <rect x="1450" y="372" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="1530" y="396" text-anchor="middle">PH lands on</text>
+          <text x="1530" y="414" text-anchor="middle">Capture App</text>
+          <!-- B10 -->
+          <rect x="1660" y="372" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="1740" y="396" text-anchor="middle">Answers Qs,</text>
+          <text x="1740" y="414" text-anchor="middle">captures photos</text>
+          <!-- B11 -->
+          <rect x="1870" y="292" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="1950" y="316" text-anchor="middle">Generates estimate</text>
+          <text x="1950" y="334" text-anchor="middle">+ triage output</text>
+          <!-- B12 -->
+          <rect x="1870" y="532" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="1950" y="556" text-anchor="middle">Estimate shown</text>
+          <text x="1950" y="574" text-anchor="middle">to body shop</text>
+          <!-- B13 -->
+          <rect x="2080" y="532" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="2160" y="556" text-anchor="middle">Reviews &amp; edits</text>
+          <text x="2160" y="574" text-anchor="middle">estimate</text>
+          <!-- B14 -->
+          <rect x="2290" y="532" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="2370" y="556" text-anchor="middle">Closes claim</text>
+          <text x="2370" y="574" text-anchor="middle">on repair</text>
+          <!-- B15 -->
+          <rect x="2290" y="292" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
+          <text x="2370" y="316" text-anchor="middle">Feedback loop</text>
+          <text x="2370" y="334" text-anchor="middle">API triggered</text>
+        </g>
+      </svg>
+      </div>
+      </div>
+    </div>
+    <p class="sprd__diagram-caption">Lanes represent each actor in the workflow; arrows follow the path of a single claim from intake to repair close-out.</p>
+  </div>
+
+  <!-- 5. Pain Points -->
+  <div class="sprd__section">
+    <h2 class="sprd__section-h">5. Pain Points &amp; Areas of Improvement</h2>
+    <div class="sprd__painpoints">
+      <div class="sprd__painpoint">
+        <div class="sprd__painpoint-h">API Incompatibility</div>
+        <div class="sprd__painpoint-body">The client onboarded onto our legacy API stack about a year ago and has declined to update their endpoints to our current format. This forces a reliance on legacy formats that don't naturally align with our modern standards; their feedback-loop API happens to be closer to our current format than the estimating API is, making the mismatch uneven across the integration.</div>
+      </div>
+      <div class="sprd__painpoint">
+        <div class="sprd__painpoint-h">Increased Development Overhead</div>
+        <div class="sprd__painpoint-body">Because the client won't change their side, the entire compatibility burden falls on us. We have to build and maintain a custom adapter layer so any new APIs we build can connect the same way their legacy integration already expects.</div>
+      </div>
+      <div class="sprd__painpoint">
+        <div class="sprd__painpoint-h">Data Fragmentation &amp; Visibility Gaps</div>
+        <div class="sprd__painpoint-body">The split between their legacy environment and our current platform creates a broken link in claim tracking. It's nearly impossible to follow a single claim from intake through to the feedback loop, leading to lost insights and reporting blind spots.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. AI Assessment & Configuration -->
+  <div class="sprd__section">
+    <h2 class="sprd__section-h">6. AI Assessment &amp; Configuration Rules</h2>
+    <div class="sprd__config">
+      <div class="sprd__config-item">
+        <div class="sprd__config-label">Custom Estimation Rules</div>
+        <div class="sprd__config-body">The client uses its own labour and paint-time tables for "strip and refit" work, rather than our platform default.</div>
+      </div>
+      <div class="sprd__config-item">
+        <div class="sprd__config-label">Inclusion Rules</div>
+        <div class="sprd__config-body">Auxiliary panel labour is folded into the main panel's labour time rather than charged separately: if a main panel is being stripped, the auxiliary panel's time isn't added as its own line.</div>
+      </div>
+      <div class="sprd__config-item">
+        <div class="sprd__config-label">6.1 Claim Processing Outcomes</div>
+        <div class="sprd__config-body">Every claim resolves to one of two states: Processable (success) or Non-Processable (exception), each with its own defined system behaviour. Full reason codes are tracked internally rather than reproduced here.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. User Stories -->
+  <div class="sprd__section">
+    <h2 class="sprd__section-h">7. User Stories</h2>
+    <p class="sprd__body" style="margin-bottom:20px;">A representative sample below; the rest are grouped by section and condensed where several rows describe one continuous flow.</p>
+    <div class="sprd__stories" id="storiesGroups">
+      <div class="sprd__stories-group-h">Data Intake &amp; Enrichment</div>
+      <div class="sprd__story-row sprd__story-featured"><div class="sprd__story-section">Data Intake</div><div class="sprd__story-text">As the Tractable system, I should be able to receive the car's VIN and accident date, so I can generate a claim-specific link for the policyholder.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Data Intake</div><div class="sprd__story-text">Tractable logs the claim as a new, independently stored and retrievable case.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Data Intake</div><div class="sprd__story-text">Tractable generates the claim-specific link to send to the insurer for the workflow.</div><div class="sprd__story-status">Exists in APP</div></div>
+
+      <div class="sprd__stories-group-h">Input Capture App</div>
+      <div class="sprd__story-row sprd__story-featured"><div class="sprd__story-section">Input Capture</div><div class="sprd__story-text">As the Input Capture App, I should walk the policyholder through Welcome → Terms → Instructions → Vehicle Condition → POI Diagram → Damage Photos → Corner Photos → Summary → Done.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Capture App</div><div class="sprd__story-text">The app recognises the claim-specific link, so it captures details against the correct claim.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Capture App</div><div class="sprd__story-text">The app submits the policyholder's details back to Tractable so the platform can continue the workflow.</div><div class="sprd__story-status">Exists in APP</div></div>
+
+      <div class="sprd__stories-group-h">Tractable Backend</div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Backend</div><div class="sprd__story-text">Generates the AI estimate and Simple/Complex triage verdict to share with the client. The panel logic is shared across clients; only the triage decision is client-specific.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Backend</div><div class="sprd__story-text">Distributes the estimate and triage results via both API and the portal, so stakeholders can review and act on them.</div><div class="sprd__story-status">Exists in APP</div></div>
+
+      <div class="sprd__stories-group-h">List View Page</div>
+      <div class="sprd__story-row sprd__story-featured"><div class="sprd__story-section">List View Page</div><div class="sprd__story-text">As a user, I should be able to search all cases by Claim ID, registration number, or VIN, so I can quickly find a specific case.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">List View</div><div class="sprd__story-text">Cases can be grouped into status tabs, filtered by vehicle or creator, sorted, and paginated at 50 per page with clear page position and navigation.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">List View</div><div class="sprd__story-text">Clicking a row opens the full case and estimate detail.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">List View</div><div class="sprd__story-text">A "Create New Claim" button opens a modal to capture Claim ID, accident date, VIN, and other optional fields in English, German, or French. The Create button stays disabled until required fields are filled; submitting routes to the new case's detail page.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">List View</div><div class="sprd__story-text">A date-range picker filters claims by accident date, and a profile menu gives access to account info and logout.</div><div class="sprd__story-status">Exists in APP</div></div>
+
+      <div class="sprd__stories-group-h">Details Page</div>
+      <div class="sprd__story-row sprd__story-featured"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">As a Claim Handler, I want to see the AI assessment results, so I can review the estimate and move ahead in the workflow.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">A widget lets the claim handler copy (and refresh, if expired) the Input Capture link to share with the car owner.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">The page tracks the policyholder's step-by-step progress through the Capture App, then flags the case "AI assessment available" once everything is submitted and evaluated.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">A car diagram highlights damaged panels and recommended operations with colour codes, so discrepancies are easy to spot visually.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">The VIN is always visible in the top panel.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">An image gallery supports zoom, rotate, invert, panel-based filtering, and opening images full-resolution in a new tab.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">The estimate is shown directly in the UI for cash-settlement decisions, with a "Download PDF" option for offline use.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">A side panel surfaces key case details, with a dedicated button to open full vehicle details.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">Images can be exported as one ZIP file for sharing.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">The claim ID and current status are always visible while handling a case.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">The AI's repairable/not-repairable decision and estimated repair or replace cost are shown, so the handler can compare against the body shop's own estimate.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">Total vehicle value and a repair-ratio bar show repair cost relative to the car's market value at a glance.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">The Simple/Complex triage output is shown, so the handler knows which path to take next.</div><div class="sprd__story-status sprd__story-status--improve">Improvement</div></div>
+
+      <div class="sprd__stories-group-h">Details Page / List View &amp; General</div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Both</div><div class="sprd__story-text">A language selector lets users switch between French, German, and English.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">General</div><div class="sprd__story-text">Tractable handles feedback sent back by the body shop portal, so it can be tracked and used for analysis.</div><div class="sprd__story-status sprd__story-status--improve">Improvement</div></div>
+
+      <div class="sprd__stories-group-h">Dashboard</div>
+      <div class="sprd__story-row sprd__story-featured"><div class="sprd__story-section">Dashboard</div><div class="sprd__story-text">As a client and Tractable team member, I want a dashboard, so I can keep track of important metrics.</div><div class="sprd__story-status sprd__story-status--improve">Improvement</div></div>
+    </div>
+
+    <button class="sprd__stories-toggle" data-toggle-target="storiesGroups" data-label-more="Show all 53 user stories →" data-label-less="Show fewer user stories">Show all 53 user stories →</button>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <span class="footer__wordmark">Praina<span>.</span></span>
+    <span class="footer__copy">© 2026 Prateek Raina · GitHub Pages</span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+  (function () {
+    const expandBtn = document.getElementById('diagramExpandBtn');
+    const closeBtn = document.getElementById('diagramCloseBtn');
+    const wrap = document.getElementById('workflowDiagramWrap');
+    const backdrop = document.getElementById('diagramBackdrop');
+    const stage = document.getElementById('diagramStage');
+    const zoomControls = document.getElementById('diagramZoomControls');
+    const scrollEl = wrap.querySelector('.sprd__diagram-scroll');
+    if (!expandBtn || !closeBtn || !wrap || !backdrop || !stage || !scrollEl) return;
+
+    const BASE_W = 1400, BASE_H = 1400 * 620 / 2500;
+    let scale = 1, tx = 0, ty = 0;
+    let dragging = false, startX = 0, startY = 0, startTx = 0, startTy = 0;
+
+    function applyTransform() {
+      stage.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(' + scale + ')';
+    }
+    function centerStage() {
+      const rect = scrollEl.getBoundingClientRect();
+      tx = (rect.width - BASE_W * scale) / 2;
+      ty = (rect.height - BASE_H * scale) / 2;
+      applyTransform();
+    }
+    function clampScale(s) { return Math.min(3, Math.max(0.4, s)); }
+
+    function openDiagram() {
+      wrap.classList.add('is-fullscreen');
+      backdrop.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+      scale = 1;
+      centerStage();
+    }
+    function closeDiagram() {
+      wrap.classList.remove('is-fullscreen');
+      backdrop.classList.remove('is-visible');
+      document.body.style.overflow = '';
+      scale = 1; tx = 0; ty = 0;
+      stage.style.transform = '';
+    }
+    expandBtn.addEventListener('click', openDiagram);
+    closeBtn.addEventListener('click', closeDiagram);
+    backdrop.addEventListener('click', closeDiagram);
+
+    wrap.addEventListener('wheel', function (e) {
+      if (!wrap.classList.contains('is-fullscreen')) return;
+      e.preventDefault();
+      const rect = scrollEl.getBoundingClientRect();
+      const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+      const localX = (mx - tx) / scale, localY = (my - ty) / scale;
+      scale = clampScale(scale * (e.deltaY < 0 ? 1.1 : 0.9));
+      tx = mx - localX * scale;
+      ty = my - localY * scale;
+      applyTransform();
+    }, { passive: false });
+
+    stage.addEventListener('mousedown', function (e) {
+      if (!wrap.classList.contains('is-fullscreen')) return;
+      dragging = true;
+      stage.classList.add('is-dragging');
+      startX = e.clientX; startY = e.clientY;
+      startTx = tx; startTy = ty;
+      e.preventDefault();
+    });
+    window.addEventListener('mousemove', function (e) {
+      if (!dragging) return;
+      tx = startTx + (e.clientX - startX);
+      ty = startTy + (e.clientY - startY);
+      applyTransform();
+    });
+    window.addEventListener('mouseup', function () {
+      dragging = false;
+      stage.classList.remove('is-dragging');
+    });
+
+    if (zoomControls) {
+      zoomControls.querySelectorAll('button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const action = btn.dataset.zoom;
+          if (action === 'in') scale = clampScale(scale * 1.2);
+          else if (action === 'out') scale = clampScale(scale / 1.2);
+          else if (action === 'reset') { scale = 1; centerStage(); return; }
+          applyTransform();
+        });
+      });
+    }
+  })();
+</script>
+</body>
+</html>
