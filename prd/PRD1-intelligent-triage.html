@@ -74,8 +74,8 @@
   <!-- 1. Introduction -->
   <div class="sprd__section">
     <h2 class="sprd__section-h">1. Introduction</h2>
-    <p class="sprd__body"><strong>Goal:</strong> Deliver Tractable's Estimating and Intelligent Triage use case to a client locked into a legacy API stack, with full feature parity and zero disruption to their existing workflow.</p>
-    <p class="sprd__body"><strong>Scope:</strong> The compatibility layer, the triage logic, and the client-specific AI configuration needed to make this work end-to-end. Migrating the client onto our native API is explicitly out of scope.</p>
+    <p class="sprd__body"><strong>Goal:</strong> Migrate the client off their legacy API stack onto Tractable's current platform, with full feature parity against everything they have today, plus the client-suggested improvements we're able to take on as part of this migration.</p>
+    <p class="sprd__body"><strong>Scope:</strong> The feature-parity work needed to close every gap against the legacy stack, the triage logic, and the client-specific AI configuration needed to make the new platform a like-for-like (or better) replacement end-to-end.</p>
   </div>
 
   <!-- 2. Background -->
@@ -98,20 +98,20 @@
         <div class="sprd__persona-field"><span class="sprd__persona-field-label">Key interaction</span>Completes the Input Capture App: vehicle questions and photo capture</div>
       </div>
       <div class="sprd__persona-card">
-        <div class="sprd__persona-name">Agent</div>
-        <div class="sprd__persona-who">Client agents who receive the First Notice of Loss and redirect the policyholder to Tractable or an internal expert</div>
+        <div class="sprd__persona-name">Claim Handler</div>
+        <div class="sprd__persona-who">The client's claim handlers who receive the First Notice of Loss and redirect the policyholder to Tractable or a claim triage expert</div>
         <div class="sprd__persona-field"><span class="sprd__persona-field-label">Primary goal</span>Understand if a claim is in Tractable's scope, and get the policyholder to complete the link</div>
         <div class="sprd__persona-field"><span class="sprd__persona-field-label">Pain point</span>Low adoption, with an ongoing change-management effort to improve it</div>
       </div>
       <div class="sprd__persona-card">
-        <div class="sprd__persona-name">Insurer's Internal Expert</div>
-        <div class="sprd__persona-who">Does ad hoc quality checks on claims and liaises with the body shop</div>
+        <div class="sprd__persona-name">Claim Triage Expert</div>
+        <div class="sprd__persona-who">Does ad hoc quality checks on claims and liaises with the bodyshop</div>
         <div class="sprd__persona-field"><span class="sprd__persona-field-label">Primary goal</span>Ensure Tractable's triage and estimate are high quality</div>
-        <div class="sprd__persona-field"><span class="sprd__persona-field-label">Key interaction</span>Reviews triage and estimate outputs alongside the body shop</div>
+        <div class="sprd__persona-field"><span class="sprd__persona-field-label">Key interaction</span>Reviews triage and estimate outputs alongside the bodyshop</div>
       </div>
       <div class="sprd__persona-card">
-        <div class="sprd__persona-name">Network Body Shop</div>
-        <div class="sprd__persona-who">Body shops in the client's approved repair network</div>
+        <div class="sprd__persona-name">Bodyshop</div>
+        <div class="sprd__persona-who">Bodyshops in the client's approved repair network</div>
         <div class="sprd__persona-field"><span class="sprd__persona-field-label">Primary goal</span>Get accurate triage and estimates so they can repair vehicles fast</div>
         <div class="sprd__persona-field"><span class="sprd__persona-field-label">Key interaction</span>Receives estimate and triage in the eGarage portal; can edit before sending back</div>
       </div>
@@ -202,7 +202,7 @@
     <div class="sprd__systems">
       <div class="sprd__system-block">
         <div class="sprd__system-name">3.1 Client's Intake System</div>
-        <div class="sprd__system-body">On first contact from a policyholder, the client's agents run an eligibility check to confirm the claim qualifies for AI-automated processing. For eligible claims, the client triggers an API request to Tractable containing the vehicle's VIN and the date of the accident.</div>
+        <div class="sprd__system-body">On first contact from a policyholder, the client's claim handlers run an eligibility check to confirm the claim qualifies for AI-automated processing. For eligible claims, the client triggers an API request to Tractable containing the vehicle's VIN and the date of the accident.</div>
       </div>
       <div class="sprd__system-block">
         <div class="sprd__system-name">3.2 Tractable Backend</div>
@@ -214,7 +214,7 @@
       </div>
       <div class="sprd__system-block">
         <div class="sprd__system-name">3.4 Client's eGarage Portal</div>
-        <div class="sprd__system-body">An external, client-owned portal that lets partner body shops review and edit the AI-generated estimate, and send an automatic feedback signal once a claim is fully repaired and closed.</div>
+        <div class="sprd__system-body">An external, client-owned portal that lets partner bodyshops review and edit the AI-generated estimate, and send an automatic feedback signal once a claim is fully repaired and closed.</div>
       </div>
     </div>
   </div>
@@ -259,16 +259,18 @@
         <!-- lane labels -->
         <g font-family="var(--f-mono)" font-size="11" letter-spacing="0.06em" fill="var(--c-ink-faint)">
           <text x="20" y="84">POLICY HOLDER</text>
-          <text x="20" y="164">AGENT</text>
+          <text x="20" y="156">CLAIM</text>
+          <text x="20" y="170">HANDLER</text>
           <text x="20" y="236">CLIENT</text>
           <text x="20" y="250">SOFTWARE</text>
           <text x="20" y="316">TRACTABLE</text>
           <text x="20" y="330">BACKEND</text>
           <text x="20" y="396">INPUT CAPTURE</text>
           <text x="20" y="410">APP</text>
-          <text x="20" y="484">EXPERT</text>
+          <text x="20" y="476">TRIAGE</text>
+          <text x="20" y="490">EXPERT</text>
           <text x="20" y="556">EGARAGE</text>
-          <text x="20" y="570">(BODY SHOPS)</text>
+          <text x="20" y="570">(BODYSHOP)</text>
         </g>
 
         <!-- arrows -->
@@ -303,7 +305,7 @@
           <!-- B1 -->
           <rect x="190" y="52" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
           <text x="270" y="76" text-anchor="middle">Has an accident,</text>
-          <text x="270" y="94" text-anchor="middle">contacts agent</text>
+          <text x="270" y="94" text-anchor="middle">contacts handler</text>
           <!-- B2 -->
           <rect x="190" y="132" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
           <text x="270" y="156" text-anchor="middle">Asks triage Qs,</text>
@@ -319,7 +321,7 @@
           <!-- B4 -->
           <rect x="610" y="452" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
           <text x="690" y="476" text-anchor="middle">Claim sent to</text>
-          <text x="690" y="494" text-anchor="middle">internal expert</text>
+          <text x="690" y="494" text-anchor="middle">triage expert</text>
           <!-- B5 -->
           <rect x="820" y="292" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
           <text x="900" y="316" text-anchor="middle">API call:</text>
@@ -351,7 +353,7 @@
           <!-- B12 -->
           <rect x="1870" y="532" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
           <text x="1950" y="556" text-anchor="middle">Estimate shown</text>
-          <text x="1950" y="574" text-anchor="middle">to body shop</text>
+          <text x="1950" y="574" text-anchor="middle">to bodyshop</text>
           <!-- B13 -->
           <rect x="2080" y="532" width="160" height="56" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.5"></rect>
           <text x="2160" y="556" text-anchor="middle">Reviews &amp; edits</text>
@@ -447,13 +449,13 @@
       <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">A side panel surfaces key case details, with a dedicated button to open full vehicle details.</div><div class="sprd__story-status">Exists in APP</div></div>
       <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">Images can be exported as one ZIP file for sharing.</div><div class="sprd__story-status">Exists in APP</div></div>
       <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">The claim ID and current status are always visible while handling a case.</div><div class="sprd__story-status">Exists in APP</div></div>
-      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">The AI's repairable/not-repairable decision and estimated repair or replace cost are shown, so the handler can compare against the body shop's own estimate.</div><div class="sprd__story-status">Exists in APP</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">The AI's repairable/not-repairable decision and estimated repair or replace cost are shown, so the handler can compare against the bodyshop's own estimate.</div><div class="sprd__story-status">Exists in APP</div></div>
       <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">Total vehicle value and a repair-ratio bar show repair cost relative to the car's market value at a glance.</div><div class="sprd__story-status">Exists in APP</div></div>
       <div class="sprd__story-row"><div class="sprd__story-section">Details Page</div><div class="sprd__story-text">The Simple/Complex triage output is shown, so the handler knows which path to take next.</div><div class="sprd__story-status sprd__story-status--improve">Improvement</div></div>
 
       <div class="sprd__stories-group-h">Details Page / List View &amp; General</div>
       <div class="sprd__story-row"><div class="sprd__story-section">Both</div><div class="sprd__story-text">A language selector lets users switch between French, German, and English.</div><div class="sprd__story-status">Exists in APP</div></div>
-      <div class="sprd__story-row"><div class="sprd__story-section">General</div><div class="sprd__story-text">Tractable handles feedback sent back by the body shop portal, so it can be tracked and used for analysis.</div><div class="sprd__story-status sprd__story-status--improve">Improvement</div></div>
+      <div class="sprd__story-row"><div class="sprd__story-section">General</div><div class="sprd__story-text">Tractable handles feedback sent back by the bodyshop portal, so it can be tracked and used for analysis.</div><div class="sprd__story-status sprd__story-status--improve">Improvement</div></div>
 
       <div class="sprd__stories-group-h">Dashboard</div>
       <div class="sprd__story-row sprd__story-featured"><div class="sprd__story-section">Dashboard</div><div class="sprd__story-text">As a client and Tractable team member, I want a dashboard, so I can keep track of important metrics.</div><div class="sprd__story-status sprd__story-status--improve">Improvement</div></div>

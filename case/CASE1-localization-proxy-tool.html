@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How I Vibe-Coded My Way Out of a Bottleneck, Courtesy of Claude | Prateek Raina</title>
+  <meta name="description" content="How I vibe-coded my way out of being the localization bottleneck at Tractable: prototyped in Lovable, rebuilt in Claude Code, shipped a self-serve key-submission proxy to 10+ engineers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__wordmark">Praina<span>.</span></a>
+    <ul class="nav__links">
+      <li><a href="/case/"       class="nav__link">Work</a></li>
+      <li><a href="/prd/"        class="nav__link">PRDs</a></li>
+      <li><a href="/icebox/"     class="nav__link">Icebox</a></li>
+      <li><a href="/#about"      class="nav__link">About</a></li>
+      <li><a href="/#experience" class="nav__link">Experience</a></li>
+    </ul>
+    <a href="/#contact" class="nav__cta">Get in touch</a>
+    <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav__mobile-overlay" id="mobileOverlay">
+  <a href="/">Home</a>
+  <a href="/case/">Work</a>
+  <a href="/prd/">PRDs</a>
+  <a href="/icebox/">Icebox</a>
+  <a href="/#contact">Contact</a>
+</div>
+
+<!-- ── CASE HEADER ────────────────────────────────────── -->
+<div class="case__header">
+  <a href="/case/" class="back-link">← Selected work</a>
+
+  <p class="eyebrow case__eyebrow">Tractable · 2026</p>
+  <h1 class="case__title">How I Vibe-Coded My Way Out of a Bottleneck, Courtesy of Claude</h1>
+  <p class="case__summary">As the owner of internationalization and localization for Tractable's new Auto Portal, I was the single point of dependency for getting any UI string into Lokalise and translated. When adding more Lokalise seats wasn't an option, I built a self-serve proxy layer instead: prototyped in Lovable, hardened in Claude Code, and rolled out internally with auth and a full audit trail.</p>
+
+  <div class="case__meta" style="grid-template-columns: 1fr 1fr;">
+    <div>
+      <div class="case__meta-label">Role</div>
+      <div class="case__meta-val">Technical Product Manager 2</div>
+    </div>
+    <div>
+      <div class="case__meta-label">Domain</div>
+      <div class="case__meta-val">Internal Tools · I18n/L10n</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PRODUCT SCREENSHOTS ────────────────────────────── -->
+<div class="case__image case__image--narrow">
+  <h2 class="case__section-h">Product</h2>
+  <div class="case__shot-grid">
+    <div>
+      <div class="case__shot-card">
+        <img class="case__shot" data-lightbox="../assets/case/localization-upload.png" src="../assets/case/localization-upload.png" alt="Localization proxy tool upload screen: paste JSON keys, pick source language and Lokalise project, tag the batch, submit">
+      </div>
+      <p class="case__image-caption case__shot-caption" style="margin-top:6px;">Upload screen</p>
+    </div>
+    <div>
+      <div class="case__shot-card">
+        <img class="case__shot" data-lightbox="../assets/case/localization-history.png" src="../assets/case/localization-history.png" alt="Localization proxy tool history screen: per-user audit log of every submission with date, language, project, tag, key count, and status">
+      </div>
+      <p class="case__image-caption case__shot-caption" style="margin-top:6px;">History screen</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── LIGHTBOX ───────────────────────────────────────── -->
+<div class="case__lightbox" id="caseLightbox">
+  <button type="button" class="case__lightbox-close" id="caseLightboxClose" aria-label="Close">✕</button>
+  <div class="case__lightbox-zoom-controls" id="caseLightboxZoomControls">
+    <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+    <button type="button" data-zoom="reset" aria-label="Reset zoom">Reset</button>
+    <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+  </div>
+  <div class="case__lightbox-viewport" id="caseLightboxViewport">
+    <img id="caseLightboxImg" src="" alt="">
+  </div>
+</div>
+
+<!-- ── IMPACT STRIP ───────────────────────────────────── -->
+<div class="case__body">
+  <div class="case__impact" data-reveal style="margin-bottom:10px;">
+    <div class="case__impact-cell">
+      <div class="case__impact-num">10+</div>
+      <div class="case__impact-label">Engineers onboarded to self-serve key submission, removing the PM as a bottleneck</div>
+    </div>
+    <div class="case__impact-cell">
+      <div class="case__impact-num">1–2 hrs</div>
+      <div class="case__impact-label">Of my own time freed up daily, no longer spent on manual key entry and Slack back-and-forth</div>
+    </div>
+    <div class="case__impact-cell">
+      <div class="case__impact-num">~$624/mo</div>
+      <div class="case__impact-label">Avoided by not needing to upgrade Lokalise's plan tier just to cover extra seats</div>
+    </div>
+  </div>
+  <p class="case__image-caption" style="margin: 0 0 56px;">Estimate based on Lokalise's public pricing: Growth ($375/mo, 10 seats) → Advanced ($999/mo, 15 seats).</p>
+
+  <!-- Context -->
+  <div class="case__section" data-reveal>
+    <h2 class="case__section-h">Context</h2>
+    <p class="case__section-body">I owned internationalization and localization for Tractable's new Auto Portal: every UI string added to the product needed to flow into Lokalise and come back translated into each required language. Lokalise was the team's source of truth for translation management, but project licensing capped the number of seats, and I held one of them.</p>
+  </div>
+
+  <!-- Problem -->
+  <div class="case__section" data-reveal>
+    <h2 class="case__section-h">Problem</h2>
+    <p class="case__section-body">Every key, from every engineer, had to go through me. I was the only person who could log into Lokalise and push new strings, which meant I was the bottleneck on a process that should have been routine. I raised it with leadership and asked about adding more seats; the answer was no, seats were intentionally capped to control the licensing bill. So more seats wasn't on the table, but the bottleneck still needed solving.</p>
+  </div>
+
+  <!-- Approach -->
+  <div class="case__approach" data-reveal>
+    <h2 class="case__section-h" style="padding-bottom:16px;">Approach</h2>
+    <div class="case__approach-step">
+      <div class="case__step-n">01</div>
+      <div>
+        <h3 class="case__step-h">Reframed it as a build problem, not a budget problem</h3>
+        <p class="case__step-t">Engineers didn't actually need full Lokalise access; they needed one narrow action: submit a set of keys for a given language and project. That's a much smaller surface than a Lokalise seat, and it's one I could build without waiting on procurement.</p>
+      </div>
+    </div>
+    <div class="case__approach-step">
+      <div class="case__step-n">02</div>
+      <div>
+        <h3 class="case__step-h">Vibe-coded a working prototype in Lovable</h3>
+        <p class="case__step-t">Built a first version fast to test whether the interaction model actually held up: paste a JSON object of keys, pick the source language and target Lokalise project, optionally tag the batch, submit. I modeled it directly on Lokalise's own upload screen rather than designing a new flow from scratch, an interaction engineers already trusted, which is largely why it worked as expected from day one with no real iteration needed after launch.</p>
+      </div>
+    </div>
+    <div class="case__approach-step">
+      <div class="case__step-n">03</div>
+      <div>
+        <h3 class="case__step-h">Rebuilt it in Claude Code for production use</h3>
+        <p class="case__step-t">Once the workflow was validated, I rebuilt it properly: Tractable SSO so only employees could submit, a real Lokalise API integration in place of the prototype's stub, and a history view logging every submission by date, user, language, project, tag, key count, and status, so the proxy layer didn't trade one bottleneck for an untraceable one. I also drew a deliberate line at uploads, not deployments: the proxy pushes keys into Lokalise but never pushes translations live, and I kept that gate for myself on purpose, reviewing everything added each day so I could still catch anything that needed editing or removing before it shipped.</p>
+      </div>
+    </div>
+    <div class="case__approach-step">
+      <div class="case__step-n">04</div>
+      <div>
+        <h3 class="case__step-h">Hosted it inside Tractable's ecosystem and let it spread organically</h3>
+        <p class="case__step-t">No formal launch: I shared it with the engineers who kept pinging me for key uploads, and adoption spread from there as people saw it save them a round trip through me.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Learnings -->
+  <div class="case__learnings" data-reveal>
+    <h2 class="case__section-h">Learnings &amp; Closing Words</h2>
+    <ul class="case__learnings-list">
+      <li class="case__learning"><strong>Not every bottleneck is a headcount or budget question.</strong> "We can't add seats" closed one door; it didn't close the actual problem, which was access to one specific action, not the whole tool.</li>
+      <li class="case__learning"><strong>A disposable prototype is the fastest way to find out if a workflow idea is right.</strong> Before investing in hardening it, Lovable got me a yes/no answer in hours, not sprints.</li>
+      <li class="case__learning"><strong>Self-serve only works if it's safe to grant.</strong> The audit trail wasn't an afterthought feature; it's what made it reasonable to open this up to anyone who asked for access.</li>
+      <li class="case__learning"><strong>Drawing the scope boundary deliberately matters as much as building the thing itself.</strong> Keeping myself as the manual gate on deployment, rather than automating that too, was a conscious trade-off, not a gap I didn't notice. Automating that review safely is the natural next iteration.</li>
+    </ul>
+    <p class="case__outro">The tool is still running. <span class="case__outro-accent">The bottleneck isn't.</span></p>
+  </div>
+
+  <!-- Next -->
+  <a href="tractable-migration.html" class="case__next" data-reveal>
+    <div>
+      <div class="case__next-label">Next case study</div>
+      <div class="case__next-title">Enterprise Platform Migration</div>
+    </div>
+    <span class="case__next-arrow">→</span>
+  </a>
+</div>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer__inner">
+    <span class="footer__wordmark">Praina<span>.</span></span>
+    <span class="footer__copy">© 2026 Prateek Raina · GitHub Pages</span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+  (function () {
+    const lightbox = document.getElementById('caseLightbox');
+    const viewport = document.getElementById('caseLightboxViewport');
+    const lightboxImg = document.getElementById('caseLightboxImg');
+    const closeBtn = document.getElementById('caseLightboxClose');
+    const zoomControls = document.getElementById('caseLightboxZoomControls');
+    if (!lightbox || !viewport || !lightboxImg || !closeBtn) return;
+
+    let scale = 1, tx = 0, ty = 0;
+    let dragging = false, startX = 0, startY = 0, startTx = 0, startTy = 0;
+
+    function applyTransform() {
+      lightboxImg.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(' + scale + ')';
+    }
+    function resetTransform() {
+      scale = 1; tx = 0; ty = 0;
+      applyTransform();
+    }
+    function clampScale(s) { return Math.min(4, Math.max(1, s)); }
+
+    function open(src, alt) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      resetTransform();
+    }
+    function close() {
+      lightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+      lightboxImg.src = '';
+      resetTransform();
+    }
+    document.querySelectorAll('.case__shot-card').forEach(function (card) {
+      const img = card.querySelector('.case__shot');
+      if (!img) return;
+      card.addEventListener('click', function () {
+        open(img.dataset.lightbox || img.src, img.alt);
+      });
+    });
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox || e.target === viewport) close();
+    });
+    closeBtn.addEventListener('click', close);
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+    });
+
+    viewport.addEventListener('wheel', function (e) {
+      if (!lightbox.classList.contains('is-open')) return;
+      e.preventDefault();
+      const rect = lightboxImg.getBoundingClientRect();
+      const mx = e.clientX - (rect.left + rect.width / 2);
+      const my = e.clientY - (rect.top + rect.height / 2);
+      const prevScale = scale;
+      scale = clampScale(scale * (e.deltaY < 0 ? 1.15 : 0.87));
+      const ratio = scale / prevScale;
+      tx = tx * ratio - mx * (ratio - 1);
+      ty = ty * ratio - my * (ratio - 1);
+      applyTransform();
+    }, { passive: false });
+
+    lightboxImg.addEventListener('mousedown', function (e) {
+      if (scale <= 1) return;
+      dragging = true;
+      viewport.classList.add('is-dragging');
+      startX = e.clientX; startY = e.clientY;
+      startTx = tx; startTy = ty;
+      e.preventDefault();
+    });
+    window.addEventListener('mousemove', function (e) {
+      if (!dragging) return;
+      tx = startTx + (e.clientX - startX);
+      ty = startTy + (e.clientY - startY);
+      applyTransform();
+    });
+    window.addEventListener('mouseup', function () {
+      dragging = false;
+      viewport.classList.remove('is-dragging');
+    });
+
+    if (zoomControls) {
+      zoomControls.querySelectorAll('button').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          const action = btn.dataset.zoom;
+          if (action === 'in') scale = clampScale(scale * 1.3);
+          else if (action === 'out') scale = clampScale(scale / 1.3);
+          else if (action === 'reset') { resetTransform(); return; }
+          applyTransform();
+        });
+      });
+    }
+  })();
+</script>
+</body>
+</html>
