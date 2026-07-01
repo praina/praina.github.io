@@ -97,6 +97,73 @@ document.querySelectorAll('[data-toggle-target]').forEach(btn => {
   });
 });
 
+/* ── Recommendations carousel ───────────────────────────────── */
+(function () {
+  const cards  = Array.from(document.querySelectorAll('.rec__card'));
+  const dotsEl = document.getElementById('recDots');
+  const bar    = document.getElementById('recBar');
+  if (!cards.length || !dotsEl || !bar) return;
+
+  const DURATION = 6000;
+  let current = 0;
+  let paused  = false;
+  let barStart = null;
+  let barFrame = null;
+
+  const dots = cards.map((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'rec__dot' + (i === 0 ? ' is-active' : '');
+    d.setAttribute('aria-label', 'Go to recommendation ' + (i + 1));
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+    return d;
+  });
+
+  function goTo(idx) {
+    const prev = current;
+    current = (idx + cards.length) % cards.length;
+    if (prev === current) return;
+    cards[prev].classList.remove('is-active');
+    cards[current].classList.add('is-active');
+    dots[prev].classList.remove('is-active');
+    dots[current].classList.add('is-active');
+    resetBar();
+  }
+
+  function resetBar() {
+    cancelAnimationFrame(barFrame);
+    bar.style.width = '0%';
+    barStart = null;
+    if (!paused) barFrame = requestAnimationFrame(tickBar);
+  }
+
+  function tickBar(ts) {
+    if (!barStart) barStart = ts;
+    const pct = Math.min((ts - barStart) / DURATION * 100, 100);
+    bar.style.width = pct + '%';
+    if (pct < 100) {
+      barFrame = requestAnimationFrame(tickBar);
+    } else {
+      goTo(current + 1);
+    }
+  }
+
+  const carousel = document.querySelector('.rec__carousel');
+  if (carousel) {
+    carousel.addEventListener('mouseenter', () => {
+      paused = true;
+      cancelAnimationFrame(barFrame);
+    });
+    carousel.addEventListener('mouseleave', () => {
+      paused = false;
+      barStart = null;
+      barFrame = requestAnimationFrame(tickBar);
+    });
+  }
+
+  barFrame = requestAnimationFrame(tickBar);
+})();
+
 /* ── "Next case study" link, derived from case/index.html row order ──
    The order of <a class="prd-list__row"> rows on /case/index.html is the
    single source of truth. Reordering case studies only means reordering
