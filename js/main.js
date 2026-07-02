@@ -162,6 +162,32 @@ document.querySelectorAll('[data-toggle-target]').forEach(btn => {
   }
 
   barFrame = requestAnimationFrame(tickBar);
+
+  function updateDots() {
+    document.querySelectorAll('.rec__quote').forEach(function (q) {
+      var wrap = q.parentElement;
+      var existing = wrap.querySelector('.rec__overflow-dots');
+      if (q.scrollHeight > q.clientHeight) {
+        if (!existing) {
+          var dots = document.createElement('span');
+          dots.className = 'rec__overflow-dots';
+          dots.setAttribute('aria-hidden', 'true');
+          dots.textContent = '• • •';
+          wrap.appendChild(dots);
+        }
+      } else {
+        if (existing) existing.remove();
+      }
+    });
+  }
+
+  updateDots();
+
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateDots, 150);
+  });
 })();
 
 /* ── "Next case study" link, derived from case/index.html row order ──

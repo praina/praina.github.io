@@ -1053,22 +1053,37 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
   user-select: none;
 }
 
+.rec__quote-wrap {
+  position: relative;
+  height: calc(3 * 1.75 * 16px);
+  margin: 0 0 28px;
+}
 .rec__quote {
   font-family: var(--f-body);
   font-size: 16px;
   line-height: 1.75;
   color: var(--c-ink-strong);
-  margin: 0 0 28px;
-  height: calc(4 * 1.75 * 16px);
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
+  margin: 0;
+  height: 100%;
   overflow: hidden;
+}
+.rec__overflow-dots {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: 0.35em;
+  color: var(--c-accent);
+  background: var(--c-bg-tint);
+  padding-left: 16px;
+  margin: 0;
+  user-select: none;
 }
 
 .rec__divider {
   border: none;
-  border-top: 1px solid var(--c-border);
+  border-top: 1px solid var(--c-border-mid);
   margin: 0 0 20px;
 }
 
