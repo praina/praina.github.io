@@ -512,6 +512,9 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
   margin: 0 0 18px; font-weight: 500;
 }
 .case__section-body { font-size: 18px; line-height: 1.75; color: var(--c-ink-strong); margin: 0; }
+.case__problem-list { list-style: none; margin: 0; padding: 0; }
+.case__problem-list li { position: relative; padding-left: 24px; margin-bottom: 8px; }
+.case__problem-list li::before { content: ""; position: absolute; left: 0; top: 0.78em; width: 11px; height: 2px; background: var(--c-accent); }
 .case__options-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
 .case__option { padding: 18px 4px; }
 .case__option--chosen {

@@ -5,7 +5,9 @@
       "name": "portfolio",
       "runtimeExecutable": "npx",
       "runtimeArgs": ["serve", "-l", "3000", "."],
-      "port": 3000
+      "port": 3000,
+      "autoPort": true,
+      "cwd": "C:\\Users\\prate\\AI Projects\\praina.github.io"
     }
   ]
 }
