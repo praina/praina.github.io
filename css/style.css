@@ -203,7 +203,7 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
 /* ── HOME : HERO (stacked / centered) ───────────────────────── */
 .hero {
   max-width: 980px; margin: 0 auto;
-  padding: 96px var(--pad-x) 64px;
+  padding: 96px var(--pad-x) 160px;
   text-align: center;
 }
 
@@ -222,10 +222,11 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
 }
 
 .hero__bio { display: none; }
+.hero__edu { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.03em; color: #6B6960; margin: 18px 0 32px; }
 
 .hero__ctas {
   display: flex; gap: 14px; flex-wrap: wrap;
-  justify-content: center; margin-bottom: 48px;
+  justify-content: center; margin-bottom: 0;
 }
 
 /* Stats: horizontal row, centered */
