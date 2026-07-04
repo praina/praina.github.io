@@ -5,7 +5,7 @@ layout: default
 <div class="sample-banner">
   <div class="sample-banner__inner">
     <div class="sample-banner__dot"></div>
-    <p class="sample-banner__text"><strong>Illustrative write-up</strong> · Based on real work · Details simplified for portfolio presentation</p>
+    <p class="sample-banner__text">{% if page.collection == 'prds' %}<strong>Writing sample</strong> · Based on a real PRD · Details simplified for portfolio presentation{% else %}<strong>Illustrative write-up</strong> · Based on real work · Details simplified for portfolio presentation{% endif %}</p>
   </div>
 </div>
 {% endif %}
