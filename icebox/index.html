@@ -13,7 +13,8 @@ plain_footer: true
   <p class="icebox__sub">Product judgment shows up as much in what you don't build as in what you do. These are ideas I explored, advocated for, or scoped, then killed, parked, or deferred. Each one taught me something.</p>
 
   <div class="icebox__grid">
-    {% for item in site.icebox %}
+    {% assign sorted_items = site.icebox | sort: 'order' %}
+    {% for item in sorted_items %}
       {% include icebox-card.html item=item %}
     {% endfor %}
   </div>

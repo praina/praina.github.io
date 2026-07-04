@@ -13,7 +13,8 @@ plain_footer: true
   <p class="prd-list__sub">End-to-end case studies with problem framing, approach, trade-off analysis, and outcomes. Each project was owned from discovery through delivery.</p>
 
   <div class="prd-list__rows">
-    {% for item in site.case_studies %}
+    {% assign sorted_items = site.case_studies | sort: 'order' %}
+    {% for item in sorted_items %}
       {% include case-card.html item=item %}
     {% endfor %}
   </div>

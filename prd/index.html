@@ -13,7 +13,8 @@ plain_footer: true
   <p class="prd-list__sub">Structured product requirements documents showing how I frame problems, scope decisions, and define success. Real contexts, detail sanitised where appropriate.</p>
 
   <div class="prd-list__rows">
-    {% for item in site.prds %}
+    {% assign sorted_items = site.prds | sort: 'order' %}
+    {% for item in sorted_items %}
       {% include case-card.html item=item %}
     {% endfor %}
   </div>
