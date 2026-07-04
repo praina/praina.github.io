@@ -1,90 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enterprise Platform Migration | Prateek Raina</title>
-  <meta name="description" content="How I led end-to-end enterprise client migration onto a new AI-powered platform architecture at Tractable.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    .infographic-wrap { position: relative; padding: 32px 0 8px; }
-    .infographic-expand-btn {
-      position: absolute; top: 36px; right: 4px;
-      width: 36px; height: 36px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      border: none; background: var(--c-ink); color: var(--c-bg);
-      box-shadow: 0 2px 10px rgba(20,19,15,.3); cursor: pointer;
-      transition: background 0.15s, color 0.15s;
-    }
-    .infographic-expand-btn:hover { background: var(--c-accent); color: var(--c-ink); }
-    .infographic-backdrop {
-      display: none; position: fixed; inset: 0;
-      background: rgba(20,19,15,.6); z-index: 199;
-    }
-    .infographic-backdrop.is-open { display: block; }
-    .infographic-modal {
-      display: none; position: fixed; inset: 30px; z-index: 200;
-      background: #FAFAF8; border: 1px solid #E4E0D6; border-radius: 4px;
-      box-shadow: 0 24px 70px rgba(20,19,15,.3); overflow: hidden;
-    }
-    .infographic-modal.is-open { display: block; }
-    .infographic-modal-close {
-      position: absolute; top: 10px; right: 10px; z-index: 5;
-      width: 36px; height: 36px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      border: none; background: var(--c-ink); color: var(--c-bg);
-      box-shadow: 0 2px 10px rgba(20,19,15,.3); cursor: pointer; font-size: 15px;
-      transition: background 0.15s, color 0.15s;
-    }
-    .infographic-modal-close:hover { background: var(--c-accent); color: var(--c-ink); }
-    .infographic-modal-zoom {
-      display: flex; position: absolute; bottom: 14px; right: 14px; z-index: 5;
-      gap: 4px; background: var(--c-ink); border-radius: 8px; padding: 4px;
-      box-shadow: 0 2px 10px rgba(20,19,15,.3);
-    }
-    .infographic-modal-zoom button {
-      min-width: 30px; height: 30px; padding: 0 10px; border: none;
-      background: none; cursor: pointer; border-radius: 5px;
-      font-family: var(--f-mono); font-size: 13px; color: var(--c-bg);
-      transition: background 0.15s, color 0.15s;
-    }
-    .infographic-modal-zoom button:hover { background: var(--c-accent); color: var(--c-ink); }
-    .infographic-modal-stage { position: absolute; inset: 0; overflow: hidden; cursor: grab; }
-    .infographic-modal-stage.is-dragging { cursor: grabbing; }
-    .infographic-modal-inner { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
-  </style>
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="cc8b1324-235b-423e-a858-fe1f1da5c2f1"></script>
-</head>
-<body>
-
-<!-- ── NAV ────────────────────────────────────────────── -->
-<nav class="nav">
-  <div class="nav__inner">
-    <a href="/" class="nav__wordmark">Praina<span>.</span></a>
-    <ul class="nav__links">
-      <li><a href="/case/"       class="nav__link">Work</a></li>
-      <li><a href="/prd/"        class="nav__link">PRDs</a></li>
-      <li><a href="/icebox/"     class="nav__link">Icebox</a></li>
-      <li><a href="/#experience" class="nav__link">Experience</a></li>
-    </ul>
-    <a href="/#contact" class="nav__cta">Get in touch</a>
-    <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<div class="nav__mobile-overlay" id="mobileOverlay">
-  <a href="/">Home</a>
-  <a href="/case/">Work</a>
-  <a href="/prd/">PRDs</a>
-  <a href="/icebox/">Icebox</a>
-  <a href="/#contact">Contact</a>
-</div>
-
+---
+title: Enterprise Platform Migration
+description: Owned end-to-end migration of 5+ enterprise clients onto a modern AI-powered architecture with zero regression at every go-live.
+permalink: /case/CASE2-tractable-migration.html
+company: Tractable
+date_range: "2025–2026"
+tldr: Owned end-to-end migration of 5+ enterprise clients onto a modern AI-powered architecture: per-client PRDs, automated API testing via Claude Code, and phased cutovers with zero regression at every go-live.
+status: Shipped
+sample: false
+---
+<style>
+  .infographic-wrap { position: relative; padding: 32px 0 8px; }
+  .infographic-expand-btn {
+    position: absolute; top: 36px; right: 4px;
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: none; background: var(--c-ink); color: var(--c-bg);
+    box-shadow: 0 2px 10px rgba(20,19,15,.3); cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .infographic-expand-btn:hover { background: var(--c-accent); color: var(--c-ink); }
+  .infographic-backdrop {
+    display: none; position: fixed; inset: 0;
+    background: rgba(20,19,15,.6); z-index: 199;
+  }
+  .infographic-backdrop.is-open { display: block; }
+  .infographic-modal {
+    display: none; position: fixed; inset: 30px; z-index: 200;
+    background: #FAFAF8; border: 1px solid #E4E0D6; border-radius: 4px;
+    box-shadow: 0 24px 70px rgba(20,19,15,.3); overflow: hidden;
+  }
+  .infographic-modal.is-open { display: block; }
+  .infographic-modal-close {
+    position: absolute; top: 10px; right: 10px; z-index: 5;
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: none; background: var(--c-ink); color: var(--c-bg);
+    box-shadow: 0 2px 10px rgba(20,19,15,.3); cursor: pointer; font-size: 15px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .infographic-modal-close:hover { background: var(--c-accent); color: var(--c-ink); }
+  .infographic-modal-zoom {
+    display: flex; position: absolute; bottom: 14px; right: 14px; z-index: 5;
+    gap: 4px; background: var(--c-ink); border-radius: 8px; padding: 4px;
+    box-shadow: 0 2px 10px rgba(20,19,15,.3);
+  }
+  .infographic-modal-zoom button {
+    min-width: 30px; height: 30px; padding: 0 10px; border: none;
+    background: none; cursor: pointer; border-radius: 5px;
+    font-family: var(--f-mono); font-size: 13px; color: var(--c-bg);
+    transition: background 0.15s, color 0.15s;
+  }
+  .infographic-modal-zoom button:hover { background: var(--c-accent); color: var(--c-ink); }
+  .infographic-modal-stage { position: absolute; inset: 0; overflow: hidden; cursor: grab; }
+  .infographic-modal-stage.is-dragging { cursor: grabbing; }
+  .infographic-modal-inner { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+</style>
 <!-- ── CASE HEADER ────────────────────────────────────── -->
 <div class="case__header">
   <a href="/case/" class="back-link">← Selected work</a>
@@ -331,15 +301,6 @@
   </a>
 </div>
 
-<!-- ── FOOTER ─────────────────────────────────────────── -->
-<footer class="footer">
-  <div class="footer__inner">
-    <span class="footer__wordmark">Praina<span>.</span></span>
-    <span class="footer__copy">© 2026 Prateek Raina · GitHub Pages</span>
-  </div>
-</footer>
-
-<script src="../js/main.js"></script>
 <script>
   (function () {
     var expandBtn = document.getElementById('infographicExpandBtn');
@@ -437,5 +398,3 @@
     }
   })();
 </script>
-</body>
-</html>
