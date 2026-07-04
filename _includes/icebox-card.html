@@ -1,0 +1,13 @@
+<div class="icebox__card{% if include.item.sample %} has-ribbon{% endif %}" data-reveal>
+  {% if include.item.sample %}<div class="corner-ribbon">Sample</div>{% endif %}
+  <div class="icebox__card-top">
+    <span class="icebox__status icebox__status--{{ include.item.status | downcase }}">{{ include.item.status }}</span>
+    <span class="icebox__context">{{ include.item.context }}</span>
+  </div>
+  <h2 class="icebox__card-title">{{ include.item.title }}</h2>
+  <p class="icebox__card-oneliner">{{ include.item.oneliner }}</p>
+  <div class="icebox__card-footer">
+    <span class="icebox__why-label">Why I dropped it · </span>{{ include.item.why_dropped }}
+  </div>
+  {% if include.item.link %}<a href="{{ include.item.link }}" class="icebox__card-link">Full decision analysis →</a>{% endif %}
+</div>

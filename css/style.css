@@ -87,6 +87,7 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
   transition: color var(--t-hover);
 }
 .nav__link:hover { color: var(--c-accent); }
+.nav__link.is-active { color: var(--c-accent); }
 
 .nav__cta {
   background: var(--c-accent); color: var(--c-bg);

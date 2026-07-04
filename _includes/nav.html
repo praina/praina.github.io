@@ -1,0 +1,27 @@
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__wordmark">Praina<span>.</span></a>
+    <ul class="nav__links">
+      <li><a href="/case/"       class="nav__link{% if page.url contains '/case/' %} is-active{% endif %}">Work</a></li>
+      <li><a href="/prd/"        class="nav__link{% if page.url contains '/prd/' %} is-active{% endif %}">PRDs</a></li>
+      <li><a href="/icebox/"     class="nav__link{% if page.url contains '/icebox/' %} is-active{% endif %}">Icebox</a></li>
+      <li><a href="/#experience" class="nav__link">Experience</a></li>
+    </ul>
+    <a href="/#contact" class="nav__cta">Get in touch</a>
+    <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+{% assign is_prd_or_icebox_detail = false %}
+{% if page.collection == 'prds' or page.url contains '/icebox/youtube-extension' %}{% assign is_prd_or_icebox_detail = true %}{% endif %}
+<div class="nav__mobile-overlay" id="mobileOverlay">
+  {% if page.url != '/' and is_prd_or_icebox_detail != true %}<a href="/" onclick="closeMobileNav()">Home</a>{% endif %}
+  {% if page.url == '/case/' %}<a href="/#experience" onclick="closeMobileNav()">Experience</a>{% endif %}
+  <a href="/case/"       onclick="closeMobileNav()">Work</a>
+  <a href="/prd/"        onclick="closeMobileNav()">PRDs</a>
+  <a href="/icebox/"     onclick="closeMobileNav()">Icebox</a>
+  {% if page.url == '/' or is_prd_or_icebox_detail %}<a href="/#experience" onclick="closeMobileNav()">Experience</a>{% endif %}
+  <a href="/#contact"    onclick="closeMobileNav()">Contact</a>
+</div>

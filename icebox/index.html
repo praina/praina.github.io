@@ -1,44 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Icebox | Prateek Raina</title>
-  <meta name="description" content="Shelved and killed product ideas from Prateek Raina, showing product judgment through what didn't ship and why.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="cc8b1324-235b-423e-a858-fe1f1da5c2f1"></script>
-</head>
-<body>
-
-<!-- ── NAV ────────────────────────────────────────────── -->
-<nav class="nav">
-  <div class="nav__inner">
-    <a href="/" class="nav__wordmark">Praina<span>.</span></a>
-    <ul class="nav__links">
-      <li><a href="/case/"       class="nav__link">Work</a></li>
-      <li><a href="/prd/"        class="nav__link">PRDs</a></li>
-      <li><a href="/icebox/"     class="nav__link">Icebox</a></li>
-      <li><a href="/#experience" class="nav__link">Experience</a></li>
-    </ul>
-    <a href="/#contact" class="nav__cta">Get in touch</a>
-    <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<div class="nav__mobile-overlay" id="mobileOverlay">
-  <a href="/">Home</a>
-  <a href="/case/">Work</a>
-  <a href="/prd/">PRDs</a>
-  <a href="/icebox/">Icebox</a>
-  <a href="/#contact">Contact</a>
-</div>
-
-<!-- ── CONTENT ────────────────────────────────────────── -->
+---
+layout: default
+title: The Icebox
+description: Shelved and killed product ideas from Prateek Raina, showing product judgment through what didn't ship and why.
+plain_footer: true
+---
 <div class="icebox__outer">
 <div class="icebox__section">
   <a href="/" class="back-link">← Home</a>
@@ -48,58 +13,10 @@
   <p class="icebox__sub">Product judgment shows up as much in what you don't build as in what you do. These are ideas I explored, advocated for, or scoped, then killed, parked, or deferred. Each one taught me something.</p>
 
   <div class="icebox__grid">
-
-    <div class="icebox__card" data-reveal>
-      <div class="icebox__card-top">
-        <span class="icebox__status icebox__status--killed">Killed</span>
-        <span class="icebox__context">Personal Project · 2025</span>
-      </div>
-      <h2 class="icebox__card-title">YouTube Escape &amp; Explore Chrome Extension</h2>
-      <p class="icebox__card-oneliner">A browser extension to replace YouTube's algorithm with intent-based discovery: pick a topic, get curated content. Three implementation paths evaluated, all rejected on different grounds.</p>
-      <div class="icebox__card-footer">
-        <span class="icebox__why-label">Why I dropped it · </span>Every viable technical approach had a fatal flaw: API proxy required a backend startup, search hacking produced unreliable results, and manual curation made me the permanent bottleneck. Killed it before writing a line of code.
-      </div>
-      <a href="youtube-extension.html" class="icebox__card-link">Full decision analysis →</a>
-    </div>
-
-    <div class="icebox__card has-ribbon" data-reveal>
-      <div class="corner-ribbon">Sample</div>
-      <div class="icebox__card-top">
-        <span class="icebox__status icebox__status--killed">Killed</span>
-        <span class="icebox__context">Vedantu · 2022</span>
-      </div>
-      <h2 class="icebox__card-title">AI-Powered Study Plan Generator</h2>
-      <p class="icebox__card-oneliner">A personalised weekly study scheduler built on learner performance data: auto-adjusts difficulty and pacing based on quiz results and time spent.</p>
-      <div class="icebox__card-footer">
-        <span class="icebox__why-label">Why I dropped it · </span>The data quality upstream wasn't there. Quiz completion rates were below 30%, making the personalisation layer meaningless noise. Building a sophisticated scheduler on top of dirty input data would have shipped something that felt smart but wasn't, and would have eroded trust faster than no feature at all. Killed it, redirected effort to fixing the completion rate problem first.
-      </div>
-    </div>
-
-    <div class="icebox__card has-ribbon" data-reveal>
-      <div class="corner-ribbon">Sample</div>
-      <div class="icebox__card-top">
-        <span class="icebox__status icebox__status--parked">Parked</span>
-        <span class="icebox__context">American Express · 2023</span>
-      </div>
-      <h2 class="icebox__card-title">Self-Serve Report Configuration Portal</h2>
-      <p class="icebox__card-oneliner">A portal allowing bureau reporting team members to configure report parameters, schedules, and delivery formats without engineering involvement.</p>
-      <div class="icebox__card-footer">
-        <span class="icebox__why-label">Why I dropped it · </span>The idea was sound but the timing was wrong. We were mid-migration and adding a configuration UI on top of a system in flux would have created two surfaces to maintain simultaneously. The value proposition also depended on a stable schema, which we didn't have yet. Parked it for post-migration; the bones of the spec are solid and worth revisiting.
-      </div>
-    </div>
-
+    {% assign sorted_items = site.icebox | sort: 'order' %}
+    {% for item in sorted_items %}
+      {% include icebox-card.html item=item %}
+    {% endfor %}
   </div>
 </div>
 </div>
-
-<!-- ── FOOTER ─────────────────────────────────────────── -->
-<footer class="footer footer--plain">
-  <div class="footer__inner">
-    <span class="footer__wordmark">Praina<span>.</span></span>
-    <span class="footer__copy">© 2026 Prateek Raina · GitHub Pages</span>
-  </div>
-</footer>
-
-<script src="../js/main.js"></script>
-</body>
-</html>
