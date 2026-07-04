@@ -1,0 +1,31 @@
+title: Prateek Raina | Technical Product Manager
+description: Technical Product Manager specialising in B2B SaaS, enterprise migrations, and AI products.
+url: "https://praina.github.io"
+baseurl: ""
+
+collections:
+  case_studies:
+    output: true
+  prds:
+    output: true
+  icebox:
+    output: false
+
+defaults:
+  - scope:
+      path: ""
+      type: "case_studies"
+    values:
+      layout: "case-study"
+  - scope:
+      path: ""
+      type: "prds"
+    values:
+      layout: "case-study"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - scripts
+  - docs
+  - .baseline
