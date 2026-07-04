@@ -14,10 +14,14 @@
   </div>
 </nav>
 
+{% assign is_prd_or_icebox_detail = false %}
+{% if page.collection == 'prds' or page.url contains '/icebox/youtube-extension' %}{% assign is_prd_or_icebox_detail = true %}{% endif %}
 <div class="nav__mobile-overlay" id="mobileOverlay">
+  {% if page.url != '/' and is_prd_or_icebox_detail != true %}<a href="/" onclick="closeMobileNav()">Home</a>{% endif %}
+  {% if page.url == '/case/' %}<a href="/#experience" onclick="closeMobileNav()">Experience</a>{% endif %}
   <a href="/case/"       onclick="closeMobileNav()">Work</a>
   <a href="/prd/"        onclick="closeMobileNav()">PRDs</a>
   <a href="/icebox/"     onclick="closeMobileNav()">Icebox</a>
-  <a href="/#experience" onclick="closeMobileNav()">Experience</a>
+  {% if page.url == '/' or is_prd_or_icebox_detail %}<a href="/#experience" onclick="closeMobileNav()">Experience</a>{% endif %}
   <a href="/#contact"    onclick="closeMobileNav()">Contact</a>
 </div>
