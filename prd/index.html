@@ -1,44 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PRD Writing Samples | Prateek Raina</title>
-  <meta name="description" content="PRD writing samples from Prateek Raina: structured product requirements documents from B2B SaaS, fintech, and edtech contexts.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="cc8b1324-235b-423e-a858-fe1f1da5c2f1"></script>
-</head>
-<body>
-
-<!-- ── NAV ────────────────────────────────────────────── -->
-<nav class="nav">
-  <div class="nav__inner">
-    <a href="/" class="nav__wordmark">Praina<span>.</span></a>
-    <ul class="nav__links">
-      <li><a href="/case/"       class="nav__link">Work</a></li>
-      <li><a href="/prd/"        class="nav__link">PRDs</a></li>
-      <li><a href="/icebox/"     class="nav__link">Icebox</a></li>
-      <li><a href="/#experience" class="nav__link">Experience</a></li>
-    </ul>
-    <a href="/#contact" class="nav__cta">Get in touch</a>
-    <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<div class="nav__mobile-overlay" id="mobileOverlay">
-  <a href="/">Home</a>
-  <a href="/case/">Work</a>
-  <a href="/prd/">PRDs</a>
-  <a href="/icebox/">Icebox</a>
-  <a href="/#contact">Contact</a>
-</div>
-
-<!-- ── CONTENT ────────────────────────────────────────── -->
+---
+layout: default
+title: PRD Writing Samples
+description: PRD writing samples from Prateek Raina, structured product requirements documents from B2B SaaS, fintech, and edtech contexts.
+plain_footer: true
+---
 <div class="prd-list__outer">
 <div class="prd-list__section">
   <a href="/" class="back-link">← Home</a>
@@ -48,58 +13,11 @@
   <p class="prd-list__sub">Structured product requirements documents showing how I frame problems, scope decisions, and define success. Real contexts, detail sanitised where appropriate.</p>
 
   <div class="prd-list__rows">
-    <a href="PRD1-intelligent-triage.html" class="prd-list__row" data-reveal>
-      <div class="prd-list__bar"></div>
-      <div class="prd-list__row-content">
-        <div class="prd-list__row-co">Tractable · 2025</div>
-        <div class="prd-list__row-title">Migrating a Legacy-Stack Insurer to Full Platform Parity</div>
-        <p class="prd-list__row-tldr">PRD for enabling AI-powered claims triage and estimating for a major insurer that must stay on a legacy API stack, bridging the gap without requiring any change on their side.</p>
-      </div>
-      <span class="prd-list__row-arrow">→</span>
-    </a>
-    <a href="PRD2-multi-brand-migration.html" class="prd-list__row" data-reveal>
-      <div class="prd-list__bar"></div>
-      <div class="prd-list__row-content">
-        <div class="prd-list__row-co">Tractable · 2025</div>
-        <div class="prd-list__row-title">Migrating a Multi-Brand Insurer to Full Platform Parity</div>
-        <p class="prd-list__row-tldr">PRD for migrating a major insurer and its digital-first subsidiary brand off a shared legacy claims stack, including a new licence-plate matching capability.</p>
-      </div>
-      <span class="prd-list__row-arrow">→</span>
-    </a>
-    <a href="failover-mechanism.html" class="prd-list__row has-ribbon" data-reveal>
-      <div class="corner-ribbon">Sample</div>
-      <div class="prd-list__bar"></div>
-      <div class="prd-list__row-content">
-        <div class="prd-list__row-co">American Express · 2023</div>
-        <div class="prd-list__row-title">Reporting Platform Failover</div>
-        <p class="prd-list__row-tldr">PRD for adding automatic failover to the bureau reporting pipeline, eliminating the single point of failure that caused intermittent platform outages.</p>
-      </div>
-      <span class="prd-list__row-arrow">→</span>
-    </a>
-    <a href="whatsapp-chatbot.html" class="prd-list__row has-ribbon" data-reveal>
-      <div class="corner-ribbon">Sample</div>
-      <div class="prd-list__bar"></div>
-      <div class="prd-list__row-content">
-        <div class="prd-list__row-co">Vedantu · 2022</div>
-        <div class="prd-list__row-title">WhatsApp Conditional Chatbot</div>
-        <p class="prd-list__row-tldr">PRD for a conditional logic chatbot on WhatsApp to re-engage lapsed learners: drove +15pp engagement and +5pp inbound sales leads.</p>
-      </div>
-      <span class="prd-list__row-arrow">→</span>
-    </a>
+    {% for item in site.prds %}
+      {% include case-card.html item=item %}
+    {% endfor %}
   </div>
 
   <p style="margin-top:32px;font-family:var(--f-mono);font-size:12px;color:var(--c-ink-faint);letter-spacing:.04em;">More writing samples added as projects conclude. <a href="/icebox/" style="color:var(--c-accent);text-decoration:none;">See the Icebox →</a></p>
 </div>
 </div>
-
-<!-- ── FOOTER ─────────────────────────────────────────── -->
-<footer class="footer footer--plain">
-  <div class="footer__inner">
-    <span class="footer__wordmark">Praina<span>.</span></span>
-    <span class="footer__copy">© 2026 Prateek Raina · GitHub Pages</span>
-  </div>
-</footer>
-
-<script src="../js/main.js"></script>
-</body>
-</html>
