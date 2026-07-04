@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include head.html %}
+</head>
+<body>
+
+{% include nav.html %}
+
+{% if page.sample %}
+<div class="sample-banner">
+  <div class="sample-banner__inner">
+    <div class="sample-banner__dot"></div>
+    <p class="sample-banner__text"><strong>Illustrative write-up</strong> · Based on real work · Details simplified for portfolio presentation</p>
+  </div>
+</div>
+{% endif %}
+
+{{ content }}
+
+{% include footer.html %}
+
+<script src="/js/main.js"></script>
+</body>
+</html>
