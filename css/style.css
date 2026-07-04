@@ -386,11 +386,17 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
 .exp__note { font-size: 15px; line-height: 1.6; color: var(--c-ink-body); margin: 10px 0 0; max-width: 62ch; }
 
 /* ── HOME : CONTACT ─────────────────────────────────────────── */
-.contact__outer { border-top: 1px solid var(--c-border); background: var(--c-bg-tint); }
+.contact__outer {
+  border-top: 1px solid var(--c-border); background: var(--c-bg-tint);
+  min-height: calc(100vh - 140px);
+  display: flex; align-items: center;
+}
 .contact__section {
+  width: 100%;
   max-width: var(--max-home); margin: 0 auto;
   padding: 96px var(--pad-x);
   display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+  align-items: center;
 }
 .contact__eyebrow { margin-bottom: 18px; }
 .contact__heading {
@@ -1119,23 +1125,11 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
 }
 
 .rec__li-btn {
-  display: inline-block;
   flex-shrink: 0;
-  font-family: var(--f-mono);
-  font-size: 12px;
-  letter-spacing: .04em;
-  color: var(--c-accent);
-  border: 1px solid var(--c-accent);
-  padding: 7px 14px;
-  border-radius: 2px;
-  text-decoration: none;
   white-space: nowrap;
-  transition: background var(--t-hover), color var(--t-hover);
   align-self: flex-end;
-}
-.rec__li-btn:hover {
-  background: var(--c-accent);
-  color: var(--c-bg);
+  font-size: 13px;
+  padding: 8px 16px;
 }
 
 .rec__progress {
