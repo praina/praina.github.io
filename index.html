@@ -98,7 +98,6 @@ description: Technical Product Manager specialising in B2B SaaS, enterprise migr
         <span class="section-header__num">03</span>
         <h2 class="section-header__title">Showcase</h2>
       </div>
-      <span class="work__hint">Case studies · click to read</span>
     </div>
     <div class="listing-card-list">
       {% assign sorted_items = site.case_studies | sort: 'order' %}
@@ -106,7 +105,6 @@ description: Technical Product Manager specialising in B2B SaaS, enterprise migr
         {% include listing-card.html item=item %}
       {% endfor %}
     </div>
-    <p style="margin-top:24px;font-family:var(--f-mono);font-size:12px;color:var(--c-ink-faint);letter-spacing:.04em;">Full decision logs and trade-off analysis in each case study. <a href="case/" style="color:var(--c-accent);text-decoration:none;">See all work →</a></p>
   </div>
 </div>
 
