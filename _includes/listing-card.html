@@ -4,9 +4,9 @@
 {% assign status_key = item.status | downcase %}
 
 {% if item_url %}
-<a href="{{ item_url }}" class="listing-card listing-card--{{ status_key }}{% if item.sample %} has-ribbon{% endif %}" data-reveal>
+<a href="{{ item_url }}" class="listing-card{% if item.status %} listing-card--{{ status_key }}{% endif %}{% if item.sample %} has-ribbon{% endif %}" data-reveal>
 {% else %}
-<div class="listing-card listing-card--{{ status_key }}{% if item.sample %} has-ribbon{% endif %}" data-reveal>
+<div class="listing-card{% if item.status %} listing-card--{{ status_key }}{% endif %}{% if item.sample %} has-ribbon{% endif %}" data-reveal>
 {% endif %}
   {% if item.sample %}<div class="corner-ribbon">Sample</div>{% endif %}
   <div class="listing-card__meta">
