@@ -891,7 +891,7 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
 .icebox__eyebrow { margin-bottom: 18px; }
 .icebox__title { font-family: var(--f-display); font-size: 60px; line-height: 1; letter-spacing: -.02em; font-weight: 400; margin: 0 0 18px; }
 .icebox__sub { font-size: 18px; line-height: 1.65; color: var(--c-ink-body); max-width: 60ch; margin: 0 0 48px; }
-.icebox__grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+.icebox__grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
 .icebox__card {
   position: relative; overflow: hidden;
   border: 1px solid var(--c-border); border-left: 3px solid var(--c-accent); border-radius: 4px;
@@ -1224,7 +1224,6 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
   .nav__hamburger { display: flex; }
   .impact__grid { grid-template-columns: 1fr 1fr; }
   .case__impact { grid-template-columns: 1fr; }
-  .icebox__grid { grid-template-columns: 1fr; }
   .hero__name { font-size: clamp(44px, 12vw, 84px); }
   .prd-list__title, .icebox__title { font-size: clamp(40px, 10vw, 60px); }
   .contact__heading { font-size: clamp(36px, 8vw, 54px); }
