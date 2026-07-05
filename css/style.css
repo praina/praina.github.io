@@ -655,10 +655,13 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
 }
 .listing-card__arrow-mobile { display: none; }
 
-@media (max-width: 640px) {
+@media (hover: none) {
+  .listing-card { padding-right: 40px; }
   .listing-card__arrow-mobile {
-    display: inline-block; align-self: flex-end; margin-top: -6px;
-    font-family: var(--f-display); font-size: 18px; color: var(--c-accent);
+    display: inline-block; position: absolute; right: 14px; top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--f-body); font-weight: 700;
+    font-size: clamp(14px, 4vw, 20px); color: var(--c-accent);
   }
   .listing-card--killed .listing-card__arrow-mobile { color: var(--c-status-kill); }
   .listing-card--parked .listing-card__arrow-mobile { color: var(--c-status-park); }
