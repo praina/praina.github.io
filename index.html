@@ -96,55 +96,15 @@ description: Technical Product Manager specialising in B2B SaaS, enterprise migr
     <div class="work__header">
       <div class="section-header" style="margin-bottom:0">
         <span class="section-header__num">03</span>
-        <h2 class="section-header__title">Selected work</h2>
+        <h2 class="section-header__title">Showcase</h2>
       </div>
       <span class="work__hint">Case studies · click to read</span>
     </div>
-    <div class="work__list">
-      <a href="case/CASE1-localization-proxy-tool.html" class="work__row" data-reveal>
-        <div class="work__bar"></div>
-        <div class="work__row-content">
-          <div class="work__row-co">Tractable · 2026</div>
-          <div class="work__row-title">How I Vibe-Coded My Way Out of a Bottleneck, Courtesy of Claude</div>
-          <div class="work__row-outcome">Built a self-serve Lokalise proxy layer, prototyped in Lovable and rebuilt in Claude Code, removing myself as the bottleneck on every localization key submission across 10+ engineers.</div>
-          <div class="work__row-tags">
-            <span class="work__tag">Internal Tools</span>
-            <span class="work__tag">AI-Assisted Dev</span>
-            <span class="work__tag">I18n/L10n</span>
-          </div>
-        </div>
-        <div class="work__arrow">→</div>
-      </a>
-      <a href="case/CASE2-tractable-migration.html" class="work__row" data-reveal>
-        <div class="work__bar"></div>
-        <div class="work__row-content">
-          <div class="work__row-co">Tractable · 2025–2026</div>
-          <div class="work__row-title">Enterprise Platform Migration</div>
-          <div class="work__row-outcome">Owned end-to-end migration of 5+ enterprise clients onto a modern AI-powered architecture: per-client PRDs, automated API testing via Claude Code, and phased cutovers with zero regression at every go-live.</div>
-          <div class="work__row-tags">
-            <span class="work__tag">Platform Migration</span>
-            <span class="work__tag">B2B SaaS</span>
-            <span class="work__tag">Enterprise</span>
-            <span class="work__tag">AI Products</span>
-          </div>
-        </div>
-        <div class="work__arrow">→</div>
-      </a>
-      <a href="case/amex-reporting.html" class="work__row" data-reveal>
-        <div class="work__bar"></div>
-        <div class="work__row-content">
-          <div class="work__row-co">American Express · 2022–2024</div>
-          <div class="work__row-title">Bureau Reporting Modernisation</div>
-          <div class="work__row-outcome">Migrated bureau reporting from legacy infrastructure to a modern REST API-based architecture: ~40% faster processing, ~99% on-time delivery, and 99.9%+ uptime through failover.</div>
-          <div class="work__row-tags">
-            <span class="work__tag">Legacy Migration</span>
-            <span class="work__tag">REST APIs</span>
-            <span class="work__tag">Fintech</span>
-            <span class="work__tag">Data Infrastructure</span>
-          </div>
-        </div>
-        <div class="work__arrow">→</div>
-      </a>
+    <div class="listing-card-list">
+      {% assign sorted_items = site.case_studies | sort: 'order' %}
+      {% for item in sorted_items %}
+        {% include listing-card.html item=item %}
+      {% endfor %}
     </div>
     <p style="margin-top:24px;font-family:var(--f-mono);font-size:12px;color:var(--c-ink-faint);letter-spacing:.04em;">Full decision logs and trade-off analysis in each case study. <a href="case/" style="color:var(--c-accent);text-decoration:none;">See all work →</a></p>
   </div>
