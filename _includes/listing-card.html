@@ -1,0 +1,30 @@
+{% assign item = include.item %}
+{% assign item_url = item.url | default: item.link %}
+{% assign summary = item.tldr | default: item.oneliner %}
+{% assign status_key = item.status | downcase %}
+
+{% if item_url %}
+<a href="{{ item_url }}" class="listing-card listing-card--{{ status_key }}{% if item.sample %} has-ribbon{% endif %}" data-reveal>
+{% else %}
+<div class="listing-card listing-card--{{ status_key }}{% if item.sample %} has-ribbon{% endif %}" data-reveal>
+{% endif %}
+  {% if item.sample %}<div class="corner-ribbon">Sample</div>{% endif %}
+  <div class="listing-card__meta">
+    {% if item.company %}{{ item.company }} · {{ item.date_range }}{% else %}{{ item.context }}{% endif %}
+  </div>
+  <div class="listing-card__title-row">
+    <h2 class="listing-card__title">{{ item.title }}</h2>
+    {% if item.status %}<span class="listing-card__status listing-card__status--{{ status_key }}">{{ item.status }}</span>{% endif %}
+  </div>
+  <p class="listing-card__summary">{{ summary }}</p>
+  {% if item.why_dropped %}
+  <div class="listing-card__detail">
+    <span class="listing-card__detail-label">Why I dropped it · </span>{{ item.why_dropped }}
+  </div>
+  {% endif %}
+  {% if item_url %}<span class="listing-card__arrow-mobile">→</span>{% endif %}
+{% if item_url %}
+</a>
+{% else %}
+</div>
+{% endif %}
