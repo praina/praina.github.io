@@ -614,6 +614,7 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
 }
 .prd-list__sub { font-size: 18px; line-height: 1.65; color: var(--c-ink-body); max-width: 58ch; margin: 0 0 48px; }
 /* ── LISTING CARD (shared: Case studies, PRDs, Icebox) ───────── */
+.listing-card-list { display: flex; flex-direction: column; gap: 16px; }
 .listing-card {
   position: relative; overflow: hidden;
   border: 1px solid var(--c-border); border-left: 3px solid transparent; border-radius: 4px;
@@ -900,7 +901,6 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
 .icebox__eyebrow { margin-bottom: 18px; }
 .icebox__title { font-family: var(--f-display); font-size: 60px; line-height: 1; letter-spacing: -.02em; font-weight: 400; margin: 0 0 18px; }
 .icebox__sub { font-size: 18px; line-height: 1.65; color: var(--c-ink-body); max-width: 60ch; margin: 0 0 48px; }
-.icebox__grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
 
 /* ── SAMPLE BANNER ──────────────────────────────────────────── */
 .sample-banner {
