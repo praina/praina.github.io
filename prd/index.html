@@ -12,10 +12,10 @@ plain_footer: true
   <h1 class="prd-list__title">PRD library</h1>
   <p class="prd-list__sub">Structured product requirements documents showing how I frame problems, scope decisions, and define success. Real contexts, detail sanitised where appropriate.</p>
 
-  <div class="prd-list__rows">
+  <div class="listing-card-list">
     {% assign sorted_items = site.prds | sort: 'order' %}
     {% for item in sorted_items %}
-      {% include case-card.html item=item %}
+      {% include listing-card.html item=item %}
     {% endfor %}
   </div>
 

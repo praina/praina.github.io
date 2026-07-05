@@ -12,10 +12,10 @@ plain_footer: true
   <h1 class="prd-list__title">Selected work</h1>
   <p class="prd-list__sub">End-to-end case studies with problem framing, approach, trade-off analysis, and outcomes. Each project was owned from discovery through delivery.</p>
 
-  <div class="prd-list__rows">
+  <div class="listing-card-list">
     {% assign sorted_items = site.case_studies | sort: 'order' %}
     {% for item in sorted_items %}
-      {% include case-card.html item=item %}
+      {% include listing-card.html item=item %}
     {% endfor %}
   </div>
 </div>

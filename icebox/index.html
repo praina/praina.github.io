@@ -12,10 +12,10 @@ plain_footer: true
   <h1 class="icebox__title">Ideas that didn't ship</h1>
   <p class="icebox__sub">Product judgment shows up as much in what you don't build as in what you do. These are ideas I explored, advocated for, or scoped, then killed, parked, or deferred. Each one taught me something.</p>
 
-  <div class="icebox__grid">
+  <div class="listing-card-list">
     {% assign sorted_items = site.icebox | sort: 'order' %}
     {% for item in sorted_items %}
-      {% include icebox-card.html item=item %}
+      {% include listing-card.html item=item %}
     {% endfor %}
   </div>
 </div>
