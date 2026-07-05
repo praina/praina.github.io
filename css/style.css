@@ -1183,10 +1183,6 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
   .work__row:hover { grid-template-columns: 0 1fr auto; }
   .work__row:hover .work__bar { width: 0; }
   .work__row:hover::before { height: 3px; }
-  .prd-list__row { grid-template-columns: 0 1fr auto auto; }
-  .prd-list__row:hover { grid-template-columns: 0 1fr auto auto; }
-  .prd-list__row:hover .prd-list__bar { width: 0; }
-  .prd-list__row:hover::before { height: 3px; }
 }
 
 @media (max-width: 680px) {
