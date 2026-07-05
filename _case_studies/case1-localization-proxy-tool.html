@@ -11,6 +11,7 @@ plain_footer: true
 order: 1
 ---
 <!-- ── CASE HEADER ────────────────────────────────────── -->
+<div class="detail-header">
 <div class="case__header">
   <a href="/case/" class="back-link">← Selected work</a>
 
@@ -29,7 +30,9 @@ order: 1
     </div>
   </div>
 </div>
+</div>
 
+<div class="detail-content">
 <!-- ── PRODUCT SCREENSHOTS ────────────────────────────── -->
 <div class="case__image case__image--narrow">
   <h2 class="case__section-h">Product</h2>
@@ -63,7 +66,6 @@ order: 1
 </div>
 
 <!-- ── IMPACT STRIP ───────────────────────────────────── -->
-<div class="case__content">
 <div class="case__body">
   <div class="case__impact" data-reveal style="margin-bottom:10px;">
     <div class="case__impact-cell">
@@ -160,14 +162,23 @@ order: 1
     <p class="case__outro">The tool is still running. <span class="case__outro-accent">The bottleneck isn't.</span></p>
   </div>
 
-  <!-- Next -->
-  <a href="CASE2-tractable-migration.html" class="case__next" data-reveal>
-    <div>
-      <div class="case__next-label">Next case study</div>
-      <div class="case__next-title">Enterprise Platform Migration</div>
-    </div>
-    <span class="case__next-arrow">→</span>
-  </a>
+  <!-- Prev / Next -->
+  <div class="case__pagination">
+    <a href="/case/" class="case__nav-card case__nav-card--prev" data-reveal>
+      <span class="case__nav-arrow">←</span>
+      <div class="case__nav-text">
+        <div class="case__nav-label">Back to</div>
+        <div class="case__nav-title">All case studies</div>
+      </div>
+    </a>
+    <a href="CASE2-tractable-migration.html" class="case__nav-card case__nav-card--next" data-reveal>
+      <div class="case__nav-text">
+        <div class="case__nav-label">Next case study</div>
+        <div class="case__nav-title">Enterprise Platform Migration</div>
+      </div>
+      <span class="case__nav-arrow">→</span>
+    </a>
+  </div>
 </div>
 </div>
 

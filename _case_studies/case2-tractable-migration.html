@@ -58,6 +58,7 @@ order: 2
   .infographic-modal-inner { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
 </style>
 <!-- ── CASE HEADER ────────────────────────────────────── -->
+<div class="detail-header">
 <div class="case__header">
   <a href="/case/" class="back-link">← Selected work</a>
 
@@ -76,7 +77,9 @@ order: 2
     </div>
   </div>
 </div>
+</div>
 
+<div class="detail-content">
 <!-- ── ARCHITECTURE DIAGRAM ────────────────────────────── -->
 <div class="case__image">
   <div class="infographic-wrap">
@@ -208,7 +211,6 @@ order: 2
 </div>
 
 <!-- ── IMPACT STRIP ───────────────────────────────────── -->
-<div class="case__content">
 <div class="case__body">
   <div class="case__impact" data-reveal>
     <div class="case__impact-cell">
@@ -294,14 +296,23 @@ order: 2
     <p class="case__outro">Five clients migrated. <span class="case__outro-accent">Zero regressions at go-live.</span></p>
   </div>
 
-  <!-- Next -->
-  <a href="amex-reporting.html" class="case__next" data-reveal>
-    <div>
-      <div class="case__next-label">Next case study</div>
-      <div class="case__next-title">Bureau Reporting Modernisation</div>
-    </div>
-    <span class="case__next-arrow">→</span>
-  </a>
+  <!-- Prev / Next -->
+  <div class="case__pagination">
+    <a href="CASE1-localization-proxy-tool.html" class="case__nav-card case__nav-card--prev" data-reveal>
+      <span class="case__nav-arrow">←</span>
+      <div class="case__nav-text">
+        <div class="case__nav-label">Previous case study</div>
+        <div class="case__nav-title">How I Vibe-Coded My Way Out of a Bottleneck</div>
+      </div>
+    </a>
+    <a href="amex-reporting.html" class="case__nav-card case__nav-card--next" data-reveal>
+      <div class="case__nav-text">
+        <div class="case__nav-label">Next case study</div>
+        <div class="case__nav-title">Bureau Reporting Modernisation</div>
+      </div>
+      <span class="case__nav-arrow">→</span>
+    </a>
+  </div>
 </div>
 </div>
 

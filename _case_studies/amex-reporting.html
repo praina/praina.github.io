@@ -11,6 +11,7 @@ plain_footer: true
 order: 3
 ---
 <!-- ── CASE HEADER ────────────────────────────────────── -->
+<div class="detail-header">
 <div class="case__header">
   <a href="/case/" class="back-link">← Selected work</a>
 
@@ -33,7 +34,9 @@ order: 3
     </div>
   </div>
 </div>
+</div>
 
+<div class="detail-content">
 <!-- ── IMAGE PLACEHOLDER ──────────────────────────────── -->
 <div class="case__image">
   <div class="case__image-placeholder">
@@ -42,7 +45,6 @@ order: 3
 </div>
 
 <!-- ── IMPACT STRIP ───────────────────────────────────── -->
-<div class="case__content">
 <div class="case__body">
   <div class="case__impact" data-reveal>
     <div class="case__impact-cell">
@@ -114,13 +116,22 @@ order: 3
     </ul>
   </div>
 
-  <!-- Next -->
-  <a href="CASE1-localization-proxy-tool.html" class="case__next" data-reveal>
-    <div>
-      <div class="case__next-label">Next case study</div>
-      <div class="case__next-title">How I Vibe-Coded My Way Out of a Bottleneck, Courtesy of Claude</div>
-    </div>
-    <span class="case__next-arrow">→</span>
-  </a>
+  <!-- Prev / Next -->
+  <div class="case__pagination">
+    <a href="CASE2-tractable-migration.html" class="case__nav-card case__nav-card--prev" data-reveal>
+      <span class="case__nav-arrow">←</span>
+      <div class="case__nav-text">
+        <div class="case__nav-label">Previous case study</div>
+        <div class="case__nav-title">Enterprise Platform Migration</div>
+      </div>
+    </a>
+    <a href="/case/" class="case__nav-card case__nav-card--next" data-reveal>
+      <div class="case__nav-text">
+        <div class="case__nav-label">Back to</div>
+        <div class="case__nav-title">All case studies</div>
+      </div>
+      <span class="case__nav-arrow">→</span>
+    </a>
+  </div>
 </div>
 </div>
