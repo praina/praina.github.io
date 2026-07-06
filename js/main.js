@@ -97,6 +97,97 @@ document.querySelectorAll('[data-toggle-target]').forEach(btn => {
   });
 });
 
+/* ── Impact stats carousel (mobile only, ≤480px) ─────────────── */
+(function () {
+  const cards  = Array.from(document.querySelectorAll('.impact__card'));
+  const grid   = document.querySelector('.impact__grid');
+  const dotsEl = document.getElementById('impactDots');
+  const bar    = document.getElementById('impactBar');
+  if (!cards.length || !grid || !dotsEl || !bar) return;
+
+  const mq = window.matchMedia('(max-width: 480px)');
+  const DURATION = 4000;
+  let current = 0;
+  let barStart = null;
+  let barFrame = null;
+  let active = false;
+
+  function syncHeight() {
+    if (!mq.matches) {
+      grid.style.height = '';
+      return;
+    }
+    grid.style.height = 'auto';
+    const max = Math.max(...cards.map(c => c.offsetHeight));
+    grid.style.height = max + 'px';
+  }
+
+  const dots = cards.map((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'impact__dot' + (i === 0 ? ' is-active' : '');
+    d.setAttribute('aria-label', 'Go to stat ' + (i + 1));
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+    return d;
+  });
+
+  function goTo(idx) {
+    const prev = current;
+    current = (idx + cards.length) % cards.length;
+    if (prev === current) return;
+    cards[prev].classList.remove('is-active');
+    cards[current].classList.add('is-active');
+    dots[prev].classList.remove('is-active');
+    dots[current].classList.add('is-active');
+    resetBar();
+  }
+
+  function resetBar() {
+    cancelAnimationFrame(barFrame);
+    bar.style.width = '0%';
+    barStart = null;
+    if (active) barFrame = requestAnimationFrame(tickBar);
+  }
+
+  function tickBar(ts) {
+    if (!barStart) barStart = ts;
+    const pct = Math.min((ts - barStart) / DURATION * 100, 100);
+    bar.style.width = pct + '%';
+    if (pct < 100) {
+      barFrame = requestAnimationFrame(tickBar);
+    } else {
+      goTo(current + 1);
+    }
+  }
+
+  function start() {
+    if (active) return;
+    active = true;
+    barStart = null;
+    barFrame = requestAnimationFrame(tickBar);
+  }
+
+  function stop() {
+    active = false;
+    cancelAnimationFrame(barFrame);
+    bar.style.width = '0%';
+  }
+
+  function syncToViewport(e) {
+    syncHeight();
+    if (e.matches) start(); else stop();
+  }
+
+  syncToViewport(mq);
+  mq.addEventListener('change', syncToViewport);
+
+  let resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(syncHeight, 150);
+  });
+})();
+
 /* ── Recommendations carousel ───────────────────────────────── */
 (function () {
   const cards  = Array.from(document.querySelectorAll('.rec__card'));

@@ -1096,7 +1096,7 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
   padding: 8px 16px;
 }
 
-.rec__progress {
+.rec__progress, .impact__progress {
   height: 2px;
   background: var(--c-border);
   border-radius: 1px;
@@ -1104,14 +1104,14 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
   overflow: hidden;
 }
 
-.rec__bar {
+.rec__bar, .impact__bar {
   height: 100%;
   background: var(--c-accent);
   border-radius: 1px;
   width: 0%;
 }
 
-.rec__dots {
+.rec__dots, .impact__dots {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1119,7 +1119,7 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
   margin-top: 16px;
 }
 
-.rec__dot {
+.rec__dot, .impact__dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -1129,10 +1129,11 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
   cursor: pointer;
   transition: background var(--t-hover), transform var(--t-hover);
 }
-.rec__dot.is-active {
+.rec__dot.is-active, .impact__dot.is-active {
   background: var(--c-accent);
   transform: scale(1.35);
 }
+.impact__progress, .impact__dots { display: none; }
 
 /* ── RESPONSIVE ─────────────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -1182,6 +1183,19 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
 }
 
 @media (max-width: 480px) {
-  .impact__grid { grid-template-columns: 1fr; }
+  .impact__grid {
+    display: block; position: relative;
+    background: none; border: none; border-radius: 0; overflow: visible; gap: 0;
+  }
+  .impact__card[data-reveal] {
+    position: absolute; top: 0; left: 0; right: 0; height: 100%;
+    box-sizing: border-box;
+    opacity: 0; pointer-events: none;
+    transition: opacity .5s var(--ease-out);
+    border: 1px solid var(--c-border); border-radius: 4px;
+  }
+  .impact__card.is-active[data-reveal] { opacity: 1; pointer-events: auto; position: relative; }
+  .impact__dots { display: flex; }
+  .impact__progress { display: block; }
   .hero__stats { grid-template-columns: repeat(3,1fr); }
 }
