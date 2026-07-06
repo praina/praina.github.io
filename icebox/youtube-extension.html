@@ -19,36 +19,40 @@ plain_footer: true
 
   <!-- Decision matrix -->
   <h2 class="icebox-detail__section-h">Approach comparison</h2>
-  <table class="matrix" data-reveal>
-    <thead>
-      <tr>
-        <th>Approach</th>
-        <th>Maintainability</th>
-        <th>User experience</th>
-        <th>Verdict</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>API Proxy</td>
-        <td>Low: requires live server, ongoing API costs</td>
-        <td>High: direct, clean navigation</td>
-        <td><span class="matrix__killed">Rejected</span><div class="matrix__note">Too much overhead for a side project</div></td>
-      </tr>
-      <tr>
-        <td>Search Hacking</td>
-        <td>High: automatic, no maintenance</td>
-        <td>Low: noisy, uncontrolled results</td>
-        <td><span class="matrix__killed">Rejected</span><div class="matrix__note">Couldn't guarantee a reliable experience</div></td>
-      </tr>
-      <tr>
-        <td>Manual Curation</td>
-        <td>Medium: requires ongoing content updates</td>
-        <td>High: curated, high-quality videos</td>
-        <td><span class="matrix__killed">Rejected</span><div class="matrix__note">Made me the permanent bottleneck</div></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-scroll">
+    <div class="table-scroll__inner">
+      <table class="matrix" data-reveal>
+        <thead>
+          <tr>
+            <th>Approach</th>
+            <th>Maintainability</th>
+            <th>User experience</th>
+            <th>Verdict</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>API Proxy</td>
+            <td>Low: requires live server, ongoing API costs</td>
+            <td>High: direct, clean navigation</td>
+            <td><span class="matrix__killed">Rejected</span><div class="matrix__note">Too much overhead for a side project</div></td>
+          </tr>
+          <tr>
+            <td>Search Hacking</td>
+            <td>High: automatic, no maintenance</td>
+            <td>Low: noisy, uncontrolled results</td>
+            <td><span class="matrix__killed">Rejected</span><div class="matrix__note">Couldn't guarantee a reliable experience</div></td>
+          </tr>
+          <tr>
+            <td>Manual Curation</td>
+            <td>Medium: requires ongoing content updates</td>
+            <td>High: curated, high-quality videos</td>
+            <td><span class="matrix__killed">Rejected</span><div class="matrix__note">Made me the permanent bottleneck</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <!-- Three approaches -->
   <h2 class="icebox-detail__section-h">Approach breakdown</h2>

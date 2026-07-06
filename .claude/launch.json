@@ -8,6 +8,13 @@
       "port": 3000,
       "autoPort": true,
       "cwd": "C:\\Users\\prate\\AI Projects\\praina.github.io"
+    },
+    {
+      "name": "jekyll-dev",
+      "runtimeExecutable": "C:\\Ruby32-x64\\bin\\jekyll.bat",
+      "runtimeArgs": ["serve", "--livereload", "--port", "4000"],
+      "port": 4000,
+      "cwd": "C:\\Users\\prate\\AI Projects\\praina.github.io"
     }
   ]
 }

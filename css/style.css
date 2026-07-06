@@ -278,6 +278,7 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
 
 /* ── HOME : PILLARS ─────────────────────────────────────────── */
 .pillars__section { max-width: var(--max-home); margin: 0 auto; padding: 88px var(--pad-x); }
+.pillars__section .container { padding: 0; }
 .pillars__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
 .pillar { border-top: 3px solid var(--c-accent); padding-top: 24px; }
 .pillar__num { font-family: var(--f-mono); font-size: 12px; color: var(--c-ink-faint); margin-bottom: 14px; }
@@ -922,6 +923,8 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
 }
 
 /* Decision matrix table */
+.table-scroll { position: relative; }
+.table-scroll__inner { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .matrix {
   width: 100%; border-collapse: collapse;
   border: 1px solid var(--c-border); border-radius: 4px; overflow: hidden;
@@ -990,8 +993,8 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
 }
 
 /* ── RECOMMENDATIONS ────────────────────────────────────────── */
-.rec__section { padding: 80px var(--pad-x); }
-.rec__section .container { max-width: var(--max-home); margin: 0 auto; }
+.rec__section { padding: 80px 0; }
+.rec__section .container { max-width: var(--max-home); margin: 0 auto; padding: 0 var(--pad-x); }
 
 .rec__carousel { position: relative; }
 
@@ -1153,6 +1156,22 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
   .nav__hamburger { display: flex; }
   .impact__grid { grid-template-columns: 1fr 1fr; }
   .case__impact { grid-template-columns: 1fr; }
+  .table-scroll .matrix { min-width: 560px; margin-bottom: 0; }
+  .table-scroll { margin-bottom: 52px; }
+  .table-scroll::after {
+    content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 28px;
+    background: linear-gradient(to right, transparent, var(--c-bg));
+    pointer-events: none;
+  }
+  .rec__quote-wrap { height: auto; }
+  .rec__quote {
+    height: auto;
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 5;
+  }
+  .rec__overflow-dots { display: none; }
+  .rec__footer { flex-direction: column; align-items: stretch; }
+  .rec__li-btn { width: 100%; text-align: center; margin-top: 4px; }
+  .section-header__title { font-size: clamp(28px, 8vw, 44px); }
   .hero__name { font-size: clamp(44px, 12vw, 84px); }
   .prd-list__title, .icebox__title { font-size: clamp(40px, 10vw, 60px); }
   .contact__heading { font-size: clamp(36px, 8vw, 54px); }
