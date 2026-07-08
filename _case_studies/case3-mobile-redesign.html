@@ -277,5 +277,88 @@ order: 3
   </div>
 </div>
 
+<!-- ── SECTION 02: PRIORITISATION ───────────────────── -->
+<div class="case__section" data-reveal>
+  <h2 class="case__section-h">02 · Prioritisation</h2>
+  <p class="case__section-body" style="margin-bottom: 24px;">What to fix first and why</p>
+
+  <p style="font-size:15px; color:var(--c-ink-body); line-height:1.65; margin-bottom:28px; padding-bottom:24px; border-bottom:1px solid var(--c-border);">
+    With six issues on the list, the question was sequencing. I plotted each against severity and implementation effort. High-severity quick wins shipped in Wave 1. The carousel work — a shared interaction engine built from scratch — followed in Wave 2 once the surface fixes were live.
+  </p>
+
+  <!-- Desktop 2x2 matrix -->
+  <div class="c3-matrix-wrap">
+    <div class="c3-ax-y-label"><span>Severity</span></div>
+    <div class="c3-ax-y-ticks"><span>High</span><span>Low</span></div>
+    <div style="grid-column:3;grid-row:1;">
+      <div class="c3-matrix">
+        <div class="c3-quad c3-quad--w1h">
+          <div class="c3-wave">Wave 1</div>
+          <div class="c3-quad-sub">High severity · Low effort</div>
+          <div class="c3-pills">
+            <span class="c3-pill">Table overflow</span>
+            <span class="c3-pill">Quote truncation</span>
+          </div>
+        </div>
+        <div class="c3-quad c3-quad--w2">
+          <div class="c3-wave">Wave 2</div>
+          <div class="c3-quad-sub">High severity · High effort</div>
+          <div class="c3-pills">
+            <span class="c3-pill">Impact carousel</span>
+            <span class="c3-pill">Skills carousel</span>
+          </div>
+        </div>
+        <div class="c3-quad c3-quad--w1l">
+          <div class="c3-wave">Wave 1</div>
+          <div class="c3-quad-sub">Low severity · Low effort</div>
+          <div class="c3-pills">
+            <span class="c3-pill">Heading align</span>
+            <span class="c3-pill">Font scale</span>
+          </div>
+        </div>
+        <div class="c3-quad c3-quad--skip">
+          <div class="c3-wave">–</div>
+          <div class="c3-quad-sub">Low severity · High effort</div>
+          <span class="c3-none">Nothing here</span>
+        </div>
+      </div>
+    </div>
+    <div class="c3-ax-x">
+      <span>Low effort</span>
+      <span class="c3-ax-x-title">Effort</span>
+      <span>High effort</span>
+    </div>
+  </div>
+
+  <!-- Mobile vertical list (shown at <540px) -->
+  <div class="c3-matrix-mobile">
+    <div class="c3-mobile-header">Prioritised by severity + effort</div>
+    <div class="c3-quad c3-quad--w1h">
+      <div class="c3-wave">Wave 1 · High severity · Low effort</div>
+      <div class="c3-pills"><span class="c3-pill">Table overflow</span><span class="c3-pill">Quote truncation</span></div>
+    </div>
+    <div class="c3-quad c3-quad--w1l">
+      <div class="c3-wave">Wave 1 · Low severity · Low effort</div>
+      <div class="c3-pills"><span class="c3-pill">Heading align</span><span class="c3-pill">Font scale</span></div>
+    </div>
+    <div class="c3-quad c3-quad--w2">
+      <div class="c3-wave">Wave 2 · High severity · High effort</div>
+      <div class="c3-pills"><span class="c3-pill">Impact carousel</span><span class="c3-pill">Skills carousel</span></div>
+    </div>
+    <div class="c3-quad c3-quad--skip">
+      <div class="c3-wave">Not in scope</div>
+      <span class="c3-none">Nothing here</span>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="c3-legend">
+    <div class="c3-legend-item"><div class="c3-legend-bar c3-lb--w1h"></div>Wave 1 — high severity</div>
+    <div class="c3-legend-item"><div class="c3-legend-bar c3-lb--w1l"></div>Wave 1 — low severity</div>
+    <div class="c3-legend-item"><div class="c3-legend-bar c3-lb--w2"></div>Wave 2</div>
+    <div class="c3-legend-item"><div class="c3-legend-bar c3-lb--skip"></div>Not in scope</div>
+  </div>
+</div>
+
 </div><!-- /.case__body -->
 </div><!-- /.detail-content -->
