@@ -97,35 +97,45 @@ document.querySelectorAll('[data-toggle-target]').forEach(btn => {
   });
 });
 
-/* ── Impact stats carousel (mobile only, ≤480px) ─────────────── */
-(function () {
-  const cards  = Array.from(document.querySelectorAll('.impact__card'));
-  const grid   = document.querySelector('.impact__grid');
-  const dotsEl = document.getElementById('impactDots');
-  const bar    = document.getElementById('impactBar');
-  if (!cards.length || !grid || !dotsEl || !bar) return;
+/* ── Shared carousel engine (Impact / Skills / Recommendations) ──
+   Handles auto-advance, dots, swipe navigation, and pause-while-
+   pressed/hovered. Mobile-only carousels pass `mq` + `grid` to also
+   lock the container to the tallest card's height. */
+function initCarousel(opts) {
+  const {
+    cardSelector, trackSelector, dotsId, barId, dotClass, duration,
+    mq = null, grid = null, onDeactivate = null, isHeld = null,
+  } = opts;
 
-  const mq = window.matchMedia('(max-width: 480px)');
-  const DURATION = 4000;
-  let current = 0;
-  let barStart = null;
-  let barFrame = null;
-  let active = false;
+  const cards  = Array.from(document.querySelectorAll(cardSelector));
+  const track  = document.querySelector(trackSelector);
+  const dotsEl = document.getElementById(dotsId);
+  const bar    = document.getElementById(barId);
+  if (!cards.length || !track || !dotsEl || !bar) return;
+
+  let current = 0, barFrame = null, active = false, paused = false;
+  let elapsed = 0, tickStart = null; // ms of progress banked so far / when the current run segment began
+  let isMouseHovering = false;
 
   function syncHeight() {
-    if (!mq.matches) {
-      grid.style.height = '';
-      return;
-    }
+    if (!grid) return;
+    if (mq && !mq.matches) { grid.style.height = ''; return; }
     grid.style.height = 'auto';
+    // Inactive cards are position:absolute with height:100%, which (once the
+    // grid's auto height resolves via the one in-flow active card) resolves
+    // against that SAME resolved height for every card — not each card's own
+    // content. Override height inline per-card during measurement so each
+    // reports its true independent content height, then restore the CSS rule.
+    cards.forEach(c => { c.style.height = 'auto'; });
     const max = Math.max(...cards.map(c => c.offsetHeight));
+    cards.forEach(c => { c.style.height = ''; });
     grid.style.height = max + 'px';
   }
 
   const dots = cards.map((_, i) => {
     const d = document.createElement('button');
-    d.className = 'impact__dot' + (i === 0 ? ' is-active' : '');
-    d.setAttribute('aria-label', 'Go to stat ' + (i + 1));
+    d.className = dotClass + (i === 0 ? ' is-active' : '');
+    d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
     d.addEventListener('click', () => goTo(i));
     dotsEl.appendChild(d);
     return d;
@@ -135,23 +145,31 @@ document.querySelectorAll('[data-toggle-target]').forEach(btn => {
     const prev = current;
     current = (idx + cards.length) % cards.length;
     if (prev === current) return;
+    // syncHeight() does a real (if brief) layout read/write across every
+    // card. The set of possible heights only changes on load, resize, or an
+    // expand/collapse toggle — never just from switching which card is
+    // shown — so only resync here if deactivating actually reverted an
+    // expanded card back to its default state.
+    const needsResync = onDeactivate ? !!onDeactivate(cards[prev]) : false;
     cards[prev].classList.remove('is-active');
     cards[current].classList.add('is-active');
     dots[prev].classList.remove('is-active');
     dots[current].classList.add('is-active');
+    if (needsResync) syncHeight();
     resetBar();
   }
 
   function resetBar() {
     cancelAnimationFrame(barFrame);
     bar.style.width = '0%';
-    barStart = null;
-    if (active) barFrame = requestAnimationFrame(tickBar);
+    elapsed = 0;
+    tickStart = null;
+    if (active && !paused) barFrame = requestAnimationFrame(tickBar);
   }
 
   function tickBar(ts) {
-    if (!barStart) barStart = ts;
-    const pct = Math.min((ts - barStart) / DURATION * 100, 100);
+    if (!tickStart) tickStart = ts;
+    const pct = Math.min((elapsed + (ts - tickStart)) / duration * 100, 100);
     bar.style.width = pct + '%';
     if (pct < 100) {
       barFrame = requestAnimationFrame(tickBar);
@@ -163,97 +181,134 @@ document.querySelectorAll('[data-toggle-target]').forEach(btn => {
   function start() {
     if (active) return;
     active = true;
-    barStart = null;
-    barFrame = requestAnimationFrame(tickBar);
+    if (!paused) { tickStart = null; barFrame = requestAnimationFrame(tickBar); }
   }
 
   function stop() {
     active = false;
     cancelAnimationFrame(barFrame);
     bar.style.width = '0%';
+    elapsed = 0;
+    tickStart = null;
   }
 
-  function syncToViewport(e) {
-    syncHeight();
-    if (e.matches) start(); else stop();
-  }
-
-  syncToViewport(mq);
-  mq.addEventListener('change', syncToViewport);
-
-  let resizeTimer;
-  window.addEventListener('resize', function () {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(syncHeight, 150);
-  });
-})();
-
-/* ── Recommendations carousel ───────────────────────────────── */
-(function () {
-  const cards  = Array.from(document.querySelectorAll('.rec__card'));
-  const dotsEl = document.getElementById('recDots');
-  const bar    = document.getElementById('recBar');
-  if (!cards.length || !dotsEl || !bar) return;
-
-  const DURATION = 6000;
-  let current = 0;
-  let paused  = false;
-  let barStart = null;
-  let barFrame = null;
-
-  const dots = cards.map((_, i) => {
-    const d = document.createElement('button');
-    d.className = 'rec__dot' + (i === 0 ? ' is-active' : '');
-    d.setAttribute('aria-label', 'Go to recommendation ' + (i + 1));
-    d.addEventListener('click', () => goTo(i));
-    dotsEl.appendChild(d);
-    return d;
-  });
-
-  function goTo(idx) {
-    const prev = current;
-    current = (idx + cards.length) % cards.length;
-    if (prev === current) return;
-    cards[prev].classList.remove('is-active');
-    cards[current].classList.add('is-active');
-    dots[prev].classList.remove('is-active');
-    dots[current].classList.add('is-active');
-    resetBar();
-  }
-
-  function resetBar() {
+  function pause() {
+    paused = true;
     cancelAnimationFrame(barFrame);
-    bar.style.width = '0%';
-    barStart = null;
-    if (!paused) barFrame = requestAnimationFrame(tickBar);
-  }
-
-  function tickBar(ts) {
-    if (!barStart) barStart = ts;
-    const pct = Math.min((ts - barStart) / DURATION * 100, 100);
-    bar.style.width = pct + '%';
-    if (pct < 100) {
-      barFrame = requestAnimationFrame(tickBar);
-    } else {
-      goTo(current + 1);
+    if (tickStart) {
+      elapsed += performance.now() - tickStart;
+      tickStart = null;
     }
   }
 
-  const carousel = document.querySelector('.rec__carousel');
-  if (carousel) {
-    carousel.addEventListener('mouseenter', () => {
-      paused = true;
-      cancelAnimationFrame(barFrame);
-    });
-    carousel.addEventListener('mouseleave', () => {
-      paused = false;
-      barStart = null;
-      barFrame = requestAnimationFrame(tickBar);
+  function resume() {
+    if (isHeld && isHeld()) return;
+    if (isMouseHovering) return;
+    paused = false;
+    tickStart = null;
+    if (active) barFrame = requestAnimationFrame(tickBar);
+  }
+
+  /* Swipe navigation + pause while pressed (touch, mouse, or stylus) */
+  let startX = null, startY = null;
+  track.addEventListener('pointerdown', (e) => {
+    startX = e.clientX;
+    startY = e.clientY;
+    pause();
+  });
+  track.addEventListener('pointerup', (e) => {
+    if (startX !== null) {
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        goTo(dx < 0 ? current + 1 : current - 1);
+      }
+    }
+    startX = null;
+    resume();
+  });
+  track.addEventListener('pointercancel', () => { startX = null; resume(); });
+
+  /* Desktop hover-pause. pointerenter/pointerleave with pointerType === 'mouse'
+     correctly ignores synthetic events fired by touch and DevTools touch-
+     simulation, where taps produce fake mouseenter with no matching mouseleave.
+     isMouseHovering prevents resume() from firing on pointerup while the real
+     cursor is still over the track. */
+  track.addEventListener('pointerenter', (e) => {
+    if (e.pointerType === 'mouse') { isMouseHovering = true; pause(); }
+  });
+  track.addEventListener('pointerleave', (e) => {
+    if (e.pointerType === 'mouse') { isMouseHovering = false; resume(); }
+  });
+
+  if (mq) {
+    const syncToViewport = (e) => { syncHeight(); if (e.matches) start(); else stop(); };
+    syncToViewport(mq);
+    mq.addEventListener('change', syncToViewport);
+  } else {
+    start();
+  }
+
+  if (grid) {
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(syncHeight, 150);
     });
   }
 
-  barFrame = requestAnimationFrame(tickBar);
+  return { syncHeight, goTo, pause, resume };
+}
 
+const mq480 = window.matchMedia('(max-width: 480px)');
+
+/* ── Impact stats carousel (mobile only, ≤480px) ─────────────── */
+initCarousel({
+  cardSelector: '.impact__card', trackSelector: '.impact__grid',
+  dotsId: 'impactDots', barId: 'impactBar', dotClass: 'impact__dot',
+  duration: 4000, mq: mq480, grid: document.querySelector('.impact__grid'),
+});
+
+/* ── Skills carousel (mobile only, ≤480px) ───────────────────── */
+const skillsCarousel = initCarousel({
+  cardSelector: '.skills__row', trackSelector: '.skills__rows',
+  dotsId: 'skillsDots', barId: 'skillsBar', dotClass: 'skills__dot',
+  duration: 5000, mq: mq480, grid: document.querySelector('.skills__rows'),
+  onDeactivate(card) {
+    const tags = card.querySelector('.skills__tags');
+    const btn  = card.querySelector('.skills__more');
+    if (tags && tags.classList.contains('is-expanded')) {
+      tags.classList.remove('is-expanded');
+      if (btn) btn.textContent = btn.dataset.labelMore || btn.textContent;
+      return true; // height changed — grid needs a resync
+    }
+    return false;
+  },
+  isHeld() {
+    const active = document.querySelector('.skills__row.is-active .skills__tags');
+    return !!(active && active.classList.contains('is-expanded'));
+  },
+});
+
+if (skillsCarousel) {
+  document.querySelectorAll('.skills__more').forEach(btn => {
+    btn.addEventListener('click', () => setTimeout(() => {
+      skillsCarousel.syncHeight();
+      const tags = document.querySelector('.skills__row.is-active .skills__tags');
+      if (tags && tags.classList.contains('is-expanded')) skillsCarousel.pause();
+      else skillsCarousel.resume();
+    }, 0));
+  });
+}
+
+/* ── Recommendations carousel ───────────────────────────────── */
+initCarousel({
+  cardSelector: '.rec__card', trackSelector: '#recTrack',
+  dotsId: 'recDots', barId: 'recBar', dotClass: 'rec__dot',
+  duration: 6000,
+});
+
+(function () {
   function updateDots() {
     document.querySelectorAll('.rec__quote').forEach(function (q) {
       var wrap = q.parentElement;
