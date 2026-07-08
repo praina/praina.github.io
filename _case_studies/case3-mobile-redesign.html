@@ -498,5 +498,84 @@ order: 3
 
   <hr class="c3-fix-divider">
 
+  <!-- Fix 03 -->
+  <div class="c3-fix-block">
+    <div class="c3-fix-num">Fix 03 of 03</div>
+    <h3 class="c3-fix-title">Table overflow: from hard clip to scrollable with hint</h3>
+    <p class="c3-fix-desc">Comparison tables clipped at the screen edge with no scroll affordance — columns simply disappeared. Fixed with horizontal scroll, a right-edge fade gradient, and a visible caret hint.</p>
+
+    <div class="c3-ba-pair">
+      <div class="c3-ba-col">
+        <div class="c3-ba-label c3-ba-label--before">Before</div>
+        <div class="c3-phone">
+          <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
+          <div class="c3-phone-body">
+            <div style="font-family:var(--f-mono);font-size:8px;color:#C04040;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Comparison</div>
+            <div style="overflow:hidden;border:2px solid #C04040;border-radius:3px;position:relative;">
+              <table style="border-collapse:collapse;font-family:var(--f-mono);font-size:8px;min-width:260px;width:100%;">
+                <tr>
+                  <th style="background:#F0ECE2;padding:4px 6px;border:1px solid #D8D4C8;color:#8C8880;text-align:left;white-space:nowrap;">Feature</th>
+                  <th style="background:#F0ECE2;padding:4px 6px;border:1px solid #D8D4C8;color:#8C8880;white-space:nowrap;">Opt...</th>
+                  <th style="background:#F0ECE2;padding:4px 6px;border:1px solid #D8D4C8;color:#8C8880;white-space:nowrap;">Opt...</th>
+                </tr>
+                <tr>
+                  <td style="padding:4px 6px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Auth</td>
+                  <td style="padding:4px 6px;border:1px solid #E4E0D6;color:#C8C4BC;white-space:nowrap;">–</td>
+                  <td style="padding:4px 6px;border:1px solid #E4E0D6;color:#C8C4BC;white-space:nowrap;">–</td>
+                </tr>
+                <tr>
+                  <td style="padding:4px 6px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">API</td>
+                  <td style="padding:4px 6px;border:1px solid #E4E0D6;color:#C8C4BC;white-space:nowrap;">–</td>
+                  <td style="padding:4px 6px;border:1px solid #E4E0D6;color:#C8C4BC;white-space:nowrap;">–</td>
+                </tr>
+              </table>
+            </div>
+            <div style="font-size:7px;color:#C04040;font-family:var(--f-mono);margin-top:6px;letter-spacing:.04em;">Columns cut off, no scroll</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="c3-ba-col">
+        <div class="c3-ba-label c3-ba-label--after">After</div>
+        <div class="c3-phone">
+          <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
+          <div class="c3-phone-body">
+            <div style="font-family:var(--f-mono);font-size:8px;color:#2BC4A2;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Comparison</div>
+            <div style="position:relative;border:1px solid rgba(43,196,162,.3);border-radius:3px;overflow:hidden;">
+              <div style="overflow-x:auto;">
+                <table style="border-collapse:collapse;font-family:var(--f-mono);font-size:8px;min-width:260px;">
+                  <tr>
+                    <th style="background:#F3FBFA;padding:4px 6px;border:1px solid rgba(43,196,162,.2);color:#2BC4A2;text-align:left;white-space:nowrap;">Feature</th>
+                    <th style="background:#F3FBFA;padding:4px 6px;border:1px solid rgba(43,196,162,.2);color:#2BC4A2;white-space:nowrap;">Option A</th>
+                    <th style="background:#F3FBFA;padding:4px 6px;border:1px solid rgba(43,196,162,.2);color:#2BC4A2;white-space:nowrap;">Option B</th>
+                  </tr>
+                  <tr>
+                    <td style="padding:4px 6px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Auth</td>
+                    <td style="padding:4px 6px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Yes</td>
+                    <td style="padding:4px 6px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">No</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:4px 6px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">API</td>
+                    <td style="padding:4px 6px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">REST</td>
+                    <td style="padding:4px 6px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">GraphQL</td>
+                  </tr>
+                </table>
+              </div>
+              <div style="position:absolute;top:0;right:0;bottom:0;width:24px;background:linear-gradient(to right,transparent,rgba(243,251,250,.9));pointer-events:none;"></div>
+            </div>
+            <div style="font-size:7px;color:#2BC4A2;font-family:var(--f-mono);margin-top:6px;letter-spacing:.04em;text-align:right;">Scroll to see all columns</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c3-tradeoff">
+      <span class="c3-tradeoff-tag">The tradeoff</span>
+      <p class="c3-tradeoff-text">Horizontal scroll on a phone is an antipattern in most contexts, but comparison tables have no better alternative — they only make sense as tables. The scroll hint makes the affordance visible rather than leaving users to discover it by accident.</p>
+    </div>
+  </div>
+
+</div><!-- /.case__section 03 -->
+
 </div><!-- /.case__body -->
 </div><!-- /.detail-content -->
