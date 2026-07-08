@@ -39,7 +39,243 @@ order: 3
 <div class="detail-content">
 <div class="case__body">
 
-<!-- sections go here -->
+<style>
+  /* ── Scoped to case3 only ── */
+  .c3-context-bar {
+    background: var(--c-surface); border-left: 3px solid var(--c-accent);
+    padding: 14px 18px; border-radius: 0 4px 4px 0;
+    font-size: 15px; color: var(--c-ink-body); line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .c3-issue-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 540px) { .c3-issue-grid { grid-template-columns: 1fr; } }
+  .c3-issue-card {
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: 5px; padding: 18px;
+  }
+  .c3-issue-num {
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--c-accent); margin-bottom: 6px;
+  }
+  .c3-issue-title { font-size: 14px; font-weight: 600; color: var(--c-ink); margin: 0 0 6px; }
+  .c3-issue-desc { font-size: 13px; color: var(--c-ink-faint); line-height: 1.55; margin: 0; }
+  .c3-sev {
+    display: inline-block; font-family: var(--f-mono); font-size: 9px;
+    letter-spacing: .06em; text-transform: uppercase;
+    padding: 2px 6px; border-radius: 2px; margin-top: 10px;
+  }
+  .c3-sev--high { background: rgba(220,60,60,.1); color: #C04040; }
+  .c3-sev--med  { background: rgba(200,150,40,.1); color: #9B7A20; }
+
+  /* ── Prioritisation matrix ── */
+  .c3-matrix-wrap {
+    display: grid; grid-template-columns: 20px 16px 1fr;
+    grid-template-rows: 1fr 20px; gap: 0; margin-bottom: 28px;
+  }
+  .c3-ax-y-label {
+    grid-column: 1; grid-row: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .c3-ax-y-label span {
+    font-family: var(--f-mono); font-size: 9px; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--c-ink-faint);
+    writing-mode: vertical-rl; transform: rotate(180deg);
+  }
+  .c3-ax-y-ticks {
+    grid-column: 2; grid-row: 1;
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 18px 0; align-items: center;
+  }
+  .c3-ax-y-ticks span {
+    font-family: var(--f-mono); font-size: 8px; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--c-border);
+    writing-mode: vertical-rl; transform: rotate(180deg);
+  }
+  .c3-ax-x {
+    grid-column: 3; grid-row: 2;
+    display: flex; justify-content: space-between; padding: 7px 0 0;
+  }
+  .c3-ax-x span {
+    font-family: var(--f-mono); font-size: 8px; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--c-border);
+  }
+  .c3-ax-x .c3-ax-x-title { font-size: 9px; letter-spacing: .13em; color: var(--c-ink-faint); }
+  .c3-matrix {
+    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+    gap: 2px; background: var(--c-border); border: 1px solid var(--c-border);
+    border-radius: 5px; overflow: hidden;
+  }
+  .c3-quad {
+    padding: 16px 16px 14px; border-left: 3px solid transparent; min-height: 120px;
+  }
+  .c3-quad--w1h { background: #F3FBFA; border-left-color: var(--c-accent); }
+  .c3-quad--w2  { background: var(--c-surface); border-left-color: var(--c-ink); }
+  .c3-quad--w1l { background: #F9FDFC; border-left-color: rgba(43,196,162,.3); }
+  .c3-quad--skip {
+    background: #F7F5F1;
+    background-image: repeating-linear-gradient(-45deg,transparent,transparent 4px,rgba(200,196,188,.15) 4px,rgba(200,196,188,.15) 5px);
+    border-left-color: transparent;
+  }
+  .c3-wave {
+    font-family: var(--f-mono); font-size: 9px; letter-spacing: .12em;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .c3-quad--w1h .c3-wave { color: var(--c-accent); }
+  .c3-quad--w1l .c3-wave { color: rgba(43,196,162,.55); }
+  .c3-quad--w2  .c3-wave { color: var(--c-ink); }
+  .c3-quad--skip .c3-wave { color: var(--c-border); }
+  .c3-quad-sub {
+    font-family: var(--f-mono); font-size: 8px; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--c-border); margin-bottom: 10px; line-height: 1.4;
+  }
+  .c3-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+  .c3-pill {
+    font-family: var(--f-mono); font-size: 10px; color: var(--c-ink-body);
+    background: rgba(44,42,37,.05); border: 1px solid var(--c-border);
+    border-radius: 2px; padding: 4px 8px; line-height: 1;
+  }
+  .c3-quad--skip .c3-pill { color: var(--c-ink-faint); border-color: var(--c-bg-tint); background: transparent; }
+  .c3-none { font-family: var(--f-mono); font-size: 10px; color: var(--c-border); }
+  .c3-legend {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    padding: 14px 16px; background: var(--c-bg-tint);
+    border-radius: 4px; margin-bottom: 48px;
+  }
+  .c3-legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--c-ink-body); }
+  .c3-legend-bar { width: 3px; height: 18px; border-radius: 1px; flex-shrink: 0; }
+  .c3-lb--w1h { background: var(--c-accent); }
+  .c3-lb--w1l { background: rgba(43,196,162,.3); }
+  .c3-lb--w2  { background: var(--c-ink); }
+  .c3-lb--skip {
+    background: repeating-linear-gradient(-45deg,transparent,transparent 2px,var(--c-border) 2px,var(--c-border) 3px);
+  }
+
+  /* ── Mobile matrix fallback ── */
+  .c3-matrix-mobile { display: none; }
+  @media (max-width: 540px) {
+    .c3-matrix-wrap  { display: none; }
+    .c3-matrix-mobile {
+      display: flex; flex-direction: column; gap: 2px;
+      border: 1px solid var(--c-border); border-radius: 5px;
+      overflow: hidden; background: var(--c-border); margin-bottom: 28px;
+    }
+    .c3-mobile-header {
+      font-family: var(--f-mono); font-size: 9px; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--c-ink-faint);
+      padding: 8px 16px 6px; background: var(--c-bg-tint);
+      border-bottom: 1px solid var(--c-border);
+    }
+    .c3-matrix-mobile .c3-quad { min-height: auto; display: flex; flex-direction: column; gap: 6px; }
+  }
+
+  /* ── Fixes section phone mockups ── */
+  .c3-fix-block { margin-bottom: 56px; }
+  .c3-fix-block:last-child { margin-bottom: 0; }
+  .c3-fix-divider { border: none; border-top: 1px solid var(--c-border); margin: 0 0 56px; }
+  .c3-fix-num {
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--c-accent); margin-bottom: 4px;
+  }
+  .c3-fix-title {
+    font-family: var(--f-display); font-size: 22px; font-weight: 400;
+    color: var(--c-ink); margin: 0 0 8px;
+  }
+  .c3-fix-desc { font-size: 15px; color: var(--c-ink-body); line-height: 1.6; margin-bottom: 24px; }
+  .c3-ba-pair {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 480px) { .c3-ba-pair { grid-template-columns: 1fr; } }
+  .c3-ba-col { display: flex; flex-direction: column; gap: 8px; }
+  .c3-ba-label {
+    font-family: var(--f-mono); font-size: 9px; letter-spacing: .12em;
+    text-transform: uppercase; text-align: center;
+  }
+  .c3-ba-label--before { color: #C04040; }
+  .c3-ba-label--after  { color: var(--c-accent); }
+  .c3-phone {
+    border: 2px solid var(--c-ink); border-radius: 14px; overflow: hidden;
+    background: var(--c-surface); position: relative;
+    box-shadow: 0 4px 20px rgba(44,42,37,.12);
+  }
+  .c3-phone-bar {
+    height: 8px; background: var(--c-ink);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .c3-phone-dot { width: 28px; height: 3px; background: #5A5650; border-radius: 2px; }
+  .c3-phone-body { padding: 12px 10px; overflow: hidden; }
+  .c3-tradeoff {
+    margin-top: 14px; padding: 12px 14px;
+    background: var(--c-bg-tint); border-radius: 4px;
+    border-left: 3px solid var(--c-border);
+  }
+  .c3-tradeoff-tag {
+    font-family: var(--f-mono); font-size: 8px; letter-spacing: .1em;
+    text-transform: uppercase; padding: 2px 6px; border-radius: 2px;
+    display: inline-block; margin-bottom: 6px;
+    background: rgba(43,196,162,.12); color: #1A9A7E;
+  }
+  .c3-tradeoff-text { font-size: 13px; color: var(--c-ink-body); line-height: 1.6; margin: 0; }
+</style>
+
+<!-- ── SECTION 01: AUDIT ─────────────────────────────── -->
+<div class="case__section" data-reveal>
+  <h2 class="case__section-h">01 · Audit</h2>
+  <p class="case__section-body" style="margin-bottom: 24px;">What was broken on mobile</p>
+
+  <div class="c3-context-bar">
+    In mid-2026 I ran a structured mobile audit of this portfolio using Chrome DevTools at iPhone 14 Pro Max dimensions — stepping into the shoes of a hiring manager opening the site on their phone. Six issues surfaced. None were dealbreakers in isolation. Together they added up to a first impression that undercut the content.
+  </div>
+
+  <div class="c3-issue-grid">
+
+    <div class="c3-issue-card">
+      <div class="c3-issue-num">Issue 01</div>
+      <div class="c3-issue-title">Comparison tables overflowing</div>
+      <p class="c3-issue-desc">Tables in the icebox section clipped horizontally with no scroll affordance. Columns simply disappeared off the right edge of the screen.</p>
+      <span class="c3-sev c3-sev--high">High severity</span>
+    </div>
+
+    <div class="c3-issue-card">
+      <div class="c3-issue-num">Issue 02</div>
+      <div class="c3-issue-title">Testimonial quotes truncating mid-sentence</div>
+      <p class="c3-issue-desc">Long quotes cut off abruptly with no ellipsis and no "read more." Looked like a rendering bug rather than a deliberate design choice.</p>
+      <span class="c3-sev c3-sev--high">High severity</span>
+    </div>
+
+    <div class="c3-issue-card">
+      <div class="c3-issue-num">Issue 03</div>
+      <div class="c3-issue-title">Section headings misaligned</div>
+      <p class="c3-issue-desc">Double padding on the section header component caused the numbering to float out of alignment with the heading text on narrow screens.</p>
+      <span class="c3-sev c3-sev--med">Medium severity</span>
+    </div>
+
+    <div class="c3-issue-card">
+      <div class="c3-issue-num">Issue 04</div>
+      <div class="c3-issue-title">Heading font not scaling</div>
+      <p class="c3-issue-desc">Display headings were fixed at desktop sizes, causing them to crowd the screen or overflow on narrow viewports.</p>
+      <span class="c3-sev c3-sev--med">Medium severity</span>
+    </div>
+
+    <div class="c3-issue-card">
+      <div class="c3-issue-num">Issue 05</div>
+      <div class="c3-issue-title">Impact stats grid collapsing</div>
+      <p class="c3-issue-desc">The three-column stats grid stacked vertically on mobile, creating a long scroll of numbers with no visual rhythm or hierarchy.</p>
+      <span class="c3-sev c3-sev--high">High severity</span>
+    </div>
+
+    <div class="c3-issue-card">
+      <div class="c3-issue-num">Issue 06</div>
+      <div class="c3-issue-title">Skills section unreadable on mobile</div>
+      <p class="c3-issue-desc">A dense wall of 50+ skill tags across five categories with no structure. No way to scan which category you were looking at or navigate between them.</p>
+      <span class="c3-sev c3-sev--high">High severity</span>
+    </div>
+
+  </div>
+</div>
 
 </div><!-- /.case__body -->
 </div><!-- /.detail-content -->
