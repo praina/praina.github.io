@@ -1,10 +1,10 @@
 ---
 title: "Mobile-First Portfolio Redesign"
-description: "Ran a structured mobile audit of this portfolio, found six issues, and shipped five fixes across two waves — carousels, overflow tables, and font scaling."
+description: "Ran a structured mobile audit of this portfolio, found six issues, and shipped five fixes across two waves: carousels, overflow tables, and font scaling."
 permalink: /case/CASE3-mobile-redesign.html
 company: Personal
 date_range: "2026"
-tldr: "Ran a structured mobile audit of this portfolio, found six issues, and shipped five fixes across two waves — turning a desktop-only experience into one that works on the phone a hiring manager is actually holding."
+tldr: "Ran a structured mobile audit of this portfolio, found six issues, and shipped five fixes across two waves, turning a desktop-only experience into one that works on the phone a hiring manager is actually holding."
 status: Shipped
 sample: false
 plain_footer: true
@@ -17,7 +17,7 @@ order: 3
 
   <p class="eyebrow case__eyebrow">Personal · 2026</p>
   <h1 class="case__title">Mobile-First Portfolio Redesign</h1>
-  <p class="case__summary">I audited this portfolio at iPhone 14 Pro Max dimensions and found six things that would embarrass me if a recruiter opened the site on their phone. Five got fixed. This is the write-up.</p>
+  <p class="case__summary">I audited this portfolio the way a recruiter would use it: on a phone, quickly, with no patience for things that don't work. Six issues surfaced. Five got fixed. This is the write-up.</p>
 
   <div class="case__meta" style="grid-template-columns: 1fr 1fr 1fr;">
     <div>
@@ -53,24 +53,62 @@ order: 3
   }
   @media (max-width: 540px) { .c3-issue-grid { grid-template-columns: 1fr; } }
   .c3-issue-card {
-    background: var(--c-bg); border: 1px solid var(--c-border);
-    border-left-width: 3px; border-radius: 5px; padding: 18px;
+    border: 1px solid var(--c-border); border-left-width: 3px;
+    border-radius: 5px; padding: 18px;
     position: relative; overflow: hidden;
+    transition: box-shadow .15s;
   }
-  .c3-issue-card--high { border-left-color: var(--c-status-kill); }
-  .c3-issue-card--med  { border-left-color: var(--c-status-park); }
+  .c3-issue-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+  .c3-issue-card--w1p { border-left-color: var(--c-accent);      background: #EFF9F8; }
+  .c3-issue-card--w1s { border-left-color: var(--c-status-park); background: #FDF7EE; }
+  .c3-issue-card--w2  { border-left-color: var(--c-ink);         background: #F5F5F5; }
   .c3-issue-num {
     font-family: var(--f-mono); font-size: 28px; font-weight: 500;
     line-height: 1; color: var(--c-border); margin-bottom: 8px; letter-spacing: 0;
   }
+  .c3-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .c3-wave-chip {
+    font-family: var(--f-mono); font-size: 9px; letter-spacing: .1em;
+    text-transform: uppercase; padding: 3px 7px; border-radius: 2px; margin-top: 2px;
+  }
+  .c3-wave-chip--w1p { color: var(--c-accent); background: rgba(45,205,186,.1); }
+  .c3-wave-chip--w1s { color: var(--c-status-park); background: rgba(217,147,43,.1); }
+  .c3-wave-chip--w2  { color: var(--c-ink); background: rgba(20,19,15,.07); }
   .c3-issue-title { font-size: 13px; font-weight: 600; color: var(--c-ink); margin: 0 0 5px; }
   .c3-issue-desc { font-size: 11.5px; color: var(--c-ink-faint); line-height: 1.5; margin: 0; }
   .c3-sev {
-    display: block; font-family: var(--f-mono); font-size: 9px;
-    letter-spacing: .08em; text-transform: uppercase; margin-top: 8px;
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--f-mono); font-size: 9px;
+    letter-spacing: .08em; text-transform: uppercase;
+    margin-top: 10px; color: var(--c-ink-faint);
   }
-  .c3-sev--high { color: var(--c-status-kill); }
-  .c3-sev--med  { color: var(--c-status-park); }
+  .c3-sev-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--c-border-pill); display: inline-block; }
+  /* Wave legend above audit grid */
+  .c3-wave-legend {
+    display: flex; gap: 18px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .c3-wave-legend-item {
+    display: flex; align-items: center; gap: 7px;
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: .06em; text-transform: uppercase;
+    color: var(--c-ink-faint);
+  }
+  .c3-wave-legend-swatch { width: 3px; height: 16px; border-radius: 2px; }
+  .c3-wls-w1p { background: var(--c-accent); }
+  .c3-wls-w1s { background: var(--c-status-park); }
+  .c3-wls-w2  { background: var(--c-ink); }
+  /* Bridge connector */
+  .c3-bridge {
+    margin-top: 20px; padding: 13px 18px;
+    border: 1px solid var(--c-border); border-top: 3px solid var(--c-accent);
+    border-radius: 0 0 4px 4px; background: var(--c-surface);
+    display: flex; align-items: center; gap: 12px;
+    font-size: 14px; color: var(--c-ink-body); line-height: 1.5;
+  }
+  .c3-bridge-icon {
+    font-family: var(--f-mono); font-size: 10px;
+    color: var(--c-accent); white-space: nowrap;
+  }
 
   /* ── Prioritisation matrix ── */
   .c3-matrix-wrap {
@@ -82,8 +120,8 @@ order: 3
     display: flex; align-items: center; justify-content: center;
   }
   .c3-ax-y-label span {
-    font-family: var(--f-mono); font-size: 9px; letter-spacing: .13em;
-    text-transform: uppercase; color: var(--c-ink-faint);
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--c-ink-body);
     writing-mode: vertical-rl; transform: rotate(180deg);
   }
   .c3-ax-y-ticks {
@@ -92,8 +130,8 @@ order: 3
     padding: 18px 0; align-items: center;
   }
   .c3-ax-y-ticks span {
-    font-family: var(--f-mono); font-size: 8px; letter-spacing: .06em;
-    text-transform: uppercase; color: var(--c-ink-faint);
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--c-ink-body);
     writing-mode: vertical-rl; transform: rotate(180deg);
   }
   .c3-ax-x {
@@ -101,10 +139,10 @@ order: 3
     display: flex; justify-content: space-between; padding: 7px 0 0;
   }
   .c3-ax-x span {
-    font-family: var(--f-mono); font-size: 8px; letter-spacing: .06em;
-    text-transform: uppercase; color: var(--c-ink-faint);
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--c-ink-body);
   }
-  .c3-ax-x .c3-ax-x-title { font-size: 9px; letter-spacing: .13em; color: var(--c-ink-faint); }
+  .c3-ax-x .c3-ax-x-title { font-size: 10px; letter-spacing: .13em; color: var(--c-ink-body); }
   .c3-matrix {
     display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
     gap: 2px; background: var(--c-border); border: 1px solid var(--c-border);
@@ -113,34 +151,39 @@ order: 3
   .c3-quad {
     padding: 16px 16px 14px; border-left: 3px solid transparent; min-height: 120px;
   }
-  .c3-quad--w1h { background: #F3FBFA; border-left-color: var(--c-accent); }
-  .c3-quad--w2  { background: var(--c-surface); border-left-color: var(--c-ink); }
-  .c3-quad--w1l { background: #F9FDFC; border-left-color: rgba(45,205,186,.3); }
+  .c3-quad--w1h { background: #EFF9F8; border-left-color: var(--c-accent); }
+  .c3-quad--w2  { background: #F5F5F5; border-left-color: var(--c-ink); }
+  .c3-quad--w1l { background: #FDF7EE; border-left-color: var(--c-status-park); }
   .c3-quad--skip {
-    background: #F7F5F1;
-    background-image: repeating-linear-gradient(-45deg,transparent,transparent 4px,rgba(200,196,188,.15) 4px,rgba(200,196,188,.15) 5px);
-    border-left-color: transparent;
+    background: var(--c-bg);
+    background-image: repeating-linear-gradient(-45deg,transparent,transparent 4px,rgba(200,196,188,.4) 4px,rgba(200,196,188,.4) 5px);
+    border-left-color: var(--c-border-pill);
   }
   .c3-wave {
-    font-family: var(--f-mono); font-size: 9px; letter-spacing: .12em;
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .12em;
     text-transform: uppercase; margin-bottom: 4px;
   }
   .c3-quad--w1h .c3-wave { color: var(--c-accent); }
-  .c3-quad--w1l .c3-wave { color: rgba(45,205,186,.55); }
-  .c3-quad--w2  .c3-wave { color: var(--c-ink); }
-  .c3-quad--skip .c3-wave { color: var(--c-border); }
+  .c3-quad--w1l .c3-wave { color: var(--c-status-park); }
+  .c3-quad--w2  .c3-wave { color: var(--c-ink-body); }
+  .c3-quad--skip .c3-wave { color: var(--c-ink-faint); }
   .c3-quad-sub {
-    font-family: var(--f-mono); font-size: 8px; letter-spacing: .06em;
-    text-transform: uppercase; color: var(--c-border); margin-bottom: 10px; line-height: 1.4;
+    font-family: var(--f-mono); font-size: 9px; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--c-ink-faint); margin-bottom: 10px; line-height: 1.4;
   }
   .c3-pills { display: flex; flex-wrap: wrap; gap: 5px; }
   .c3-pill {
     font-family: var(--f-mono); font-size: 10px; color: var(--c-ink-body);
-    background: rgba(44,42,37,.05); border: 1px solid var(--c-border);
+    background: var(--c-surface); border: 1px solid var(--c-border);
     border-radius: 2px; padding: 4px 8px; line-height: 1;
+    display: flex; align-items: center; gap: 4px;
   }
-  .c3-quad--skip .c3-pill { color: var(--c-ink-faint); border-color: var(--c-bg-tint); background: transparent; }
-  .c3-none { font-family: var(--f-mono); font-size: 10px; color: var(--c-border); }
+  .c3-pill--w1h { border-color: rgba(45,205,186,.3);  background: rgba(45,205,186,.06); color: var(--c-ink); }
+  .c3-pill--w1l { border-color: rgba(217,147,43,.3);  background: rgba(217,147,43,.06); color: var(--c-ink); }
+  .c3-pill--w2  { border-color: rgba(20,19,15,.15);   background: rgba(20,19,15,.04);   color: var(--c-ink); }
+  .c3-pill-num  { font-size: 8px; color: var(--c-ink-faint); }
+  .c3-quad--skip .c3-pill { color: var(--c-ink-faint); border-color: var(--c-border); background: transparent; }
+  .c3-none { font-family: var(--f-mono); font-size: 10px; color: var(--c-border-pill); }
   .c3-legend {
     display: flex; gap: 16px; flex-wrap: wrap;
     padding: 14px 16px; background: var(--c-bg-tint);
@@ -149,11 +192,9 @@ order: 3
   .c3-legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--c-ink-body); }
   .c3-legend-bar { width: 3px; height: 18px; border-radius: 1px; flex-shrink: 0; }
   .c3-lb--w1h { background: var(--c-accent); }
-  .c3-lb--w1l { background: rgba(45,205,186,.3); }
+  .c3-lb--w1l { background: var(--c-status-park); }
   .c3-lb--w2  { background: var(--c-ink); }
-  .c3-lb--skip {
-    background: repeating-linear-gradient(-45deg,transparent,transparent 2px,var(--c-border) 2px,var(--c-border) 3px);
-  }
+  .c3-lb--skip { background: var(--c-border-pill); }
 
   /* ── Mobile matrix fallback ── */
   .c3-matrix-mobile { display: none; }
@@ -210,17 +251,16 @@ order: 3
   .c3-phone-dot { width: 28px; height: 3px; background: var(--c-ink-body); border-radius: 2px; }
   .c3-phone-body { padding: 12px 10px; overflow: hidden; }
   .c3-tradeoff {
-    margin-top: 14px; padding: 12px 14px;
-    background: var(--c-bg-tint); border-radius: 4px;
-    border-left: 3px solid var(--c-border);
+    margin-top: 20px; padding: 16px 20px;
+    background: var(--c-accent-bg); border-radius: 0 4px 4px 0;
+    border-left: 3px solid var(--c-accent);
   }
   .c3-tradeoff-tag {
-    font-family: var(--f-mono); font-size: 8px; letter-spacing: .1em;
-    text-transform: uppercase; padding: 2px 6px; border-radius: 2px;
-    display: inline-block; margin-bottom: 6px;
-    background: rgba(45,205,186,.12); color: #1A9A7E;
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--c-ink-faint);
+    display: block; margin-bottom: 8px;
   }
-  .c3-tradeoff-text { font-size: 13px; color: var(--c-ink-body); line-height: 1.6; margin: 0; }
+  .c3-tradeoff-text { font-size: 15px; color: var(--c-ink-body); line-height: 1.65; margin: 0; }
 </style>
 
 <!-- ── SECTION 01: AUDIT ─────────────────────────────── -->
@@ -229,54 +269,73 @@ order: 3
   <p class="case__section-body" style="margin-bottom: 24px;">What was broken on mobile</p>
 
   <div class="c3-context-bar">
-    In mid-2026 I ran a structured mobile audit of this portfolio using Chrome DevTools at iPhone 14 Pro Max dimensions — stepping into the shoes of a hiring manager opening the site on their phone. Six issues surfaced. None were dealbreakers in isolation. Together they added up to a first impression that undercut the content.
+    In mid-2026 I ran a structured mobile audit of this portfolio using Chrome DevTools at iPhone 14 Pro Max dimensions, stepping into the shoes of a hiring manager opening the site on their phone. Six issues surfaced. None were dealbreakers in isolation. Together they added up to a first impression that undercut the content.
   </div>
 
   <div class="c3-issue-grid">
 
-    <div class="c3-issue-card c3-issue-card--high">
-      <div class="c3-issue-num">01</div>
+    <div class="c3-issue-card c3-issue-card--w1p">
+      <div class="c3-card-top">
+        <div class="c3-issue-num">01</div>
+        <div class="c3-wave-chip c3-wave-chip--w1p">Wave 1</div>
+      </div>
       <div class="c3-issue-title">Comparison tables overflowing</div>
       <p class="c3-issue-desc">Tables in the icebox section clipped horizontally with no scroll affordance. Columns simply disappeared off the right edge of the screen.</p>
-      <span class="c3-sev c3-sev--high">High severity</span>
+      <div class="c3-sev"><span>High severity</span><span class="c3-sev-dot"></span><span>Low effort</span></div>
     </div>
 
-    <div class="c3-issue-card c3-issue-card--high">
-      <div class="c3-issue-num">02</div>
+    <div class="c3-issue-card c3-issue-card--w1p">
+      <div class="c3-card-top">
+        <div class="c3-issue-num">02</div>
+        <div class="c3-wave-chip c3-wave-chip--w1p">Wave 1</div>
+      </div>
       <div class="c3-issue-title">Testimonial quotes truncating mid-sentence</div>
       <p class="c3-issue-desc">Long quotes cut off abruptly with no ellipsis and no "read more." Looked like a rendering bug rather than a deliberate design choice.</p>
-      <span class="c3-sev c3-sev--high">High severity</span>
+      <div class="c3-sev"><span>High severity</span><span class="c3-sev-dot"></span><span>Low effort</span></div>
     </div>
 
-    <div class="c3-issue-card c3-issue-card--med">
-      <div class="c3-issue-num">03</div>
+    <div class="c3-issue-card c3-issue-card--w1s">
+      <div class="c3-card-top">
+        <div class="c3-issue-num">03</div>
+        <div class="c3-wave-chip c3-wave-chip--w1s">Wave 1</div>
+      </div>
       <div class="c3-issue-title">Section headings misaligned</div>
       <p class="c3-issue-desc">Double padding on the section header component caused the numbering to float out of alignment with the heading text on narrow screens.</p>
-      <span class="c3-sev c3-sev--med">Medium severity</span>
+      <div class="c3-sev"><span>Low severity</span><span class="c3-sev-dot"></span><span>Low effort</span></div>
     </div>
 
-    <div class="c3-issue-card c3-issue-card--med">
-      <div class="c3-issue-num">04</div>
+    <div class="c3-issue-card c3-issue-card--w1s">
+      <div class="c3-card-top">
+        <div class="c3-issue-num">04</div>
+        <div class="c3-wave-chip c3-wave-chip--w1s">Wave 1</div>
+      </div>
       <div class="c3-issue-title">Heading font not scaling</div>
       <p class="c3-issue-desc">Display headings were fixed at desktop sizes, causing them to crowd the screen or overflow on narrow viewports.</p>
-      <span class="c3-sev c3-sev--med">Medium severity</span>
+      <div class="c3-sev"><span>Low severity</span><span class="c3-sev-dot"></span><span>Low effort</span></div>
     </div>
 
-    <div class="c3-issue-card c3-issue-card--high">
-      <div class="c3-issue-num">05</div>
+    <div class="c3-issue-card c3-issue-card--w2">
+      <div class="c3-card-top">
+        <div class="c3-issue-num">05</div>
+        <div class="c3-wave-chip c3-wave-chip--w2">Wave 2</div>
+      </div>
       <div class="c3-issue-title">Impact stats grid collapsing</div>
       <p class="c3-issue-desc">The three-column stats grid stacked vertically on mobile, creating a long scroll of numbers with no visual rhythm or hierarchy.</p>
-      <span class="c3-sev c3-sev--high">High severity</span>
+      <div class="c3-sev"><span>High severity</span><span class="c3-sev-dot"></span><span>High effort</span></div>
     </div>
 
-    <div class="c3-issue-card c3-issue-card--high">
-      <div class="c3-issue-num">06</div>
+    <div class="c3-issue-card c3-issue-card--w2">
+      <div class="c3-card-top">
+        <div class="c3-issue-num">06</div>
+        <div class="c3-wave-chip c3-wave-chip--w2">Wave 2</div>
+      </div>
       <div class="c3-issue-title">Skills section unreadable on mobile</div>
       <p class="c3-issue-desc">A dense wall of 50+ skill tags across five categories with no structure. No way to scan which category you were looking at or navigate between them.</p>
-      <span class="c3-sev c3-sev--high">High severity</span>
+      <div class="c3-sev"><span>High severity</span><span class="c3-sev-dot"></span><span>High effort</span></div>
     </div>
 
   </div>
+
 </div>
 
 <!-- ── SECTION 02: PRIORITISATION ───────────────────── -->
@@ -285,7 +344,7 @@ order: 3
   <p class="case__section-body" style="margin-bottom: 24px;">What to fix first and why</p>
 
   <p style="font-size:15px; color:var(--c-ink-body); line-height:1.65; margin-bottom:28px; padding-bottom:24px; border-bottom:1px solid var(--c-border);">
-    With six issues on the list, the question was sequencing. I plotted each against severity and implementation effort. High-severity quick wins shipped in Wave 1. The carousel work — a shared interaction engine built from scratch — followed in Wave 2 once the surface fixes were live.
+    With six issues on the list, the question was sequencing. I plotted each against severity and implementation effort. High-severity quick wins shipped in Wave 1. The carousel work, a shared interaction engine built from scratch, followed in Wave 2 once the surface fixes were live.
   </p>
 
   <!-- Desktop 2x2 matrix -->
@@ -298,28 +357,28 @@ order: 3
           <div class="c3-wave">Wave 1</div>
           <div class="c3-quad-sub">High severity · Low effort</div>
           <div class="c3-pills">
-            <span class="c3-pill">Table overflow</span>
-            <span class="c3-pill">Quote truncation</span>
+            <span class="c3-pill c3-pill--w1h"><span class="c3-pill-num">01</span> Table overflow</span>
+            <span class="c3-pill c3-pill--w1h"><span class="c3-pill-num">02</span> Quote truncation</span>
           </div>
         </div>
         <div class="c3-quad c3-quad--w2">
           <div class="c3-wave">Wave 2</div>
           <div class="c3-quad-sub">High severity · High effort</div>
           <div class="c3-pills">
-            <span class="c3-pill">Impact carousel</span>
-            <span class="c3-pill">Skills carousel</span>
+            <span class="c3-pill c3-pill--w2"><span class="c3-pill-num">05</span> Impact carousel</span>
+            <span class="c3-pill c3-pill--w2"><span class="c3-pill-num">06</span> Skills carousel</span>
           </div>
         </div>
         <div class="c3-quad c3-quad--w1l">
           <div class="c3-wave">Wave 1</div>
           <div class="c3-quad-sub">Low severity · Low effort</div>
           <div class="c3-pills">
-            <span class="c3-pill">Heading align</span>
-            <span class="c3-pill">Font scale</span>
+            <span class="c3-pill c3-pill--w1l"><span class="c3-pill-num">03</span> Heading align</span>
+            <span class="c3-pill c3-pill--w1l"><span class="c3-pill-num">04</span> Font scale</span>
           </div>
         </div>
         <div class="c3-quad c3-quad--skip">
-          <div class="c3-wave">–</div>
+          <div class="c3-wave">Not in scope</div>
           <div class="c3-quad-sub">Low severity · High effort</div>
           <span class="c3-none">Nothing here</span>
         </div>
@@ -337,15 +396,24 @@ order: 3
     <div class="c3-mobile-header">Prioritised by severity + effort</div>
     <div class="c3-quad c3-quad--w1h">
       <div class="c3-wave">Wave 1 · High severity · Low effort</div>
-      <div class="c3-pills"><span class="c3-pill">Table overflow</span><span class="c3-pill">Quote truncation</span></div>
+      <div class="c3-pills">
+        <span class="c3-pill c3-pill--w1h"><span class="c3-pill-num">01</span> Table overflow</span>
+        <span class="c3-pill c3-pill--w1h"><span class="c3-pill-num">02</span> Quote truncation</span>
+      </div>
     </div>
     <div class="c3-quad c3-quad--w1l">
       <div class="c3-wave">Wave 1 · Low severity · Low effort</div>
-      <div class="c3-pills"><span class="c3-pill">Heading align</span><span class="c3-pill">Font scale</span></div>
+      <div class="c3-pills">
+        <span class="c3-pill c3-pill--w1l"><span class="c3-pill-num">03</span> Heading align</span>
+        <span class="c3-pill c3-pill--w1l"><span class="c3-pill-num">04</span> Font scale</span>
+      </div>
     </div>
     <div class="c3-quad c3-quad--w2">
       <div class="c3-wave">Wave 2 · High severity · High effort</div>
-      <div class="c3-pills"><span class="c3-pill">Impact carousel</span><span class="c3-pill">Skills carousel</span></div>
+      <div class="c3-pills">
+        <span class="c3-pill c3-pill--w2"><span class="c3-pill-num">05</span> Impact carousel</span>
+        <span class="c3-pill c3-pill--w2"><span class="c3-pill-num">06</span> Skills carousel</span>
+      </div>
     </div>
     <div class="c3-quad c3-quad--skip">
       <div class="c3-wave">Not in scope</div>
@@ -353,13 +421,6 @@ order: 3
     </div>
   </div>
 
-  <!-- Legend -->
-  <div class="c3-legend">
-    <div class="c3-legend-item"><div class="c3-legend-bar c3-lb--w1h"></div>Wave 1 — high severity</div>
-    <div class="c3-legend-item"><div class="c3-legend-bar c3-lb--w1l"></div>Wave 1 — low severity</div>
-    <div class="c3-legend-item"><div class="c3-legend-bar c3-lb--w2"></div>Wave 2</div>
-    <div class="c3-legend-item"><div class="c3-legend-bar c3-lb--skip"></div>Not in scope</div>
-  </div>
 </div>
 
 <!-- ── SECTION 03: FIXES ─────────────────────────────── -->
@@ -368,7 +429,7 @@ order: 3
   <p class="case__section-body" style="margin-bottom: 24px;">What changed and why</p>
 
   <p style="font-size:15px; color:var(--c-ink-body); line-height:1.65; margin-bottom:32px; padding-bottom:24px; border-bottom:1px solid var(--c-border);">
-    Five fixes across two waves. Each one is shown as a before/after phone mockup — illustrative rather than pixel-accurate screenshots, since the goal is to communicate the nature of the change, not reproduce the exact UI.
+    Five fixes across two waves. Each one is shown as a before/after phone mockup, illustrative rather than pixel-accurate screenshots, since the goal is to communicate the nature of the change, not reproduce the exact UI.
   </p>
 
   <!-- Fix 01 -->
@@ -383,22 +444,22 @@ order: 3
         <div class="c3-phone">
           <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
           <div class="c3-phone-body">
-            <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-ink-faint);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Impact</div>
+            <div style="font-family:var(--f-mono);font-size:10px;color:var(--c-ink-faint);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Impact</div>
             <div style="display:flex;flex-direction:column;gap:6px;">
               <div style="padding:10px 12px;background:#F0ECE2;border-radius:3px;">
                 <div style="font-family:var(--f-display);font-size:20px;color:var(--c-ink);line-height:1;">~80%</div>
-                <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-ink-faint);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;">Accuracy improvement</div>
+                <div style="font-family:var(--f-mono);font-size:9px;color:var(--c-ink-faint);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;">Accuracy improvement</div>
               </div>
               <div style="padding:10px 12px;background:#F0ECE2;border-radius:3px;">
                 <div style="font-family:var(--f-display);font-size:20px;color:var(--c-ink);line-height:1;">5+</div>
-                <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-ink-faint);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;">Enterprise clients</div>
+                <div style="font-family:var(--f-mono);font-size:9px;color:var(--c-ink-faint);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;">Enterprise clients</div>
               </div>
               <div style="padding:10px 12px;background:#F0ECE2;border-radius:3px;">
                 <div style="font-family:var(--f-display);font-size:20px;color:var(--c-ink);line-height:1;">0</div>
-                <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-ink-faint);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;">Regressions at go-live</div>
+                <div style="font-family:var(--f-mono);font-size:9px;color:var(--c-ink-faint);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;">Regressions at go-live</div>
               </div>
             </div>
-            <div style="font-size:7px;color:var(--c-status-kill);font-family:var(--f-mono);margin-top:8px;letter-spacing:.04em;">Long scroll, no rhythm</div>
+            <div style="font-size:9px;color:var(--c-status-kill);font-family:var(--f-mono);margin-top:8px;letter-spacing:.04em;">Long scroll, no rhythm</div>
           </div>
         </div>
       </div>
@@ -408,10 +469,10 @@ order: 3
         <div class="c3-phone">
           <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
           <div class="c3-phone-body">
-            <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Impact</div>
+            <div style="font-family:var(--f-mono);font-size:10px;color:var(--c-accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Impact</div>
             <div style="padding:16px 12px;background:#F0ECE2;border-radius:3px;text-align:center;margin-bottom:8px;">
               <div style="font-family:var(--f-display);font-size:32px;color:var(--c-ink);line-height:1;">~80%</div>
-              <div style="font-size:8px;color:var(--c-ink-faint);margin-top:4px;font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.08em;">Accuracy improvement</div>
+              <div style="font-size:9px;color:var(--c-ink-faint);margin-top:4px;font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.08em;">Accuracy improvement</div>
               <div style="margin-top:12px;height:2px;background:var(--c-border);border-radius:1px;"><div style="width:35%;height:2px;background:var(--c-accent);border-radius:1px;"></div></div>
             </div>
             <div style="display:flex;justify-content:center;gap:5px;margin-top:6px;">
@@ -444,23 +505,23 @@ order: 3
         <div class="c3-phone">
           <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
           <div class="c3-phone-body">
-            <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-status-kill);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Skills</div>
+            <div style="font-family:var(--f-mono);font-size:10px;color:var(--c-status-kill);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Skills</div>
             <div style="display:flex;flex-wrap:wrap;gap:3px;">
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Python</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">SQL</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">JavaScript</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Figma</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Jira</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Postman</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Notion</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Miro</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Lokalise</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Claude Code</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Roadmapping</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">PRD writing</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-faint);border-style:dashed;">+40 more...</span>
+              <span style="font-family:var(--f-mono);font-size:8px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Python</span>
+              <span style="font-family:var(--f-mono);font-size:8px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">SQL</span>
+              <span style="font-family:var(--f-mono);font-size:8px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">JavaScript</span>
+              <span style="font-family:var(--f-mono);font-size:8px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Figma</span>
+              <span style="font-family:var(--f-mono);font-size:8px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Jira</span>
+              <span style="font-family:var(--f-mono);font-size:8px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Postman</span>
+              <span style="font-family:var(--f-mono);font-size:8px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Notion</span>
+              <span style="font-family:var(--f-mono);font-size:8px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Miro</span>
+              <span style="font-family:var(--f-mono);font-size:8px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Lokalise</span>
+              <span style="font-family:var(--f-mono);font-size:8px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Claude Code</span>
+              <span style="font-family:var(--f-mono);font-size:8px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Roadmapping</span>
+              <span style="font-family:var(--f-mono);font-size:8px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">PRD writing</span>
+              <span style="font-family:var(--f-mono);font-size:8px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-faint);border-style:dashed;">+40 more...</span>
             </div>
-            <div style="font-size:7px;color:var(--c-status-kill);font-family:var(--f-mono);margin-top:8px;letter-spacing:.04em;">No category structure</div>
+            <div style="font-size:9px;color:var(--c-status-kill);font-family:var(--f-mono);margin-top:8px;letter-spacing:.04em;">No category structure</div>
           </div>
         </div>
       </div>
@@ -470,9 +531,9 @@ order: 3
         <div class="c3-phone">
           <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
           <div class="c3-phone-body">
-            <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Skills &amp; Tools</div>
+            <div style="font-family:var(--f-mono);font-size:10px;color:var(--c-accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Skills &amp; Tools</div>
             <div style="border-left:3px solid var(--c-accent);padding:12px 12px 10px;background:#F5FBF9;border-radius:0 3px 3px 0;margin-bottom:8px;">
-              <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-ink-faint);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">01 / 05</div>
+              <div style="font-family:var(--f-mono);font-size:9px;color:var(--c-ink-faint);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">01 / 05</div>
               <div style="font-family:var(--f-display);font-size:16px;color:var(--c-ink);margin:0 0 8px;">Core PM</div>
               <div style="font-size:10px;color:var(--c-ink-strong);padding:4px 0;border-top:1px solid var(--c-border);">Product Discovery</div>
               <div style="font-size:10px;color:var(--c-ink-strong);padding:4px 0;border-top:1px solid var(--c-border);">PRD Writing</div>
@@ -494,7 +555,7 @@ order: 3
 
     <div class="c3-tradeoff">
       <span class="c3-tradeoff-tag">The tradeoff</span>
-      <p class="c3-tradeoff-text">Hiding categories behind a swipe interaction adds a step for users who want to scan everything. But a wall of 50 unstructured tags is not scannable anyway — the carousel at least provides structure.</p>
+      <p class="c3-tradeoff-text">Hiding categories behind a swipe interaction adds a step for users who want to scan everything. But a wall of 50 unstructured tags is not scannable anyway; the carousel at least provides structure.</p>
     </div>
   </div>
 
@@ -504,7 +565,7 @@ order: 3
   <div class="c3-fix-block">
     <div class="c3-fix-num">Fix 03 of 03</div>
     <h3 class="c3-fix-title">Table overflow: from hard clip to scrollable with hint</h3>
-    <p class="c3-fix-desc">Comparison tables clipped at the screen edge with no scroll affordance — columns simply disappeared. Fixed with horizontal scroll, a right-edge fade gradient, and a visible caret hint.</p>
+    <p class="c3-fix-desc">Comparison tables clipped at the screen edge with no scroll affordance; columns simply disappeared. Fixed with horizontal scroll, a right-edge fade gradient, and a visible caret hint.</p>
 
     <div class="c3-ba-pair">
       <div class="c3-ba-col">
@@ -512,10 +573,10 @@ order: 3
         <div class="c3-phone">
           <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
           <div class="c3-phone-body">
-            <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-ink-faint);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Comparison</div>
+            <div style="font-family:var(--f-mono);font-size:10px;color:var(--c-ink-faint);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Comparison</div>
             <div style="overflow:hidden;position:relative;border-right:2px solid rgba(192,64,64,.5);">
               <div style="position:absolute;top:0;right:0;bottom:0;width:18px;background:linear-gradient(to right,transparent,rgba(192,64,64,.08));pointer-events:none;z-index:1;"></div>
-              <table style="border-collapse:collapse;font-family:var(--f-mono);font-size:8px;min-width:300px;">
+              <table style="border-collapse:collapse;font-family:var(--f-mono);font-size:9px;min-width:300px;">
                 <tr>
                   <th style="background:#F0ECE2;padding:5px 8px;border:1px solid var(--c-border-pill);color:var(--c-ink-faint);text-align:left;white-space:nowrap;">Feature</th>
                   <th style="background:#F0ECE2;padding:5px 8px;border:1px solid var(--c-border-pill);color:var(--c-ink-faint);white-space:nowrap;">Option A</th>
@@ -536,7 +597,7 @@ order: 3
                 </tr>
               </table>
             </div>
-            <div style="font-family:var(--f-mono);font-size:7px;color:var(--c-status-kill);margin-top:5px;display:flex;align-items:center;gap:4px;letter-spacing:.04em;"><span>⚠</span><span>Column C cut off, no scroll</span></div>
+            <div style="font-family:var(--f-mono);font-size:9px;color:var(--c-status-kill);margin-top:5px;display:flex;align-items:center;gap:4px;letter-spacing:.04em;"><span>⚠</span><span>Column C cut off, no scroll</span></div>
           </div>
         </div>
       </div>
@@ -546,10 +607,10 @@ order: 3
         <div class="c3-phone">
           <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
           <div class="c3-phone-body">
-            <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Comparison</div>
+            <div style="font-family:var(--f-mono);font-size:10px;color:var(--c-accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Comparison</div>
             <div style="position:relative;border-radius:2px;overflow:hidden;">
               <div style="overflow-x:auto;">
-                <table style="border-collapse:collapse;font-family:var(--f-mono);font-size:8px;min-width:300px;">
+                <table style="border-collapse:collapse;font-family:var(--f-mono);font-size:9px;min-width:300px;">
                   <tr>
                     <th style="background:#F0ECE2;padding:5px 8px;border:1px solid var(--c-border-pill);color:var(--c-ink-faint);text-align:left;white-space:nowrap;">Feature</th>
                     <th style="background:#F0ECE2;padding:5px 8px;border:1px solid var(--c-border-pill);color:var(--c-ink-faint);white-space:nowrap;">Option A</th>
@@ -573,7 +634,7 @@ order: 3
               <div style="position:absolute;top:0;right:0;bottom:0;width:28px;background:linear-gradient(to right,transparent,rgba(45,205,186,.15));pointer-events:none;"></div>
               <div style="position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--c-accent);text-shadow:0 0 6px rgba(45,205,186,.4);">›</div>
             </div>
-            <div style="font-family:var(--f-mono);font-size:7px;color:var(--c-accent);margin-top:5px;display:flex;align-items:center;gap:4px;letter-spacing:.04em;"><span>↔</span><span>Scroll to see all columns</span></div>
+            <div style="font-family:var(--f-mono);font-size:9px;color:var(--c-accent);margin-top:5px;display:flex;align-items:center;gap:4px;letter-spacing:.04em;"><span>↔</span><span>Scroll to see all columns</span></div>
           </div>
         </div>
       </div>
@@ -581,7 +642,7 @@ order: 3
 
     <div class="c3-tradeoff">
       <span class="c3-tradeoff-tag">The tradeoff</span>
-      <p class="c3-tradeoff-text">Horizontal scroll on a phone is an antipattern in most contexts, but comparison tables have no better alternative — they only make sense as tables. The scroll hint makes the affordance visible rather than leaving users to discover it by accident.</p>
+      <p class="c3-tradeoff-text">Horizontal scroll on a phone is an antipattern in most contexts, but comparison tables have no better alternative; they only make sense as tables. The scroll hint makes the affordance visible rather than leaving users to discover it by accident.</p>
     </div>
   </div>
 
@@ -591,7 +652,7 @@ order: 3
 <div class="case__learnings" data-reveal>
   <h2 class="case__section-h">04 · Reflection</h2>
   <p style="font-family:var(--f-display);font-size:28px;font-weight:400;color:var(--c-ink);margin:0 0 20px;line-height:1.2;">What I'd carry forward</p>
-  <p style="font-size:15px;color:var(--c-ink-body);line-height:1.65;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--c-border);">Running a structured audit on your own work is harder than it sounds. The familiarity bias is real — you stop seeing what's broken when you built the thing yourself.</p>
+  <p style="font-size:15px;color:var(--c-ink-body);line-height:1.65;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--c-border);">Running a structured audit on your own work is harder than it sounds. The familiarity bias is real: you stop seeing what's broken when you built the thing yourself.</p>
 
   <ul class="case__learnings-list">
     <li class="case__learning"><strong>Personal projects deserve the same rigour as product work.</strong> A structured audit surfaced issues I had walked past for months. The process matters regardless of the audience size.</li>
