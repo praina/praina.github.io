@@ -42,9 +42,9 @@ order: 3
 <style>
   /* ── Scoped to case3 only ── */
   .c3-context-bar {
-    background: var(--c-surface); border-left: 3px solid var(--c-accent);
+    background: var(--c-accent-bg); border-left: 3px solid var(--c-accent);
     padding: 14px 18px; border-radius: 0 4px 4px 0;
-    font-size: 15px; color: var(--c-ink-body); line-height: 1.6;
+    font-size: 15px; color: var(--c-ink-strong); line-height: 1.6;
     margin-bottom: 28px;
   }
   .c3-issue-grid {
@@ -53,12 +53,12 @@ order: 3
   }
   @media (max-width: 540px) { .c3-issue-grid { grid-template-columns: 1fr; } }
   .c3-issue-card {
-    background: var(--c-surface); border: 1px solid var(--c-border);
+    background: var(--c-bg); border: 1px solid var(--c-border);
     border-left-width: 3px; border-radius: 5px; padding: 18px;
     position: relative; overflow: hidden;
   }
-  .c3-issue-card--high { border-left-color: #C04040; }
-  .c3-issue-card--med  { border-left-color: #C8922A; }
+  .c3-issue-card--high { border-left-color: var(--c-status-kill); }
+  .c3-issue-card--med  { border-left-color: var(--c-status-park); }
   .c3-issue-num {
     font-family: var(--f-mono); font-size: 28px; font-weight: 500;
     line-height: 1; color: var(--c-border); margin-bottom: 8px; letter-spacing: 0;
@@ -69,8 +69,8 @@ order: 3
     display: block; font-family: var(--f-mono); font-size: 9px;
     letter-spacing: .08em; text-transform: uppercase; margin-top: 8px;
   }
-  .c3-sev--high { color: #C04040; }
-  .c3-sev--med  { color: #C8922A; }
+  .c3-sev--high { color: var(--c-status-kill); }
+  .c3-sev--med  { color: var(--c-status-park); }
 
   /* ── Prioritisation matrix ── */
   .c3-matrix-wrap {
@@ -115,7 +115,7 @@ order: 3
   }
   .c3-quad--w1h { background: #F3FBFA; border-left-color: var(--c-accent); }
   .c3-quad--w2  { background: var(--c-surface); border-left-color: var(--c-ink); }
-  .c3-quad--w1l { background: #F9FDFC; border-left-color: rgba(43,196,162,.3); }
+  .c3-quad--w1l { background: #F9FDFC; border-left-color: rgba(45,205,186,.3); }
   .c3-quad--skip {
     background: #F7F5F1;
     background-image: repeating-linear-gradient(-45deg,transparent,transparent 4px,rgba(200,196,188,.15) 4px,rgba(200,196,188,.15) 5px);
@@ -126,7 +126,7 @@ order: 3
     text-transform: uppercase; margin-bottom: 4px;
   }
   .c3-quad--w1h .c3-wave { color: var(--c-accent); }
-  .c3-quad--w1l .c3-wave { color: rgba(43,196,162,.55); }
+  .c3-quad--w1l .c3-wave { color: rgba(45,205,186,.55); }
   .c3-quad--w2  .c3-wave { color: var(--c-ink); }
   .c3-quad--skip .c3-wave { color: var(--c-border); }
   .c3-quad-sub {
@@ -149,7 +149,7 @@ order: 3
   .c3-legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--c-ink-body); }
   .c3-legend-bar { width: 3px; height: 18px; border-radius: 1px; flex-shrink: 0; }
   .c3-lb--w1h { background: var(--c-accent); }
-  .c3-lb--w1l { background: rgba(43,196,162,.3); }
+  .c3-lb--w1l { background: rgba(45,205,186,.3); }
   .c3-lb--w2  { background: var(--c-ink); }
   .c3-lb--skip {
     background: repeating-linear-gradient(-45deg,transparent,transparent 2px,var(--c-border) 2px,var(--c-border) 3px);
@@ -196,7 +196,7 @@ order: 3
     font-family: var(--f-mono); font-size: 9px; letter-spacing: .12em;
     text-transform: uppercase; text-align: center;
   }
-  .c3-ba-label--before { color: #C04040; }
+  .c3-ba-label--before { color: var(--c-status-kill); }
   .c3-ba-label--after  { color: var(--c-accent); }
   .c3-phone {
     border: 2px solid var(--c-ink); border-radius: 14px; overflow: hidden;
@@ -207,7 +207,7 @@ order: 3
     height: 8px; background: var(--c-ink);
     display: flex; align-items: center; justify-content: center;
   }
-  .c3-phone-dot { width: 28px; height: 3px; background: #5A5650; border-radius: 2px; }
+  .c3-phone-dot { width: 28px; height: 3px; background: var(--c-ink-body); border-radius: 2px; }
   .c3-phone-body { padding: 12px 10px; overflow: hidden; }
   .c3-tradeoff {
     margin-top: 14px; padding: 12px 14px;
@@ -218,7 +218,7 @@ order: 3
     font-family: var(--f-mono); font-size: 8px; letter-spacing: .1em;
     text-transform: uppercase; padding: 2px 6px; border-radius: 2px;
     display: inline-block; margin-bottom: 6px;
-    background: rgba(43,196,162,.12); color: #1A9A7E;
+    background: rgba(45,205,186,.12); color: #1A9A7E;
   }
   .c3-tradeoff-text { font-size: 13px; color: var(--c-ink-body); line-height: 1.6; margin: 0; }
 </style>
@@ -383,22 +383,22 @@ order: 3
         <div class="c3-phone">
           <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
           <div class="c3-phone-body">
-            <div style="font-family:var(--f-mono);font-size:8px;color:#8C8880;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Impact</div>
+            <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-ink-faint);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Impact</div>
             <div style="display:flex;flex-direction:column;gap:6px;">
               <div style="padding:10px 12px;background:#F0ECE2;border-radius:3px;">
-                <div style="font-family:var(--f-display);font-size:20px;color:#2C2A25;line-height:1;">~80%</div>
-                <div style="font-family:var(--f-mono);font-size:8px;color:#8C8880;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;">Accuracy improvement</div>
+                <div style="font-family:var(--f-display);font-size:20px;color:var(--c-ink);line-height:1;">~80%</div>
+                <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-ink-faint);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;">Accuracy improvement</div>
               </div>
               <div style="padding:10px 12px;background:#F0ECE2;border-radius:3px;">
-                <div style="font-family:var(--f-display);font-size:20px;color:#2C2A25;line-height:1;">5+</div>
-                <div style="font-family:var(--f-mono);font-size:8px;color:#8C8880;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;">Enterprise clients</div>
+                <div style="font-family:var(--f-display);font-size:20px;color:var(--c-ink);line-height:1;">5+</div>
+                <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-ink-faint);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;">Enterprise clients</div>
               </div>
               <div style="padding:10px 12px;background:#F0ECE2;border-radius:3px;">
-                <div style="font-family:var(--f-display);font-size:20px;color:#2C2A25;line-height:1;">0</div>
-                <div style="font-family:var(--f-mono);font-size:8px;color:#8C8880;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;">Regressions at go-live</div>
+                <div style="font-family:var(--f-display);font-size:20px;color:var(--c-ink);line-height:1;">0</div>
+                <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-ink-faint);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;">Regressions at go-live</div>
               </div>
             </div>
-            <div style="font-size:7px;color:#C04040;font-family:var(--f-mono);margin-top:8px;letter-spacing:.04em;">Long scroll, no rhythm</div>
+            <div style="font-size:7px;color:var(--c-status-kill);font-family:var(--f-mono);margin-top:8px;letter-spacing:.04em;">Long scroll, no rhythm</div>
           </div>
         </div>
       </div>
@@ -408,16 +408,16 @@ order: 3
         <div class="c3-phone">
           <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
           <div class="c3-phone-body">
-            <div style="font-family:var(--f-mono);font-size:8px;color:#2BC4A2;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Impact</div>
+            <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Impact</div>
             <div style="padding:16px 12px;background:#F0ECE2;border-radius:3px;text-align:center;margin-bottom:8px;">
-              <div style="font-family:var(--f-display);font-size:32px;color:#2C2A25;line-height:1;">~80%</div>
-              <div style="font-size:8px;color:#8C8880;margin-top:4px;font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.08em;">Accuracy improvement</div>
-              <div style="margin-top:12px;height:2px;background:#E4E0D6;border-radius:1px;"><div style="width:35%;height:2px;background:#2BC4A2;border-radius:1px;"></div></div>
+              <div style="font-family:var(--f-display);font-size:32px;color:var(--c-ink);line-height:1;">~80%</div>
+              <div style="font-size:8px;color:var(--c-ink-faint);margin-top:4px;font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.08em;">Accuracy improvement</div>
+              <div style="margin-top:12px;height:2px;background:var(--c-border);border-radius:1px;"><div style="width:35%;height:2px;background:var(--c-accent);border-radius:1px;"></div></div>
             </div>
             <div style="display:flex;justify-content:center;gap:5px;margin-top:6px;">
-              <div style="width:5px;height:5px;border-radius:50%;background:#2BC4A2;"></div>
-              <div style="width:5px;height:5px;border-radius:50%;background:#D8D4C8;"></div>
-              <div style="width:5px;height:5px;border-radius:50%;background:#D8D4C8;"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--c-accent);"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--c-border-pill);"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--c-border-pill);"></div>
             </div>
           </div>
         </div>
@@ -444,23 +444,23 @@ order: 3
         <div class="c3-phone">
           <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
           <div class="c3-phone-body">
-            <div style="font-family:var(--f-mono);font-size:8px;color:#C04040;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Skills</div>
+            <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-status-kill);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Skills</div>
             <div style="display:flex;flex-wrap:wrap;gap:3px;">
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid #D8D4C8;border-radius:2px;color:#5A5650;">Python</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid #D8D4C8;border-radius:2px;color:#5A5650;">SQL</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid #D8D4C8;border-radius:2px;color:#5A5650;">JavaScript</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid #D8D4C8;border-radius:2px;color:#5A5650;">Figma</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid #D8D4C8;border-radius:2px;color:#5A5650;">Jira</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid #D8D4C8;border-radius:2px;color:#5A5650;">Postman</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid #D8D4C8;border-radius:2px;color:#5A5650;">Notion</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid #D8D4C8;border-radius:2px;color:#5A5650;">Miro</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid #D8D4C8;border-radius:2px;color:#5A5650;">Lokalise</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid #D8D4C8;border-radius:2px;color:#5A5650;">Claude Code</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid #D8D4C8;border-radius:2px;color:#5A5650;">Roadmapping</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid #D8D4C8;border-radius:2px;color:#5A5650;">PRD writing</span>
-              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid #D8D4C8;border-radius:2px;color:#8C8880;border-style:dashed;">+40 more...</span>
+              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Python</span>
+              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">SQL</span>
+              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">JavaScript</span>
+              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Figma</span>
+              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Jira</span>
+              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Postman</span>
+              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Notion</span>
+              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Miro</span>
+              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Lokalise</span>
+              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Claude Code</span>
+              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">Roadmapping</span>
+              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-body);">PRD writing</span>
+              <span style="font-family:var(--f-mono);font-size:7px;padding:2px 5px;border:1px solid var(--c-border-pill);border-radius:2px;color:var(--c-ink-faint);border-style:dashed;">+40 more...</span>
             </div>
-            <div style="font-size:7px;color:#C04040;font-family:var(--f-mono);margin-top:8px;letter-spacing:.04em;">No category structure</div>
+            <div style="font-size:7px;color:var(--c-status-kill);font-family:var(--f-mono);margin-top:8px;letter-spacing:.04em;">No category structure</div>
           </div>
         </div>
       </div>
@@ -470,23 +470,23 @@ order: 3
         <div class="c3-phone">
           <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
           <div class="c3-phone-body">
-            <div style="font-family:var(--f-mono);font-size:8px;color:#2BC4A2;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Skills &amp; Tools</div>
-            <div style="border-left:3px solid #2BC4A2;padding:12px 12px 10px;background:#F5FBF9;border-radius:0 3px 3px 0;margin-bottom:8px;">
-              <div style="font-family:var(--f-mono);font-size:8px;color:#8C8880;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">01 / 05</div>
-              <div style="font-family:var(--f-display);font-size:16px;color:#2C2A25;margin:0 0 8px;">Core PM</div>
-              <div style="font-size:10px;color:#3A362E;padding:4px 0;border-top:1px solid #E4E0D6;">Product Discovery</div>
-              <div style="font-size:10px;color:#3A362E;padding:4px 0;border-top:1px solid #E4E0D6;">PRD Writing</div>
-              <div style="font-size:10px;color:#3A362E;padding:4px 0;border-top:1px solid #E4E0D6;">Roadmapping</div>
-              <div style="font-size:10px;color:#3A362E;padding:4px 0;border-top:1px solid #E4E0D6;">Sprint Planning</div>
+            <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Skills &amp; Tools</div>
+            <div style="border-left:3px solid var(--c-accent);padding:12px 12px 10px;background:#F5FBF9;border-radius:0 3px 3px 0;margin-bottom:8px;">
+              <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-ink-faint);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">01 / 05</div>
+              <div style="font-family:var(--f-display);font-size:16px;color:var(--c-ink);margin:0 0 8px;">Core PM</div>
+              <div style="font-size:10px;color:var(--c-ink-strong);padding:4px 0;border-top:1px solid var(--c-border);">Product Discovery</div>
+              <div style="font-size:10px;color:var(--c-ink-strong);padding:4px 0;border-top:1px solid var(--c-border);">PRD Writing</div>
+              <div style="font-size:10px;color:var(--c-ink-strong);padding:4px 0;border-top:1px solid var(--c-border);">Roadmapping</div>
+              <div style="font-size:10px;color:var(--c-ink-strong);padding:4px 0;border-top:1px solid var(--c-border);">Sprint Planning</div>
             </div>
             <div style="display:flex;justify-content:center;gap:5px;margin-top:4px;">
-              <div style="width:5px;height:5px;border-radius:50%;background:#2BC4A2;"></div>
-              <div style="width:5px;height:5px;border-radius:50%;background:#D8D4C8;"></div>
-              <div style="width:5px;height:5px;border-radius:50%;background:#D8D4C8;"></div>
-              <div style="width:5px;height:5px;border-radius:50%;background:#D8D4C8;"></div>
-              <div style="width:5px;height:5px;border-radius:50%;background:#D8D4C8;"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--c-accent);"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--c-border-pill);"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--c-border-pill);"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--c-border-pill);"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--c-border-pill);"></div>
             </div>
-            <div style="height:2px;background:#E4E0D6;border-radius:1px;margin-top:6px;"><div style="width:20%;height:2px;background:#2BC4A2;border-radius:1px;"></div></div>
+            <div style="height:2px;background:var(--c-border);border-radius:1px;margin-top:6px;"><div style="width:20%;height:2px;background:var(--c-accent);border-radius:1px;"></div></div>
           </div>
         </div>
       </div>
@@ -512,31 +512,31 @@ order: 3
         <div class="c3-phone">
           <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
           <div class="c3-phone-body">
-            <div style="font-family:var(--f-mono);font-size:8px;color:#8C8880;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Comparison</div>
+            <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-ink-faint);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Comparison</div>
             <div style="overflow:hidden;position:relative;border-right:2px solid rgba(192,64,64,.5);">
               <div style="position:absolute;top:0;right:0;bottom:0;width:18px;background:linear-gradient(to right,transparent,rgba(192,64,64,.08));pointer-events:none;z-index:1;"></div>
               <table style="border-collapse:collapse;font-family:var(--f-mono);font-size:8px;min-width:300px;">
                 <tr>
-                  <th style="background:#F0ECE2;padding:5px 8px;border:1px solid #D8D4C8;color:#8C8880;text-align:left;white-space:nowrap;">Feature</th>
-                  <th style="background:#F0ECE2;padding:5px 8px;border:1px solid #D8D4C8;color:#8C8880;white-space:nowrap;">Option A</th>
-                  <th style="background:#F0ECE2;padding:5px 8px;border:1px solid #D8D4C8;color:#8C8880;white-space:nowrap;">Option B</th>
-                  <th style="background:#F0ECE2;padding:5px 8px;border:1px solid #D8D4C8;color:#C04040;opacity:.4;white-space:nowrap;">Opt...</th>
+                  <th style="background:#F0ECE2;padding:5px 8px;border:1px solid var(--c-border-pill);color:var(--c-ink-faint);text-align:left;white-space:nowrap;">Feature</th>
+                  <th style="background:#F0ECE2;padding:5px 8px;border:1px solid var(--c-border-pill);color:var(--c-ink-faint);white-space:nowrap;">Option A</th>
+                  <th style="background:#F0ECE2;padding:5px 8px;border:1px solid var(--c-border-pill);color:var(--c-ink-faint);white-space:nowrap;">Option B</th>
+                  <th style="background:#F0ECE2;padding:5px 8px;border:1px solid var(--c-border-pill);color:var(--c-status-kill);opacity:.4;white-space:nowrap;">Opt...</th>
                 </tr>
                 <tr>
-                  <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Speed</td>
-                  <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Fast</td>
-                  <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Medium</td>
-                  <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#C04040;opacity:.4;white-space:nowrap;">—</td>
+                  <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">Speed</td>
+                  <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">Fast</td>
+                  <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">Medium</td>
+                  <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-status-kill);opacity:.4;white-space:nowrap;">—</td>
                 </tr>
                 <tr>
-                  <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Cost</td>
-                  <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">High</td>
-                  <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Low</td>
-                  <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#C04040;opacity:.4;white-space:nowrap;">—</td>
+                  <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">Cost</td>
+                  <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">High</td>
+                  <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">Low</td>
+                  <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-status-kill);opacity:.4;white-space:nowrap;">—</td>
                 </tr>
               </table>
             </div>
-            <div style="font-family:var(--f-mono);font-size:7px;color:#C04040;margin-top:5px;display:flex;align-items:center;gap:4px;letter-spacing:.04em;"><span>⚠</span><span>Column C cut off, no scroll</span></div>
+            <div style="font-family:var(--f-mono);font-size:7px;color:var(--c-status-kill);margin-top:5px;display:flex;align-items:center;gap:4px;letter-spacing:.04em;"><span>⚠</span><span>Column C cut off, no scroll</span></div>
           </div>
         </div>
       </div>
@@ -546,34 +546,34 @@ order: 3
         <div class="c3-phone">
           <div class="c3-phone-bar"><div class="c3-phone-dot"></div></div>
           <div class="c3-phone-body">
-            <div style="font-family:var(--f-mono);font-size:8px;color:#2BC4A2;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Comparison</div>
+            <div style="font-family:var(--f-mono);font-size:8px;color:var(--c-accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Comparison</div>
             <div style="position:relative;border-radius:2px;overflow:hidden;">
               <div style="overflow-x:auto;">
                 <table style="border-collapse:collapse;font-family:var(--f-mono);font-size:8px;min-width:300px;">
                   <tr>
-                    <th style="background:#F0ECE2;padding:5px 8px;border:1px solid #D8D4C8;color:#8C8880;text-align:left;white-space:nowrap;">Feature</th>
-                    <th style="background:#F0ECE2;padding:5px 8px;border:1px solid #D8D4C8;color:#8C8880;white-space:nowrap;">Option A</th>
-                    <th style="background:#F0ECE2;padding:5px 8px;border:1px solid #D8D4C8;color:#8C8880;white-space:nowrap;">Option B</th>
-                    <th style="background:#F0ECE2;padding:5px 8px;border:1px solid #D8D4C8;color:#8C8880;white-space:nowrap;">Option C</th>
+                    <th style="background:#F0ECE2;padding:5px 8px;border:1px solid var(--c-border-pill);color:var(--c-ink-faint);text-align:left;white-space:nowrap;">Feature</th>
+                    <th style="background:#F0ECE2;padding:5px 8px;border:1px solid var(--c-border-pill);color:var(--c-ink-faint);white-space:nowrap;">Option A</th>
+                    <th style="background:#F0ECE2;padding:5px 8px;border:1px solid var(--c-border-pill);color:var(--c-ink-faint);white-space:nowrap;">Option B</th>
+                    <th style="background:#F0ECE2;padding:5px 8px;border:1px solid var(--c-border-pill);color:var(--c-ink-faint);white-space:nowrap;">Option C</th>
                   </tr>
                   <tr>
-                    <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Speed</td>
-                    <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Fast</td>
-                    <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Medium</td>
-                    <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Slow</td>
+                    <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">Speed</td>
+                    <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">Fast</td>
+                    <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">Medium</td>
+                    <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">Slow</td>
                   </tr>
                   <tr>
-                    <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Cost</td>
-                    <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">High</td>
-                    <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Low</td>
-                    <td style="padding:5px 8px;border:1px solid #E4E0D6;color:#3A362E;white-space:nowrap;">Medium</td>
+                    <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">Cost</td>
+                    <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">High</td>
+                    <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">Low</td>
+                    <td style="padding:5px 8px;border:1px solid var(--c-border);color:var(--c-ink-strong);white-space:nowrap;">Medium</td>
                   </tr>
                 </table>
               </div>
-              <div style="position:absolute;top:0;right:0;bottom:0;width:28px;background:linear-gradient(to right,transparent,rgba(43,196,162,.15));pointer-events:none;"></div>
-              <div style="position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:11px;color:#2BC4A2;text-shadow:0 0 6px rgba(43,196,162,.4);">›</div>
+              <div style="position:absolute;top:0;right:0;bottom:0;width:28px;background:linear-gradient(to right,transparent,rgba(45,205,186,.15));pointer-events:none;"></div>
+              <div style="position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--c-accent);text-shadow:0 0 6px rgba(45,205,186,.4);">›</div>
             </div>
-            <div style="font-family:var(--f-mono);font-size:7px;color:#2BC4A2;margin-top:5px;display:flex;align-items:center;gap:4px;letter-spacing:.04em;"><span>↔</span><span>Scroll to see all columns</span></div>
+            <div style="font-family:var(--f-mono);font-size:7px;color:var(--c-accent);margin-top:5px;display:flex;align-items:center;gap:4px;letter-spacing:.04em;"><span>↔</span><span>Scroll to see all columns</span></div>
           </div>
         </div>
       </div>
