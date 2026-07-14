@@ -102,42 +102,23 @@ description: Technical Product Manager specialising in B2B SaaS, enterprise migr
       </div>
     </div>
     <div class="work__cards" id="workCards" data-reveal>
-      <a href="/case/case1-localization-proxy-tool.html" class="work__card is-active">
+      {% assign sorted_items = site.case_studies | where_exp: "item", "item.sample != true" | sort: "order" %}
+      {% for item in sorted_items %}
+      {% assign item_url = item.url | default: item.link %}
+      {% assign summary = item.description | default: item.tldr %}
+      <a href="{{ item_url }}" class="work__card{% if forloop.first %} is-active{% endif %}">
         <div class="work__card-top">
-          <span class="work__card-co">Tractable</span>
-          <span class="work__card-year">2026</span>
+          <span class="work__card-co">{{ item.company }}</span>
+          <span class="work__card-year">{{ item.date_range }}</span>
         </div>
-        <h3 class="work__card-title">How I Vibe-Coded My Way Out of a Bottleneck</h3>
-        <p class="work__card-summary">Built a localisation proxy tool in a weekend to unblock the whole engineering team and reclaim sprint capacity.</p>
+        <h3 class="work__card-title">{{ item.title }}</h3>
+        <p class="work__card-summary">{{ summary }}</p>
         <div class="work__card-footer">
-          <span class="work__card-num">01</span>
+          <span class="work__card-num">0{{ forloop.index }}</span>
           <span class="work__card-arrow">↗</span>
         </div>
       </a>
-      <a href="/case/case2-tractable-migration.html" class="work__card">
-        <div class="work__card-top">
-          <span class="work__card-co">Tractable</span>
-          <span class="work__card-year">2025–2026</span>
-        </div>
-        <h3 class="work__card-title">Enterprise Platform Migration</h3>
-        <p class="work__card-summary">12-team coordination through a zero-downtime platform migration at scale.</p>
-        <div class="work__card-footer">
-          <span class="work__card-num">02</span>
-          <span class="work__card-arrow">↗</span>
-        </div>
-      </a>
-      <a href="/case/case3-mobile-redesign.html" class="work__card">
-        <div class="work__card-top">
-          <span class="work__card-co">Personal</span>
-          <span class="work__card-year">2026</span>
-        </div>
-        <h3 class="work__card-title">Mobile-First Portfolio Redesign</h3>
-        <p class="work__card-summary">Audited, prioritised, and rebuilt a portfolio site from the ground up, constraint-led.</p>
-        <div class="work__card-footer">
-          <span class="work__card-num">03</span>
-          <span class="work__card-arrow">↗</span>
-        </div>
-      </a>
+      {% endfor %}
     </div>
     <div class="work__dots" id="workDots"></div>
     <div class="work__progress"><div class="work__bar" id="workBar"></div></div>
