@@ -297,6 +297,134 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
   gap: 24px; margin-bottom: 44px; flex-wrap: wrap;
 }
 
+/* ── HOME : WORK CARDS (showcase grid) ─────────────────────── */
+.work__inner { padding: 64px var(--pad-x); }
+.work__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.work__card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--t-hover) var(--ease-out),
+              box-shadow var(--t-hover) var(--ease-out),
+              background var(--t-hover),
+              border-color var(--t-hover);
+}
+.work__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(20,19,15,.07);
+  background: #EFF9F8;
+  border-color: var(--c-accent);
+}
+.work__card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.work__card-co {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: var(--c-border-pill);
+  color: var(--c-ink-body);
+  padding: 3px 10px;
+  border-radius: 20px;
+  transition: background var(--t-hover), color var(--t-hover);
+}
+.work__card:hover .work__card-co {
+  background: var(--c-accent);
+  color: var(--c-bg);
+}
+.work__card-year {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  color: var(--c-ink-faint);
+  letter-spacing: .04em;
+}
+.work__card-title {
+  font-family: var(--f-display);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--c-ink);
+  line-height: 1.3;
+  margin: 0 0 10px;
+  flex: 1;
+}
+.work__card-summary {
+  font-family: var(--f-body);
+  font-size: 13px;
+  color: var(--c-ink-body);
+  line-height: 1.55;
+  margin: 0 0 16px;
+}
+.work__card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--c-border);
+  padding-top: 12px;
+  margin-top: auto;
+  transition: border-color var(--t-hover);
+}
+.work__card:hover .work__card-footer { border-color: var(--c-accent); }
+.work__card-num {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  color: var(--c-ink-faint);
+  letter-spacing: .06em;
+}
+.work__card-arrow {
+  font-size: 15px;
+  color: var(--c-ink-faint);
+  transition: transform var(--t-hover) var(--ease-out), color var(--t-hover);
+}
+.work__card:hover .work__card-arrow {
+  transform: translate(2px, -2px);
+  color: var(--c-accent);
+}
+.work__dots { display: none; justify-content: center; gap: 6px; margin-top: 20px; }
+.work__dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--c-border-mid); border: none; cursor: pointer;
+  padding: 0; transition: background var(--t-hover), transform var(--t-hover);
+}
+.work__dot.is-active { background: var(--c-accent); transform: scale(1.35); }
+.work__progress { display: none; height: 2px; background: var(--c-border); margin-top: 10px; border-radius: 1px; }
+.work__bar { height: 100%; width: 0%; background: var(--c-accent); border-radius: 1px; transition: width var(--t-bar) linear; }
+
+@media (max-width: 680px) {
+  .work__cards {
+    display: block;
+    position: relative;
+  }
+  .work__card {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .5s var(--ease-out);
+  }
+  .work__card.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+  }
+  .work__dots { display: flex; }
+  .work__progress { display: block; }
+}
+
 /* ── HOME : SKILLS ──────────────────────────────────────────── */
 .skills__section { border-top: 1px solid var(--c-border); background: var(--c-bg-tint); }
 .skills__section .container { max-width: var(--max-home); margin: 0 auto; padding: 88px var(--pad-x); }

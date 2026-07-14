@@ -261,6 +261,14 @@ function initCarousel(opts) {
 }
 
 const mq480 = window.matchMedia('(max-width: 480px)');
+const mq680 = window.matchMedia('(max-width: 680px)');
+
+/* ── Showcase work cards carousel (mobile only, ≤680px) ─────── */
+initCarousel({
+  cardSelector: '.work__card', trackSelector: '#workCards',
+  dotsId: 'workDots', barId: 'workBar', dotClass: 'work__dot',
+  duration: 5000, mq: mq680, grid: document.querySelector('.work__cards'),
+});
 
 /* ── Impact stats carousel (mobile only, ≤480px) ─────────────── */
 initCarousel({
