@@ -317,35 +317,49 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
 .skills__badge, .skills__more { display: none; }
 
 /* ── HOME : EXPERIENCE ──────────────────────────────────────── */
+@keyframes expScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .exp__section { border-top: 1px solid var(--c-border); background: var(--c-bg); }
-.exp__inner { max-width: var(--max-home); margin: 0 auto; padding: 88px var(--pad-x); }
-.exp__timeline { position: relative; padding-left: 36px; }
-.exp__timeline::before {
-  content: ''; position: absolute; left: 5px; top: 6px; bottom: 6px;
-  width: 1px; background: var(--c-border-pill);
+.exp__inner { max-width: var(--max-home); margin: 0 auto; padding: 64px 0; }
+.exp__inner .section-header { padding: 0 var(--pad-x) 24px; }
+.exp__strip-wrap {
+  position: relative; overflow: hidden; padding: 4px 0 12px;
 }
-.exp__item { position: relative; padding-bottom: 38px; }
-.exp__item:last-child { padding-bottom: 0; }
-.exp__dot {
-  position: absolute; left: -36px; top: 4px;
-  width: 11px; height: 11px; border-radius: 50%;
+.exp__strip-wrap::before,
+.exp__strip-wrap::after {
+  content: ''; position: absolute; top: 0; height: 100%; width: 72px; z-index: 2; pointer-events: none;
+}
+.exp__strip-wrap::before { left: 0;  background: linear-gradient(90deg,  var(--c-bg), transparent); }
+.exp__strip-wrap::after  { right: 0; background: linear-gradient(270deg, var(--c-bg), transparent); }
+.exp__strip-inner {
+  display: flex; align-items: stretch; width: max-content;
+  animation: expScroll 32s linear infinite;
+}
+.exp__strip-inner:hover { animation-play-state: paused; }
+.exp__card {
+  width: 200px; flex-shrink: 0; padding: 16px; margin: 0 7px;
+  border: 1px solid var(--c-border); border-radius: 8px;
+  background: var(--c-surface); display: flex; flex-direction: column;
+}
+.exp__card--cur { border-left: 2.5px solid var(--c-accent); background: var(--c-accent-bg); }
+.exp__card-logo { margin-bottom: 12px; flex-shrink: 0; display: block; }
+.exp__card-co {
+  font-family: var(--f-display); font-size: 20px; font-weight: 400;
+  color: var(--c-ink); line-height: 1.2; margin: 0 0 7px;
+}
+.exp__card-rl {
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--c-ink-faint); margin: 0 0 4px;
+}
+.exp__card--cur .exp__card-rl { color: var(--c-accent); }
+.exp__card-per {
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .04em;
+  color: var(--c-ink-faint); margin: 0;
+}
+.exp__cur-dot {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
   background: var(--c-accent); animation: pulseDot 2.2s infinite;
+  margin-right: 5px; vertical-align: middle;
 }
-.exp__dot--hollow {
-  left: -34px; top: 6px; width: 9px; height: 9px;
-  background: var(--c-bg); border: 2px solid var(--c-border-mid);
-  animation: none;
-}
-.exp__header {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: 16px; flex-wrap: wrap;
-}
-.exp__role {
-  font-family: var(--f-display); font-size: 23px; font-weight: 400; margin: 0;
-}
-.exp__role span { color: var(--c-accent); }
-.exp__period { font-family: var(--f-mono); font-size: 12.5px; color: var(--c-ink-faint); white-space: nowrap; }
-.exp__note { font-size: 15px; line-height: 1.6; color: var(--c-ink-body); margin: 10px 0 0; max-width: 62ch; }
 
 /* ── HOME : CONTACT ─────────────────────────────────────────── */
 .contact__outer {
