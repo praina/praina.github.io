@@ -91,9 +91,11 @@ document.querySelectorAll('[data-toggle-target]').forEach(btn => {
   if (!target) return;
   const labelMore = btn.dataset.labelMore || btn.textContent;
   const labelLess = btn.dataset.labelLess || 'Show less';
+  const setLabel = l => { btn.innerHTML = '<span class="skills__more-pill">' + l + '</span>'; };
+  setLabel(labelMore);
   btn.addEventListener('click', () => {
     const expanded = target.classList.toggle('is-expanded');
-    btn.textContent = expanded ? labelLess : labelMore;
+    setLabel(expanded ? labelLess : labelMore);
   });
 });
 
@@ -287,7 +289,7 @@ const skillsCarousel = initCarousel({
     const btn  = card.querySelector('.skills__more');
     if (tags && tags.classList.contains('is-expanded')) {
       tags.classList.remove('is-expanded');
-      if (btn) btn.textContent = btn.dataset.labelMore || btn.textContent;
+      if (btn) btn.innerHTML = '<span class="skills__more-pill">' + (btn.dataset.labelMore || '') + '</span>';
       return true; // height changed — grid needs a resync
     }
     return false;

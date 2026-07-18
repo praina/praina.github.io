@@ -1394,10 +1394,20 @@ body  { background: var(--c-bg); color: var(--c-ink); font-family: var(--f-body)
   .skills__tag:first-child { border-top: none; padding-top: 0; }
   .skills__tags:not(.is-expanded) .skills__tag:nth-child(n+9) { display: none; }
   .skills__more {
-    display: block; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--c-border-sub);
-    background: none; border-left: none; border-right: none; border-bottom: none;
-    font-family: var(--f-mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase;
-    color: var(--c-accent); text-decoration: underline; cursor: pointer;
+    display: flex; align-items: center; gap: 0;
+    width: 100%; margin: 0; padding: 0 0 10px;
+    background: none; border: none; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--c-accent);
+  }
+  .skills__more::before,
+  .skills__more::after {
+    content: ''; flex: 1; border-top: 1px solid var(--c-border);
+  }
+  .skills__more-pill {
+    padding: 4px 14px; border: 1px solid var(--c-border);
+    border-radius: 20px; white-space: nowrap;
   }
   .skills__dots, .skills__progress { display: flex; }
   .skills__progress { display: block; }
